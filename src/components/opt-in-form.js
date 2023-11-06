@@ -26,6 +26,7 @@ export default function OptInForm() {
       }
     }).then((result) => result.json())
       .then(({id}) => {
+        fbq('track', 'CompleteRegistration');
         setCookie('leadId', id)
         router.push(`/survey?id=${id}`);
       })
@@ -59,12 +60,10 @@ export default function OptInForm() {
         }
       )} placeholder="tu sitio web o instagram"/>
 
-      <button disabled={sending} className="w-full">{!sending ? 'Continuar' : 'Ahi vamos'}</button>
+      <button disabled={sending} className="w-full">{!sending ? 'Continuar' : 'Ahí vamos'}</button>
 
       <p className="-ft-3 mt-4 text-center">Al dar clic aceptas nuestra&nbsp;
-        <Link href={info.privacyNotice}>
-          <span>política de privacidad</span>
-        </Link>
+        <Link href={info.privacyNotice}>política de privacidad</Link>
       </p>
     </form>
   );

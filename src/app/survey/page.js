@@ -104,9 +104,8 @@ export default function Survey() {
         "Content-Type": "application/json"
       }
     }).then((response) => response)
-      .then(({status}) => {
-        console.log(status)
-
+      .then(() => {
+        fbq('track', 'Lead')
         const url = 'https://notoriovsstudio.pipedrive.com/scheduler/bEE1rxHv/consultoria-gratuita';
 
         const forwardLink = document.createElement("a");
@@ -239,7 +238,7 @@ export default function Survey() {
                   type={formStep < 7 ? 'button' : 'submit'}
                   onClick={() => handleNext()}
                   className="mt-auto"
-                >{formStep < 7 ? 'Siguiente' : 'Agendar cita' || sending ? 'Abriendo calendario' : 'Agendar cita'}
+                >{formStep < 7 ? 'Agendar cita' : sending ? 'Abriendo Calendario' : 'Siguiente'}
                 </button>
               </div>
             </form>

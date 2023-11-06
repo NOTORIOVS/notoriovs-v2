@@ -4,6 +4,7 @@
 
 @import 'type';
 @import 'header';
+@import 'form';
 
 :root {
   --ntrs-x_margins: 2rem;
@@ -43,60 +44,6 @@ a.link {
   }
 }
 
-input, select, textarea {
-  font-size: 1.6rem;
-  @apply flex border border-gray-500 px-6 py-4 w-full;
-  &::placeholder {
-   @apply text-gray-500;
-  }
-  &::-ms-input-placeholder {
-   @apply text-gray-500;
-  }
-}
-
-input[type=radio] {
-  display: none;
-}
-
-input[type=radio] + label {
-  @extend .ft-0;
-  @apply flex p-4 border border-black w-full text-center justify-center items-center cursor-pointer;
-}
-input[type=radio]:checked + label {
-  @apply bg-brand-1;
-}
-
-select {
-  appearance: none;
-  border-radius: 0;
-  &::-ms-expand {
-    display: none;
-  }
-  & option:disabled {
-    @apply text-gray-500;
-  }
-  &:invalid {
-    @apply text-gray-500;
-  }
-  &[disabled] {
-    @apply text-gray-500;
-  }
-}
-
-.select {
-  position: relative;
-  &::after {
-    font-size: 1.4rem;
-    display: block;
-    position: absolute;
-    right: 1rem;
-    top: 25%;
-    content: "expand_more";
-    font-family: "Material Icons";
-    color: black;
-  }
-}
-
 button, .button {
   font-size: 1.6rem;
   @apply flex justify-center
@@ -112,7 +59,6 @@ button, .button {
     @extend .button;
   }
 }
-
 
 .ntrs_wrapper, section {
   @apply m-auto flex flex-wrap md:flex-col md:px-8;
@@ -133,10 +79,6 @@ button, .button {
   & li {
     @apply before:content-['•'] before:mr-4 ml-4;
   }
-}
-
-form {
-  font-size: 16px;
 }
 
 ul > li {
@@ -244,8 +186,4 @@ ol {
   background-image: radial-gradient(circle, #eee 30%, transparent 30%), radial-gradient(circle, #eee 30%, transparent 30%);
   background-size: 1rem 1rem;
   background-position: 0 0, 1rem 1rem;
-}
-
-.survey-card {
-  @apply bg-white sticky top-20 flex flex-col min-h-[60vh] lg:min-h-[40vh] w-full max-w-[80rem] p-8 border border-black;
 }

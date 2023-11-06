@@ -30,7 +30,7 @@ export default function Home() {
             </div>
             <h2 className="ft-10 text-center text-white">
               ¿Agencia de marketing?
-              <br/>— Si, pero más chido
+              <br/>— Sí, pero más chido
             </h2>
             <h3 className="text-center text-white mt-20">Abajo te contamos rápidamente qué hacemos</h3>
           </div>
@@ -95,7 +95,7 @@ export default function Home() {
           <p>tú construirías tu casa así sin planos, ni un render, ni nada?</p>
           <p>No lo creo.</p>
           <p>Por esto…</p>
-          <p>primero tenemos que armar una estrategia, asi como contratas a un arqui para que te diseñe tu casa,
+          <p>primero tenemos que armar una estrategia, así como contratas a un arqui para que te diseñe tu casa,
             saque
             planos y esas cosas;</p>
           <p>y luego…</p>
@@ -107,7 +107,7 @@ export default function Home() {
           <div className="border border-black p-8 pt-12">
             <h3 className="text-center">Consultoría</h3>
             <p className="text-center">
-              Si eres freelancer o micro empresa y SI tienes tiempo para tomar una serie de <b>«classes»</b> y
+              Si eres freelancer o micro empresa y SÍ tienes tiempo para tomar una serie de <b>«classes»</b> y
               ejecutar tu plan de marketing, esta es la buena.
             </p>
           </div>
@@ -122,7 +122,7 @@ export default function Home() {
           <div className="border border-black p-8 pt-12">
             <h3 className="text-center">Contenido</h3>
             <p className="text-center">
-              Esto si es manitas a la obra, no hay mucho que decir, hay que hacer lo que se dijo en
+              Esto sí es manitas a la obra, no hay mucho que decir, hay que hacer lo que se dijo en
               la <b>estrategia</b> para poder alcanzar los objetivos planteados.
             </p>
           </div>
@@ -133,7 +133,7 @@ export default function Home() {
           <p className="-ft-3 mt-4 text-center">Agenda una sesión gratuita para analizar tu proyecto</p>
         </div>
         <div className="max-w-[80ch] space-y-8">
-          <h2 className="mt-20">Nosotros si nos involucramos en tu <i>bisne</i></h2>
+          <h2 className="mt-20">Nosotros sí nos involucramos en tu <i>bisne</i></h2>
           <p>Te vamos a cuestionar,<br/>
             vamos a meter nuestra cuchara<br/>
             y hasta nos vas a decir que nosotros que vamos a andar sabiendo.</p>
@@ -165,7 +165,7 @@ export default function Home() {
           <p>Depende de tu negocio,<br/>
             Depende de tus objetivos,<br/>
             Depende de qué herramientas vayas a necesitar</p>
-          <p>Lo que si te puedo adelantar son tres cosas:</p>
+          <p>Lo que sí te puedo adelantar son tres cosas:</p>
           <ol>
             <li>Una <b>consultoría</b> cuesta $6,000 mxn</li>
             <li>Una <b>estrategia básica</b>, va desde $26,000 mxn</li>

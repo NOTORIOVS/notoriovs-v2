@@ -205,7 +205,7 @@ export default function Survey() {
 
               <div className={`my-20 ${formStep === 6 ? 'block' : 'hidden'}`}>
                 <p className="ft-3 sans mb-6">Del 1 al 5, ¿qué tan interesado estás en aliarte con nosotros?</p>
-                <p className="mb-12">1 = no se que hago aquí, <nobr>5 = machín</nobr></p>
+                <p className="mb-12">1 = no sé que hago aquí, <nobr>5 = machín</nobr></p>
                 <Radio
                   name="compromise"
                   inputOptions={{required: 'Selecciona una opción'}}
@@ -238,7 +238,7 @@ export default function Survey() {
                   type={formStep < 7 ? 'button' : 'submit'}
                   onClick={() => handleNext()}
                   className="mt-auto"
-                >{formStep < 7 ? 'Agendar cita' : sending ? 'Abriendo Calendario' : 'Siguiente'}
+                >{formStep === 7 ? 'Agendar cita' : sending ? 'Abriendo Calendario' : 'Siguiente'}
                 </button>
               </div>
             </form>

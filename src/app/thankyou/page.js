@@ -22,7 +22,7 @@ export default function Thankyou() {
             />
           </div>
           <h2 className="ft-8 text-center text-white">
-            Vientos! ya estamos del otro lado.
+            ¡Vientos! ya estamos del otro lado.
           </h2>
           <h3 className="text-center mono text-white mt-20">Si no se abrió nuestro calendario para agendar tu sesión gratuita</h3>
           <a

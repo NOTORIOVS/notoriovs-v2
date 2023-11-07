@@ -8,7 +8,7 @@ import { usePathname } from 'next/navigation';
 
 export default function Header() {
   const [openBurger, setOpenBurger] = useState(false);
-  const [ww, setWindowWidth] = useState();
+  const [ww, setWindowWidth] = useState(414);
   const pathName = usePathname();
 
 

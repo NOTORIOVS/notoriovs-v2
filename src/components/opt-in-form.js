@@ -2,8 +2,9 @@ import Link from 'next/link';
 import { info } from '../../info';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
-import { setCookie } from "cookies-next";
+import { setCookie } from 'cookies-next';
 import { useState } from 'react';
+import { restrictNumber, emailRegExp } from '@/utils/formValidators';
 
 export default function OptInForm() {
   const [sending, setSending] = useState(false);
@@ -14,7 +15,7 @@ export default function OptInForm() {
   } = useForm();
 
   const onSubmit = (data) => {
-    setSending(true)
+    setSending(true);
 
     data.phone = '52' + data.phone.replace(/^\+?(52)?\s?0?1?|\s|\(|\)|-/g, '');
 
@@ -22,16 +23,16 @@ export default function OptInForm() {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {
-        "Content-Type": "application/json"
-      }
+        'Content-Type': 'application/json',
+      },
     }).then((result) => result.json())
       .then(({id}) => {
         fbq('track', 'CompleteRegistration');
-        setCookie('leadId', id)
+        setCookie('leadId', id);
         router.push(`/survey?id=${id}`);
-      })
+      });
 
-  }
+  };
 
   return (
     <form className="flex flex-col w-full space-y-4" onSubmit={handleSubmit(onSubmit)}>
@@ -39,25 +40,32 @@ export default function OptInForm() {
         'fullName',
         {
           required: true,
-        }
+        },
       )} placeholder="tu nombre"/>
       <input {...register(
         'email',
         {
           required: true,
-        }
+          pattern: {
+            value: emailRegExp,
+            message: 'Revisa tu correo',
+          },
+        },
       )} placeholder="un email que si uses"/>
-      <input {...register(
-        'phone',
-        {
-          required: true,
-        }
-      )} placeholder="teléfono de WhatsApp"/>
+      <input
+        {...register(
+          'phone',
+          {
+            required: true,
+          },
+        )}
+        onKeyPress={restrictNumber}
+        placeholder="teléfono de WhatsApp"/>
       <input {...register(
         'company',
         {
           required: true,
-        }
+        },
       )} placeholder="tu sitio web o instagram"/>
 
       <button disabled={sending} className="w-full">{!sending ? 'Continuar' : 'Ahí vamos'}</button>

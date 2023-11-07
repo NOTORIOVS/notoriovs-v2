@@ -94,10 +94,11 @@ export default function Survey() {
 
   const onSubmit = (data) => {
     setSending(true);
-    const leadId = getCookie('leadId');
+    const lead = getCookie('lead');
+    const {id, email, phone} = JSON.parse(lead);
     const _fbc = getCookie('_fbc');
     const _fbp = getCookie('_fbp');
-    const payload = {...data, leadId, _fbc, _fbp};
+    const payload = {...data, id, email, phone, _fbc, _fbp};
 
     fetch('https://hook.us1.make.com/f1yv4o13p65ywj5wni139fikancma8tj', {
       method: 'POST',

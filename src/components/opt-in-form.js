@@ -71,7 +71,10 @@ export default function OptInForm() {
         },
       )} placeholder="tu sitio web o instagram"/>
 
-      <button disabled={sending} className="w-full">{!sending ? 'Continuar' : 'Ahí vamos'}</button>
+      <button disabled={sending} className="w-full">
+        {sending && <span className="animate-spin mr-4">+</span>}
+        {!sending ? 'Continuar' : 'Ahí vamos'}
+      </button>
 
       <p className="-ft-3 mt-4 text-center">Al dar clic aceptas nuestra&nbsp;
         <Link href={info.privacyNotice}>política de privacidad</Link>

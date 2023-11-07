@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { info } from '../../info';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
-import { setCookie } from 'cookies-next';
+import { getCookie, setCookie } from 'cookies-next';
 import { useState } from 'react';
 import { restrictNumber, emailRegExp } from '@/utils/formValidators';
 
@@ -16,12 +16,15 @@ export default function OptInForm() {
 
   const onSubmit = (data) => {
     setSending(true);
-
     data.phone = '52' + data.phone.replace(/^\+?(52)?\s?0?1?|\s|\(|\)|-/g, '');
+
+    const _fbc = getCookie('_fbc');
+    const _fbp = getCookie('_fbp');
+    const payload = {...data, _fbc, _fbp};
 
     fetch('https://hook.us1.make.com/yots59pvvj41v9owiy6nicka7drtvyq2', {
       method: 'POST',
-      body: JSON.stringify(data),
+      body: JSON.stringify(payload),
       headers: {
         'Content-Type': 'application/json',
       },

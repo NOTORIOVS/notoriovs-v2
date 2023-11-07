@@ -178,22 +178,14 @@ export default function Home() {
         <div className="mt-12 relative w-full h-[10rem] lg:h-auto">
           <div
             className="flex lg:flex-wrap lg:w-full absolute lg:relative px-10 -right-8 -left-8 lg:ml-16 overflow-scroll snap-mandatory snap-x justify-start lg:justify-center">
-            <p className="snap-center arrow_box mb-4">Brief</p>
-            <p className="snap-center arrow_box mb-4">Benchmark</p>
-            <p className="snap-center arrow_box mb-4">Diagnóstico</p>
-            <p className="snap-center arrow_box mb-4">La Oferta</p>
-            <p className="snap-center arrow_box mb-4">Temática de <br/>contenido</p>
-            <p className="snap-center arrow_box mb-4">Canales de comunicación</p>
-            <p className="snap-center arrow_box mb-4">Estilo visual</p>
-            <p className="snap-center arrow_box mb-4">Organización de cuentas</p>
-            <p className="snap-center arrow_box mb-4">Campaña <br/>publicitaria</p>
-            <p className="snap-center arrow_box mb-4">Calendario omni-canal</p>
-            <p className="snap-center arrow_box mb-4">Automatizaciones</p>
-            <p className="snap-center arrow_box mb-4">Seguimiento</p>
+            <p className="snap-center arrow_box mb-4">Diagnóstico del problema</p>
+            <p className="snap-center arrow_box mb-4">Discurso de venta</p>
+            <p className="snap-center arrow_box mb-4">Herramientas persuasivas</p>
+            <p className="snap-center arrow_box mb-4">Automatización y optimización</p>
           </div>
         </div>
         <div className="max-w-[80ch] flex flex-col mt-20">
-          <a href="#contact" className="button !w-full text-center">¿Qué dudas tienes? Click!</a>
+          <a href="#contact" className="button !w-full text-center">¿Quieres conocer todo el proceso? Click!</a>
           <p className="-ft-3 mt-4 text-center">Agenda una sesión gratuita para analizar tu proyecto</p>
         </div>
         <div className="space-y-8 max-w-[80ch]">
@@ -282,7 +274,7 @@ export default function Home() {
           </div>
         </div>
         <div className="max-w-[80ch] flex flex-col mt-20">
-          <a href="#contact" className="button !w-full text-center">¿No quisieras ver tu marca ahi arriba?
+          <a href="#contact" className="button !w-full text-center">¿No quisieras ver tu marca ahí arriba?
             Click!</a>
           <p className="-ft-3 mt-4 text-center">Agenda una sesión gratuita para analizar tu proyecto</p>
         </div>

@@ -160,18 +160,13 @@ export default function Home() {
           <p className="-ft-3 mt-4 text-center">Agenda una sesión gratuita para analizar tu proyecto</p>
         </div>
         <div className="max-w-[80ch] space-y-8">
-          <h2 className="mt-20">¿A cómo sale, joven?</h2>
-          <p>Esta está fácil.</p>
-          <p>Depende de tu negocio,<br/>
-            Depende de tus objetivos,<br/>
-            Depende de qué herramientas vayas a necesitar</p>
-          <p>Lo que sí te puedo adelantar son tres cosas:</p>
-          <ol>
-            <li>Una <b>consultoría</b> cuesta $6,000 mxn</li>
-            <li>Una <b>estrategia básica</b>, va desde $26,000 mxn</li>
-            <li>Un <b>plan mensual de contenido</b> para redes no sabemos cuanto cuesta hasta tener una estrategia
-            </li>
-          </ol>
+          {/* eslint-disable-next-line react/no-unescaped-entities */}
+          <h2 className="mt-20">"Yo no necesito una estrategia, yo necesito que se pongan a chambear"</h2>
+          <p>Dirías tú.</p>
+          <p>Pero si estás leyendo esto probablemente es porque ya le has intentado por la libre y no te ha funcionado.</p>
+          <p>O seguramente ya contrataste a algunos freelancers o agencias que te cobraban $15,000 por 3 meses y terminas sin una venta porque no supieron ni supiste identificar tu problema.</p>
+          <p>Ojo, nosotros no vendemos, el que vende eres tú.</p>
+          <p>Lo que sí, es que con nuestro programa te la vamos a poner más fácil.</p>
           <p>¿Y qué trae una estrategia?</p>
           <p>Básicamente es un «llave en mano» para que comiences a generar oportunidades de negocio.</p>
         </div>

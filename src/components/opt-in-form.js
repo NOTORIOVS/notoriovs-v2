@@ -2,9 +2,10 @@ import Link from 'next/link';
 import { info } from '../../info';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
-import { getCookie, setCookie } from 'cookies-next';
+import { setCookie } from 'cookies-next';
 import { useState } from 'react';
 import { restrictNumber, emailRegExp } from '@/utils/formValidators';
+import fbEvents from '@/services/fbEvents';
 
 export default function OptInForm() {
   const [sending, setSending] = useState(false);
@@ -18,9 +19,9 @@ export default function OptInForm() {
     setSending(true);
     data.phone = '52' + data.phone.replace(/^\+?(52)?\s?0?1?|\s|\(|\)|-/g, '');
 
-    const _fbc = getCookie('_fbc');
-    const _fbp = getCookie('_fbp');
-    const payload = {...data, _fbc, _fbp};
+    const fbParams = fbEvents('CompleteRegistration')
+
+    const payload = {...data, fbParams};
 
     fetch('https://hook.us1.make.com/yots59pvvj41v9owiy6nicka7drtvyq2', {
       method: 'POST',
@@ -30,7 +31,6 @@ export default function OptInForm() {
       },
     }).then((result) => result.json())
       .then(({id}) => {
-        fbq('track', 'CompleteRegistration');
         setCookie('lead', {...data, id});
         router.push(`/survey?id=${id}`);
       });

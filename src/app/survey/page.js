@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Radio } from '@/components/formAtoms';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { setCookie, getCookie } from 'cookies-next';
+import fbEvents from '@/services/fbEvents';
 
 const formSteps = [
   'firstName',
@@ -96,9 +97,8 @@ export default function Survey() {
     setSending(true);
     const lead = getCookie('lead');
     const {id, email, phone} = JSON.parse(lead);
-    const _fbc = getCookie('_fbc');
-    const _fbp = getCookie('_fbp');
-    const payload = {...data, id, email, phone, _fbc, _fbp};
+    const fbParams = fbEvents('Lead', id)
+    const payload = {...data, id, email, phone, fbParams};
 
     fetch('https://hook.us1.make.com/f1yv4o13p65ywj5wni139fikancma8tj', {
       method: 'POST',

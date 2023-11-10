@@ -71,11 +71,15 @@ export default function Survey() {
   const router = useRouter();
 
   useEffect(() => {
-    if ((getCookie('leadId') === 'null' || !getCookie('leadId')) && !searchParams.get('id')) {
-      router.push('/#contact')
-    }
-    if ((getCookie('leadId') === 'null' || !getCookie('leadId')) && searchParams.get('id')) {
-      setCookie('leadId', searchParams.get('id'))
+    const id = searchParams.get('id');
+    const lead = getCookie('lead');
+
+    if (!lead || lead === 'null' || Object.keys(lead).length === 0) {
+      if (!id) {
+        router.push('/#contact')
+      } else {
+        setCookie('lead', {...lead, id});
+      }
     }
 
     formSteps.map((fs) => setError(fs, {}));

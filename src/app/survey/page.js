@@ -243,6 +243,7 @@ export default function Survey() {
                 </button>
                 <button
                   type={formStep < 7 ? 'button' : 'submit'}
+                  disabled={sending}
                   onClick={() => handleNext()}
                   className="mt-auto"
                 >

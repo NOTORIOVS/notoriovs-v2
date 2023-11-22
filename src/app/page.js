@@ -11,7 +11,7 @@ export default function Home() {
   useEffect(() => {
     scrollDepth({
       values: [25, 50, 75, 100],
-      callback: (value) => fbq('trackCustom', `Scroll Depth: ${value}`),
+      callback: (value) => fbq('trackCustom', 'Scroll', {depth: value}),
     })
   })
 

@@ -4,8 +4,16 @@ import Image from 'next/image';
 import OptInForm from '@/components/opt-in-form';
 import logo from '../../public/images/svg/NTRS-Logo-Green.png';
 import Link from 'next/link';
+import scrollDepth from '@/utils/scrollDepth';
+import { useEffect } from 'react';
 
 export default function Home() {
+  useEffect(() => {
+    scrollDepth({
+      values: [25, 50, 75, 100],
+      callback: (value) => fbq('trackCustom', `Scroll Depth: ${value}`),
+    })
+  })
 
   return (
     <div className="pb-20">

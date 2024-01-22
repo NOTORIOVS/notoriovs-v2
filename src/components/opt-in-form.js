@@ -17,7 +17,7 @@ export default function OptInForm() {
 
   const onSubmit = (data) => {
     setSending(true);
-    data.phone = '52' + data.phone.replace(/^\+?(52)?\s?0?1?|\s|\(|\)|-/g, '');
+    data.phone = '52' + data.phone.replace(/^\+?((MX)?\s?(52)?)?\s?0?1?|\s|\(|\)|-/g, '');
 
     const fbParams = fbEvents('CompleteRegistration')
 

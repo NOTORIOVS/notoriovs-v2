@@ -24,9 +24,9 @@ const immediacyOpts = [
 ];
 
 const budgetOpts = [
-  {value: 'min', label: 'Menos de $20,000'},
-  {value: '$15,000+', label: '$20,000 a $50,000'},
-  {value: '$50,000+', label: 'Más de $50,000'},
+  {value: '$15,000+', label: 'De $15,000 a $20,000 mxn'},
+  {value: '$20,000+', label: '$20,000 a $50,000 mxn'},
+  {value: '$50,000+', label: 'Más de $50,000 mxn'},
 ];
 
 const services = [
@@ -47,15 +47,13 @@ const businessVerticals = [
 ];
 
 const compromiseOpts = [
-  {value: 1, label: 1},
-  {value: 2, label: 2},
-  {value: 3, label: 3},
-  {value: 4, label: 4},
-  {value: 5, label: 5},
+  {value: 'yes', label: 'Claro! sin broncas'},
+  {value: 'mid', label: 'Puedo buscar la forma'},
+  {value: 'not', label: 'De plano no puedo'},
 ];
 
 const commitmentOpts = [
-  {value: 'si', label: 'Claro!'},
+  {value: 'yes', label: 'Claro!'},
   {value: 'maybe', label: 'Tal vez'},
   {value: 'remind', label: 'La neta necesito que me recuerden'},
 ];
@@ -161,8 +159,7 @@ export default function Survey() {
               </div>
 
               <div className={`my-20 ${formStep === 2 ? 'block' : 'hidden'}`}>
-                <p className="ft-3 sans mb-12">¿Por qué hoy es un buen momento para escalar tu
-                  negocio?</p>
+                <p className="ft-3 sans mb-12">Cuéntame sobre tu negocio y por qué hoy es un buen momento para escalar</p>
                 <textarea
                   {...register(
                     'whyGrow',
@@ -211,14 +208,14 @@ export default function Survey() {
               </div>
 
               <div className={`my-20 ${formStep === 6 ? 'block' : 'hidden'}`}>
-                <p className="ft-3 sans mb-6">Del 1 al 5, ¿qué tan interesado estás en aliarte con nosotros?</p>
-                <p className="mb-12">1 = no sé que hago aquí, <nobr>5 = machín</nobr></p>
+                <p className="ft-3 sans mb-6">Hagamos un ejercicio realista, pues somos muy buenos pero no somos magos</p>
+                <p className="mb-12">Piensa en cuanto quieres facturar al mes. ¿Estás dispuesto a invertir de un 20% a 30% en marketing para generar esa facturación?</p>
                 <Radio
                   name="compromise"
                   inputOptions={{required: 'Selecciona una opción'}}
                   placeholder="no nos agüitamos, sé honesto"
                   options={compromiseOpts}
-                  optCols={5}
+                  optCols={3}
                   className={inputError === 6 ? '!border-brand-2' : undefined}
                 />
               </div>

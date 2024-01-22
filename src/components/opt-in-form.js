@@ -62,7 +62,7 @@ export default function OptInForm() {
             required: true,
           },
         )}
-        onKeyPress={restrictNumber}
+        onKeyDown={restrictNumber}
         placeholder="teléfono de WhatsApp"/>
       <input {...register(
         'company',

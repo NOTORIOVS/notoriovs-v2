@@ -209,7 +209,7 @@ export default function Survey() {
 
               <div className={`my-20 ${formStep === 6 ? 'block' : 'hidden'}`}>
                 <p className="ft-3 sans mb-6">Hagamos un ejercicio realista, pues somos muy buenos pero no somos magos</p>
-                <p className="mb-12">Piensa en cuanto quieres facturar al mes. ¿Estás dispuesto a invertir de un 20% a 30% en marketing para generar esa facturación?</p>
+                <p className="mb-12">Piensa en cuanto quieres facturar al mes. ¿Estás dispuesto a invertir de un 10% a 20% en marketing para generar esa facturación?</p>
                 <Radio
                   name="compromise"
                   inputOptions={{required: 'Selecciona una opción'}}

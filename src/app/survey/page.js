@@ -53,7 +53,7 @@ const compromiseOpts = [
 ];
 
 const commitmentOpts = [
-  {value: 'yes', label: 'Claro!'},
+  {value: 'confirmed', label: 'Claro!'},
   {value: 'maybe', label: 'Tal vez'},
   {value: 'remind', label: 'La neta necesito que me recuerden'},
 ];
@@ -213,7 +213,6 @@ export default function Survey() {
                 <Radio
                   name="compromise"
                   inputOptions={{required: 'Selecciona una opción'}}
-                  placeholder="no nos agüitamos, sé honesto"
                   options={compromiseOpts}
                   optCols={3}
                   className={inputError === 6 ? '!border-brand-2' : undefined}

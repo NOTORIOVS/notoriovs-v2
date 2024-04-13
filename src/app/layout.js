@@ -1,6 +1,4 @@
 import '@/styles/globals.scss';
-import Header from '@/components/header';
-import Footer from '@/components/footer';
 import TrackingAnalytics from '@/components/trackingAnalytics';
 
 export const metadata = {
@@ -21,9 +19,7 @@ export default function RootLayout({children}) {
       <title>{metadata.title}</title>
     </head>
     <body>
-      <Header/>
-      <main>{children}</main>
-      <Footer/>
+      {children}
     </body>
     </html>
   );

@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import OptInForm from '@/components/opt-in-form';
-import logo from '../../public/images/svg/NTRS-Logo-Green.png';
+import logo from '../../../public/images/svg/NTRS-Logo-Green.png';
 import Link from 'next/link';
 import scrollDepth from '@/utils/scrollDepth';
 import { useEffect } from 'react';

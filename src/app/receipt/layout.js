@@ -8,8 +8,8 @@ export const metadata = {
 export default function ReceiptLayout({children}) {
 
   return (
-    <body className='w-full max-w-[1080px] mx-auto'>
-      <main className='w-full'>{children}</main>
+    <body className='w-full bg-black'>
+      <main className='w-full max-w-[1080px] mx-auto'>{children}</main>
     </body>
   );
 }

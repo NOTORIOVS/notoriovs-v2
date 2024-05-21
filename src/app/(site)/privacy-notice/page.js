@@ -1,4 +1,4 @@
-import { info } from '../../../info';
+import { info } from '../../../../info';
 
 export default function PrivacyNotice() {
   return (

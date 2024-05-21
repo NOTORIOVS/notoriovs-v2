@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import logo from '../../../public/images/svg/NTRS-Logo-Green.png';
+import logo from '../../../../public/images/svg/NTRS-Logo-Green.png';
 
 export default function Thankyou() {
   return (

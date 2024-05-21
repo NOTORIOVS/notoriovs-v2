@@ -24,15 +24,14 @@ const immediacyOpts = [
 ];
 
 const budgetOpts = [
-  {value: '$15,000+', label: 'De $15,000 a $20,000 mxn'},
+  {value: '$15,000+', label: '$15,000 a $20,000 mxn'},
   {value: '$20,000+', label: '$20,000 a $50,000 mxn'},
   {value: '$50,000+', label: 'Más de $50,000 mxn'},
 ];
 
 const services = [
-  {value: 'consultancy', label: 'Que me enseñen para nosotros ejecutar'},
-  {value: 'integral', label: 'Estrategia, producción y se encarguen de todo'},
-  {value: 'socialMedia', label: 'Solo quiero que lleven mis redes'},
+  {value: 'strategy', label: 'Que me den un plan, una guía o algo para yo ejecutar'},
+  {value: 'integral', label: 'Estrategia, producción, ejecución y se encarguen de todo'},
 ];
 
 const businessVerticals = [
@@ -42,13 +41,14 @@ const businessVerticals = [
   {value: 'finance', label: 'Finanzas'},
   {value: 'beautyAndSpa', label: 'Beauty and Spa'},
   {value: 'eCommerce', label: 'e-commerce'},
+  {value: 'restaurant', label: 'Restaurant'},
   {value: 'courses', label: 'Cursos'},
   {value: 'other', label: 'Otro'},
 ];
 
 const compromiseOpts = [
-  {value: 'yes', label: 'Claro! sin broncas'},
-  {value: 'mid', label: 'Puedo buscar la forma'},
+  {value: 'no problem', label: 'Claro! sin broncas'},
+  {value: 'can find the way', label: 'Puedo buscar la forma'},
   {value: 'not', label: 'De plano no puedo'},
 ];
 

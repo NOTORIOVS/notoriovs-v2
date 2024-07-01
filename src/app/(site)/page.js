@@ -61,7 +61,7 @@ export default function Home() {
           <p>y tal vez,</p>
           <p>fallar en el intento.</p>
           <div className="flex flex-col mt-20">
-            <Link href="#contact" className="button !w-full text-center">contáctanos, sin miedo, Click!</Link>
+            <Link href={{href: '/', hash: 'contact'}} className="button !w-full text-center">contáctanos, sin miedo, Click!</Link>
             <p className="-ft-3 mt-4 text-center">Agenda una sesión gratuita para analizar tu proyecto</p>
           </div>
         </div>
@@ -88,11 +88,11 @@ export default function Home() {
               management</p>
           </div>
         </div>
-
         <div className="max-w-[80ch] flex flex-col mt-20">
-          <a href="#contact" className="button !w-full text-center">Seguro buscabas algo de esto, Click!</a>
+          <Link href={{href: '/', hash: 'contact'}} className="button !w-full text-center">Seguro buscabas algo de esto, Click!</Link>
           <p className="-ft-3 mt-4 text-center">Agenda una sesión gratuita para analizar tu proyecto</p>
         </div>
+
         <div className="max-w-[80ch] space-y-8">
           <h2 className=" mt-20">Permítame tantito, le venimos ofreciendo…</h2>
           <p>Te voy a ser honesto,</p>
@@ -103,43 +103,66 @@ export default function Home() {
           <p>tú construirías tu casa así sin planos, ni un render, ni nada?</p>
           <p>No lo creo.</p>
           <p>Por esto…</p>
-          <p>primero tenemos que armar una estrategia, así como contratas a un arqui para que te diseñe tu casa,
-            saque
-            planos y esas cosas;</p>
-          <p>y luego…</p>
-          <p>podemos comenzar con un plan como cualquier agencia lo haría: por iguala, por cantidad de posts, nos
-            hacemos socios, yo que sé…</p>
-          <p>En pocas palabras te podemos ayudar con estas cosas:</p>
+          <p>primero tenemos que armar una estrategia, así como contratas a un arqui para que diseñe tu casa,
+            saque planos y esas cosas;</p>
+          <p>y es que, de nada te va a servir oootra campaña de WhatsApp si no se tiene claro el camino para llegar a
+            tus objetivos.</p>
+          <p>En pocas palabras, si no tienes esto:</p>
+        </div>
+        <div className="mt-12 relative w-full h-[10rem] lg:h-auto">
+          <div
+            className="flex lg:flex-wrap lg:w-full absolute lg:relative px-10 -right-8 -left-8 lg:ml-16 overflow-scroll snap-mandatory snap-x justify-start lg:justify-center">
+            <p className="snap-center arrow_box mb-4">Diagnóstico de tu estado actual</p>
+            <p className="snap-center arrow_box mb-4">Objetivos</p>
+            <p className="snap-center arrow_box mb-4">Análisis de tu cliente</p>
+            <p className="snap-center arrow_box mb-4">Análisis de la competencia</p>
+            <p className="snap-center arrow_box mb-4">Una oferta sólida</p>
+            <p className="snap-center arrow_box mb-4">Acciones de prospección</p>
+          </div>
+        </div>
+        <div className="flex flex-col mt-20 max-w-[80ch]">
+          <Link href={{href: '/', hash: 'contact'}} className="button !w-full text-center">Tiene más sentido, ¿no? Click!</Link>
+          <p className="-ft-3 mt-4 text-center">Agenda una sesión gratuita para analizar tu proyecto</p>
+        </div>
+
+        <div className="max-w-[80ch] space-y-8">
+          {/* eslint-disable-next-line react/no-unescaped-entities */}
+          <h2 className="mt-20">"Yo no necesito una estrategia, yo necesito que se pongan a chambear"</h2>
+          <p>Dirías tú.</p>
+          <p>Pero si estás leyendo esto probablemente es porque ya le has intentado por la libre y no te ha
+            funcionado.</p>
+          <p>O seguramente ya contrataste a algunos freelancers o agencias que te cobraban $5,000 al mes y
+            terminaste sin una venta porque no supieron ni supiste identificar tu problema.</p>
+          <p>Ojo, nosotros no vendemos, el que vende eres tú.</p>
+          <p>Lo que sí, es que con nuestro programa te la vamos a poner más fácil.</p>
+          <p>¿Y qué trae este programa?</p>
+          <p>Básicamente es un «llave en mano» para que comiences a generar oportunidades de negocio.</p>
         </div>
         <div className="w-full grid grid-cols-1 md:grid-cols-3 mt-20">
           <div className="border border-black p-8 pt-12">
-            <h3 className="text-center">Consultoría</h3>
-            <p className="text-center">
-              Si eres freelancer o micro empresa y SÍ tienes tiempo para tomar una serie de <b>«classes»</b> y
-              ejecutar tu plan de marketing, esta es la buena.
+            <h3 className="text-center">Estrategia y análisis</h3>
+            <p className="text-center mt-8">
+              Esto consiste en lo que te platiqué antes, hacer un análisis y aterrizar bien el camino por el que le vamos a llegar a tus clientes.
             </p>
           </div>
           <div className="border border-black p-8 pt-12">
-            <h3 className="text-center">Estrategia</h3>
-            <p className="text-center">
-              Antes de poner a tu sobrino a que te haga un post en canva, necesitas tener unos <b>lineamientos</b>,
-              si
-              no, te vas a descarrilar y vas a creer que el marketing no sirve.
+            <h3 className="text-center">Ecosistema <br/>digital</h3>
+            <p className="text-center mt-8">
+              Aquí creamos tu landing page y la conectamos con una base de datos, el Pixel de FB y otras cositas más técnicas que ya platicaremos.
             </p>
           </div>
           <div className="border border-black p-8 pt-12">
-            <h3 className="text-center">Contenido</h3>
-            <p className="text-center">
-              Esto sí es manitas a la obra, no hay mucho que decir, hay que hacer lo que se dijo en
-              la <b>estrategia</b> para poder alcanzar los objetivos planteados.
+            <h3 className="text-center">Campaña de prospección</h3>
+            <p className="text-center mt-8">
+              Esto sí es manitas a la obra, echamos a andar tu campaña para que se empiece a materializar todo ese choro que armamos como plan.
             </p>
           </div>
         </div>
-
-        <div className="flex flex-col mt-20 max-w-[80ch]">
-          <a href="#contact" className="button !w-full text-center">Tiene más sentido, ¿no? Click!</a>
+        <div className="max-w-[80ch] flex flex-col mt-20">
+          <Link href={{href: '/', hash: 'contact'}} className="button !w-full text-center">¿Quieres conocer todo el proceso? Click!</Link>
           <p className="-ft-3 mt-4 text-center">Agenda una sesión gratuita para analizar tu proyecto</p>
         </div>
+
         <div className="max-w-[80ch] space-y-8">
           <h2 className="mt-20">Nosotros sí nos involucramos en tu <i>bisne</i></h2>
           <p>Te vamos a cuestionar,<br/>
@@ -164,33 +187,10 @@ export default function Home() {
           <p>Por eso somos chismosos, si no ¿cómo podríamos armar una estrategia exitosa?</p>
         </div>
         <div className="max-w-[80ch] flex flex-col mt-20">
-          <a href="#contact" className="button !w-full text-center">¿Listo pa chambear juntos? Click!</a>
+          <Link href={{href: '/', hash: 'contact'}} className="button !w-full text-center">¿Listo pa chambear juntos? Click!</Link>
           <p className="-ft-3 mt-4 text-center">Agenda una sesión gratuita para analizar tu proyecto</p>
         </div>
-        <div className="max-w-[80ch] space-y-8">
-          {/* eslint-disable-next-line react/no-unescaped-entities */}
-          <h2 className="mt-20">"Yo no necesito una estrategia, yo necesito que se pongan a chambear"</h2>
-          <p>Dirías tú.</p>
-          <p>Pero si estás leyendo esto probablemente es porque ya le has intentado por la libre y no te ha funcionado.</p>
-          <p>O seguramente ya contrataste a algunos freelancers o agencias que te cobraban $15,000 por 3 meses y terminas sin una venta porque no supieron ni supiste identificar tu problema.</p>
-          <p>Ojo, nosotros no vendemos, el que vende eres tú.</p>
-          <p>Lo que sí, es que con nuestro programa te la vamos a poner más fácil.</p>
-          <p>¿Y qué trae una estrategia?</p>
-          <p>Básicamente es un «llave en mano» para que comiences a generar oportunidades de negocio.</p>
-        </div>
-        <div className="mt-12 relative w-full h-[10rem] lg:h-auto">
-          <div
-            className="flex lg:flex-wrap lg:w-full absolute lg:relative px-10 -right-8 -left-8 lg:ml-16 overflow-scroll snap-mandatory snap-x justify-start lg:justify-center">
-            <p className="snap-center arrow_box mb-4">Diagnóstico del problema</p>
-            <p className="snap-center arrow_box mb-4">Discurso de venta</p>
-            <p className="snap-center arrow_box mb-4">Herramientas persuasivas</p>
-            <p className="snap-center arrow_box mb-4">Automatización y optimización</p>
-          </div>
-        </div>
-        <div className="max-w-[80ch] flex flex-col mt-20">
-          <a href="#contact" className="button !w-full text-center">¿Quieres conocer todo el proceso? Click!</a>
-          <p className="-ft-3 mt-4 text-center">Agenda una sesión gratuita para analizar tu proyecto</p>
-        </div>
+
         <div className="space-y-8 max-w-[80ch]">
           <h2 className="mt-20">“Ajá, pero a ver, ¿qué han hecho?”</h2>
           <p>Y si eso estas pensando.</p>
@@ -215,7 +215,8 @@ export default function Home() {
               <div>
                 <p className="-ft-2 text-brand-1">Branding // Estrategia</p>
               </div>
-              <p className="-ft-1">Los financieros dedicados a ofrecer créditos empresariales llegaron en ceros y al cabo de 6 meses terminaron rankeados como
+              <p className="-ft-1">Los financieros dedicados a ofrecer créditos empresariales llegaron en ceros y al
+                cabo de 6 meses terminaron rankeados como
                 la
                 franquicia #9
                 de SOC Asesores a nivel nacional.</p>
@@ -277,8 +278,8 @@ export default function Home() {
           </div>
         </div>
         <div className="max-w-[80ch] flex flex-col mt-20">
-          <a href="#contact" className="button !w-full text-center">¿No quisieras ver tu marca ahí arriba?
-            Click!</a>
+          <Link href={{href: '/', hash: 'contact'}} className="button !w-full text-center">¿No quisieras ver tu marca ahí arriba?
+            Click!</Link>
           <p className="-ft-3 mt-4 text-center">Agenda una sesión gratuita para analizar tu proyecto</p>
         </div>
         <div

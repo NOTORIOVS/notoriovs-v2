@@ -152,7 +152,7 @@ ol {
 }
 
 .arrow_box {
-  --size: 12rem;
+  --size: 14rem;
   --width: calc(var(--size) * 1.5);
   @apply flex relative p-8 justify-center items-center text-white text-center bg-black;
   height: var(--size);

@@ -16,7 +16,7 @@ export default function TermsAndConditions() {
         <li>Todas las automatizaciones destinadas a reportar los prospectos generados serán pausadas.</li>
         <li>Se suspenderá el acceso a la base de datos de prospectos gestionada por Notoriovs Studio.</li>
       </ul>
-      <p>No se pausarán ni las campañas ni los servicios contratados para la creación de anuncios y/o mailing. Las actividades de LA AGENCIA continuarán como siempre; únicamente se pausará el acceso a la base de datos y las automatizaciones.</p>
+      <p>No se pausarán ni las campañas ni los servicios contratados para la creación de anuncios y/o mailing. Dichas actividades de LA AGENCIA continuarán como se establece en la propuesta comercial; únicamente se pausará el acceso a la base de datos y las automatizaciones.</p>
       <p>Dichos accesos y automatizaciones serán reactivados una vez que se efectúe el pago pendiente.</p>
 
       <h2>3. Acceso y Respaldo de la Base de Datos de Prospectos</h2>

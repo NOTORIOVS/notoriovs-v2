@@ -21,6 +21,8 @@ export async function GET(request) {
       status: t.status.select.name,
       brand: t.v_brand.formula.string,
       client: brand.properties.v_partner.formula.string,
+      contact: brand.properties['Contact Person'].rich_text[0].plain_text,
+      email: brand.properties['Contact Email'].email,
       bankAccount: {
         name: bank.bank_name.rich_text[0].plain_text,
         acctNumber: bank.acct_number.rich_text[0].plain_text,
@@ -45,6 +47,8 @@ export async function GET(request) {
       issue_date: payload.issueDate,
       due_date: payload.dueDate,
       client: payload.client,
+      contact: payload.contact,
+      email: payload.email,
       brand: payload.brand,
       ref_code: payload.refCode,
       concept: payload.concept,
@@ -56,7 +60,10 @@ export async function GET(request) {
       bank_name: payload.bankAccount.name,
       acct_number: payload.bankAccount.acctNumber,
       clabe: payload.bankAccount.clabe,
-    }), {status: 200});
+    }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' }
+    });
   } catch (e) {
     console.log(e);
     return new Response({data: 'data not found'}, {status: 500});

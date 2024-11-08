@@ -36,7 +36,7 @@ export async function GET(request) {
       type: data.status === 'Paid' ? 'Recibo de pago' : 'Recordatorio de pago',
       status: data.status === 'Paid' ? 'Pagado, gracias!' : 'Pendiente de pago',
       amount: formatCurr.format(data.amount),
-      issueDate: new Date(formatDate(data.dueDate, '-', -4)).toISOString().slice(0, 10),
+      issueDate: new Date(formatDate(data.dueDate, '-', -5)).toISOString().slice(0, 10),
       refCode: data.dueDate.replace(/-/g, '') + '-' + data.brand.replace(/[aeiou]/g, '').substring(0, 2) + '-0' + data.concept.match(/\d{2}/),
       vat: data.fiscal !== false ? formatCurr.format(data.amount * .16) : 'N/A',
       totalAmountDue: data.fiscal !== false ? formatCurr.format(data.amount * 1.16) : formatCurr.format(data.amount),

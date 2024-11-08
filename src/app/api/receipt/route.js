@@ -1,7 +1,7 @@
 import { notion } from '@/services/notion';
 import { formatCurr, formatDate } from '@/utils/formatters';
 
-export async function GET(request) {
+export async function POST(request) {
   const url = new URL(request.url);
   const query = url.searchParams;
   const id = query.get('id');

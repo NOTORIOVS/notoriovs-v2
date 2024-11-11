@@ -82,7 +82,7 @@ button, .button {
   }
 
   & li {
-    @apply before:content-['•'] before:mr-4 ml-4;
+    @apply before:content-['—'] before:-left-8 before:absolute ml-8 relative;
   }
 }
 

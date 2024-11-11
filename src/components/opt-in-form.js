@@ -67,7 +67,7 @@ export default function OptInForm() {
         {
           required: true,
         },
-      )} placeholder="tu sitio web o instagram"/>
+      )} placeholder="Nombre de tu empresa"/>
 
       <button disabled={sending} className="w-full">
         {sending && <span className="animate-spin mr-4">+</span>}

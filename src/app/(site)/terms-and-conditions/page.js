@@ -47,8 +47,8 @@ export default function TermsAndConditions() {
         <li>En caso de terminación anticipada, EL CLIENTE deberá cubrir todos los montos correspondientes hasta la fecha de finalización de la relación contractual, más un 20% adicional sobre las mensualidades restantes.</li>
       </ul>
 
-      <h2>10. Jurisdicción</h2>
-      <p>Para la interpretación, ejecución y cumplimiento del presente acuerdo, las partes acuerdan someterse a la legislación de los Estados Unidos Mexicanos y a la jurisdicción de los tribunales de Guadalajara, Jalisco, renunciando a cualquier otro fuero.</p>
+      {/*<h2>10. Jurisdicción</h2>*/}
+      {/*<p>Para la interpretación, ejecución y cumplimiento del presente acuerdo, las partes acuerdan someterse a la legislación de los Estados Unidos Mexicanos y a la jurisdicción de los tribunales de Guadalajara, Jalisco, renunciando a cualquier otro fuero.</p>*/}
 
     </div>
   )

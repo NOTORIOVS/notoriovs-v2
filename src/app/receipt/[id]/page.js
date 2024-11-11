@@ -34,6 +34,7 @@ export default async function Receipt({params}) {
     type,
     due_date: dueDate,
     issue_date: issueDate,
+    paid_on: paidOn,
     acct_number: accountNumber,
     bank_name: bank,
     clabe,
@@ -108,6 +109,7 @@ export default async function Receipt({params}) {
           </div>
           <div className="py-12 border-t-2 border-b-2 border-black">
             <p className="ft-2 text-center uppercase font-bold">{statusText}</p>
+            <p className="text-center">Pagado el: {paidOn}</p>
             {fiscal ?
               <p className="text-center -ft-2">
                 Este no es un comprobante fiscal.<br/>

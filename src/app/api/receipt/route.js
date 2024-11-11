@@ -16,6 +16,7 @@ export async function POST(request) {
 
     const data = {
       dueDate: new Date(t.due_date.date.start).toISOString().slice(0, 10),
+      paidOn: t.paid_on.date?.start,
       amount: t.amount.number,
       concept: t.concept.title[0].plain_text,
       status: t.status.select.name,
@@ -33,9 +34,10 @@ export async function POST(request) {
 
     const payload = {
       ...data,
-      type: data.status === 'Paid' ? 'Recibo de pago' : 'Recordatorio de pago',
-      statusText: data.status === 'Paid' ? 'Pagado, gracias!' : 'Pendiente de pago',
+      type: data.paidOn !== undefined ? 'Recibo de pago' : 'Recordatorio de pago',
+      statusText: data.paidOn !== undefined ? 'Pagado, gracias!' : 'Pendiente de pago',
       amount: formatCurr.format(data.amount),
+      paidOn: data.paidOn !== undefined ? new Date(data.paidOn).toISOString().slice(0, 10) : 'No pagado',
       issueDate: new Date(formatDate(data.dueDate, '-', -5)).toISOString().slice(0, 10),
       refCode: data.dueDate.replace(/-/g, '') + '-' + data.brand.replace(/[aeiou]/g, '').substring(0, 2) + '-0' + data.concept.match(/\d{2}/),
       vat: data.fiscal !== false ? formatCurr.format(data.amount * .16) : 'N/A',
@@ -44,9 +46,11 @@ export async function POST(request) {
     }
 
     return new Response(JSON.stringify({
+      id: id,
       type: payload.type,
       issue_date: payload.issueDate,
       due_date: payload.dueDate,
+      paid_on: payload.paidOn,
       client: payload.client,
       contact: payload.contact,
       email: payload.email,

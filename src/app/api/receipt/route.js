@@ -34,12 +34,13 @@ export async function POST(request) {
     const payload = {
       ...data,
       type: data.status === 'Paid' ? 'Recibo de pago' : 'Recordatorio de pago',
-      status: data.status === 'Paid' ? 'Pagado, gracias!' : 'Pendiente de pago',
+      statusText: data.status === 'Paid' ? 'Pagado, gracias!' : 'Pendiente de pago',
       amount: formatCurr.format(data.amount),
       issueDate: new Date(formatDate(data.dueDate, '-', -5)).toISOString().slice(0, 10),
       refCode: data.dueDate.replace(/-/g, '') + '-' + data.brand.replace(/[aeiou]/g, '').substring(0, 2) + '-0' + data.concept.match(/\d{2}/),
       vat: data.fiscal !== false ? formatCurr.format(data.amount * .16) : 'N/A',
-      totalAmountDue: data.fiscal !== false ? formatCurr.format(data.amount * 1.16) : formatCurr.format(data.amount),
+      retISR: data.fiscal !== false ? formatCurr.format(data.amount * .0125) : 'N/A',
+      totalAmountDue: data.fiscal !== false ? formatCurr.format((data.amount * 1.16) - (data.amount * 0.0125)) : formatCurr.format(data.amount),
     }
 
     return new Response(JSON.stringify({
@@ -54,8 +55,10 @@ export async function POST(request) {
       concept: payload.concept,
       formatted_amount: payload.amount,
       vat: payload.vat,
+      retISR: payload.retISR,
       total_amount_due: payload.totalAmountDue,
-      status_text: payload.status,
+      status: payload.status,
+      status_text: payload.statusText,
       fiscal: payload.fiscal,
       bank_name: payload.bankAccount.name,
       acct_number: payload.bankAccount.acctNumber,

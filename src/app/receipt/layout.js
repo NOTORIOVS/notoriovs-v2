@@ -1,10 +1,5 @@
 import '@/styles/globals.scss';
 
-export const metadata = {
-  title: 'Notoriovs Studio // Brand and Marketing Consultancy',
-  description: 'Young creative blood to help your business become a successful brand',
-};
-
 export default function ReceiptLayout({children}) {
 
   return (

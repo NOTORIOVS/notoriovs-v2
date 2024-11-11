@@ -26,6 +26,7 @@ $fluid_steps: (
   -ft-2: (minSize: 1.25rem, maxSize: 1.5rem, lead: $baseLead),
   -ft-3: (minSize: 1.1rem, maxSize: 1.3rem, lead: $baseLead),
   -ft-4: (minSize: 1.1rem, maxSize: 1.1rem, lead: $baseLead),
+  -ft-5: (minSize: 0.8rem, maxSize: 0.8rem, lead: $baseLead),
 );
 
 @each $class, $props in $fluid_steps {

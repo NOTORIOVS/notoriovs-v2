@@ -86,6 +86,14 @@ button, .button {
   }
 }
 
+.terms-conditions {
+  & > h1, h2, h3 { font-family: 'pragmatica', sans-serif }
+  & > h2 { @apply mt-16 pt-8 border-t border-dashed border-gray-400; }
+  & > h3 { @extend .ft-3; @apply mt-10 mb-0; }
+  & > p { @apply mt-2; }
+  & > ul > li { @extend .ft-0; }
+}
+
 ul > li {
   @apply before:content-['—'] before:-left-8 before:absolute ml-8 relative;
   & > li {

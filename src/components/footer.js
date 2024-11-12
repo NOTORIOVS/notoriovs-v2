@@ -16,7 +16,7 @@ export default function Footer() {
             </p>
             <p className="-ft-4 text-white">
               <span className="font-bold">T:</span>
-              <a href={`tel:${info.whatsapp.value}`}>+52 (33) 1080 4567</a>
+              <a href={`tel:${info.whatsapp.value}`}>{info.whatsapp.value}</a>
             </p>
           </div>
         </div>

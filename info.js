@@ -1,5 +1,5 @@
 export const info = {
-  legalName: 'Bar Code Services S.A de C.V.',
+  legalName: 'Notoriovs Studio',
   companyName: 'Notoriovs Studio',
   description: 'Brands Metamorphosis',
   email: {

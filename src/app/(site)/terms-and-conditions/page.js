@@ -36,8 +36,9 @@ export default function TermsAndConditions() {
       <h2>3. Pagos y Acceso a Servicios</h2>
       <h3>3.1 Condiciones de Pago</h3>
       <p>El Cliente se compromete a realizar el pago de los servicios en las fechas establecidas en la cotización
-        incluida en la propuesta comercial. El incumplimiento de estos pagos activará las siguientes medidas hasta que
-        se efectúe el pago pendiente:</p>
+        incluida en la propuesta comercial. En caso de incumplimiento, se otorgará una prórroga de 5 días naturales para
+        que El Cliente regularice el pago sin afectar el acceso a los servicios. Si el pago no se efectúa dentro de este
+        plazo, se activarán las siguientes medidas hasta que se liquide el saldo pendiente:</p>
 
       <h3>3.2 Suspensión de Automatizaciones y Acceso a Base de Datos</h3>
       <ul>
@@ -84,8 +85,10 @@ export default function TermsAndConditions() {
         renunciando a cualquier otro fuero.</p>
 
       <h2>9. Propiedad Intelectual</h2>
-      <p>Notoriovs Studio no está generando ninguna clase de derechos de autor, ya que únicamente se encuentra prestando sus conocimientos profesionales para el desarrollo del proyecto especificado en la propuesta comercial.
-        Sin embargo, Notoriovd Studio queda con el derecho de utilizar libremente el material creado para El Cliente para su propia promoción y comunicación.</p>
+      <p>Notoriovs Studio no está generando ninguna clase de derechos de autor, ya que únicamente se encuentra prestando
+        sus conocimientos profesionales para el desarrollo del proyecto especificado en la propuesta comercial.
+        Sin embargo, Notoriovd Studio queda con el derecho de utilizar libremente el material creado para El Cliente
+        para su propia promoción y comunicación.</p>
 
       <h2>10. Confidencialidad</h2>
       <p>Ambas partes se comprometen a mantener la confidencialidad de cualquier información sensible compartida en el

@@ -87,7 +87,7 @@ export default function TermsAndConditions() {
       <h2>9. Propiedad Intelectual</h2>
       <p>Notoriovs Studio no está generando ninguna clase de derechos de autor, ya que únicamente se encuentra prestando
         sus conocimientos profesionales para el desarrollo del proyecto especificado en la propuesta comercial.
-        Sin embargo, Notoriovd Studio queda con el derecho de utilizar libremente el material creado para El Cliente
+        Sin embargo, Notoriovs Studio queda con el derecho de utilizar libremente el material creado para El Cliente
         para su propia promoción y comunicación.</p>
 
       <h2>10. Confidencialidad</h2>

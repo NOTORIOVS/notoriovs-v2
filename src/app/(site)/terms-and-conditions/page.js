@@ -55,6 +55,10 @@ export default function TermsAndConditions() {
       <p>Los accesos y las automatizaciones suspendidos se reactivarán automáticamente una vez que el pago pendiente
         haya sido procesado.</p>
 
+      <h3>3.5 Inversión en Pautas Publicitarias</h3>
+      <p>Para lograr los objetivos, el CLIENTE deberá invertir en pautas publicitarias durante la duración del
+        proyecto. Si no se realiza esta inversión, LA AGENCIA no se responsabiliza por el fracaso de la campaña.</p>
+
       <h2>4. Derechos y Obligaciones de las Partes</h2>
       <h3>4.1 Obligaciones de Notoriovs Studio</h3>
       <p>Notoriovs Studio se compromete a ejecutar los servicios descritos con profesionalismo y de acuerdo con los
@@ -71,7 +75,8 @@ export default function TermsAndConditions() {
 
       <h2>6. Política de Cancelación y Terminación</h2>
       <p>6.1 Cualquiera de las partes podrá terminar el acuerdo notificando por escrito con un preaviso de 30 días.</p>
-      <p>6.2 En caso de cancelación anticipada, el Cliente será responsable de pagar los servicios proporcionados hasta
+      <p>6.2 En caso de cancelación anticipada por parte del Cliente, este será responsable de pagar los servicios
+        proporcionados hasta
         la fecha de terminación, así como los gastos adicionales acordados previamente en la propuesta comercial.</p>
 
       <h2>7. Resolución de Disputas</h2>

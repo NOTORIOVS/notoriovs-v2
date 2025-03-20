@@ -91,43 +91,43 @@ export default function TermsAndConditions() {
       </ul>
       <p>
         Si la evaluación determina que la agencia no ha cumplido con los estándares acordados, Notoriovs Studio
-        reembolsará el 50% de los honorarios ya pagados por El Cliente. Por el contrario, si la evaluación concluye que
+        reembolsará el 20% de los honorarios ya pagados por El Cliente. Por el contrario, si la evaluación concluye que
         la agencia ha cumplido con sus obligaciones y se identifica que la falta de resultados se debe a deficiencias en
         el proceso comercial, en la oferta del producto/servicio o en la gestión interna del Cliente, la agencia no será
-        responsable por dichos resultados y, en este caso, El Cliente deberá abonar un 50% adicional sobre los
+        responsable por dichos resultados y, en este caso, El Cliente deberá abonar un 20% adicional sobre los
         honorarios previamente pactados.
       </p>
 
-      <h2>5. Modificación de los Términos y Condiciones</h2>
+      <h2>6. Modificación de los Términos y Condiciones</h2>
       <p>Notoriovs Studio se reserva el derecho de modificar estos Términos y Condiciones. Cualquier cambio será
         notificado al Cliente por escrito y entrará en vigor 30 días después de dicha notificación, salvo que el Cliente
         notifique su desacuerdo por escrito antes de la fecha de entrada en vigor.</p>
 
-      <h2>6. Política de Cancelación y Terminación</h2>
-      <h3>6.1 Plazo de cancelación</h3>
+      <h2>7. Política de Cancelación y Terminación</h2>
+      <h3>7.1 Plazo de cancelación</h3>
       <p>Cualquiera de las partes podrá terminar el acuerdo notificando por escrito con un preaviso de 30 días.</p>
-      <h3>6.2 Cancelación anticipada</h3>
+      <h3>7.2 Cancelación anticipada</h3>
       <p>En caso de cancelación anticipada por parte del Cliente, este será responsable de pagar los servicios
         proporcionados hasta la fecha de terminación, así como los gastos adicionales acordados previamente en la
         propuesta comercial.</p>
 
-      <h2>7. Resolución de Disputas</h2>
+      <h2>8. Resolución de Disputas</h2>
       <p>En caso de disputa, ambas partes acuerdan intentar resolver la situación mediante negociación directa. Si no se
         llega a una resolución, las partes podrán recurrir a un proceso de mediación o arbitraje de acuerdo con la
         jurisdicción de los tribunales de Guadalajara, Jalisco.</p>
 
-      <h2>8. Jurisdicción</h2>
+      <h2>9. Jurisdicción</h2>
       <p>Para la interpretación, ejecución y cumplimiento del presente acuerdo, las partes acuerdan someterse a la
         legislación de los Estados Unidos Mexicanos y a la jurisdicción de los tribunales de Guadalajara, Jalisco,
         renunciando a cualquier otro fuero.</p>
 
-      <h2>9. Propiedad Intelectual</h2>
+      <h2>10. Propiedad Intelectual</h2>
       <p>Notoriovs Studio no está generando ninguna clase de derechos de autor, ya que únicamente se encuentra prestando
         sus conocimientos profesionales para el desarrollo del proyecto especificado en la propuesta comercial.
         Sin embargo, Notoriovs Studio queda con el derecho de utilizar libremente el material creado para El Cliente
         para su propia promoción y comunicación.</p>
 
-      <h2>10. Confidencialidad</h2>
+      <h2>11. Confidencialidad</h2>
       <p>Ambas partes se comprometen a mantener la confidencialidad de cualquier información sensible compartida en el
         marco de este acuerdo, incluyendo, pero no limitándose a, información comercial, técnica y financiera.</p>
 

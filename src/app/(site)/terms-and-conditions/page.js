@@ -77,15 +77,19 @@ export default function TermsAndConditions() {
       <h2>5. Inconformidad con los resultados de prospección</h2>
       <p>En caso de que El Cliente exprese inconformidad con los resultados de prospección, se establecen dos opciones
         para una evaluación adecuada:<br/>
-        <ul>
-          <li><b>Contratar una Auditoría Comercial Externa:</b> El Cliente puede optar por contratar a un auditor comercial
-            independiente para evaluar los resultados y procesos implementados.
-          </li>
-          <li><b>Asignación de un Asesor Comercial Interno por parte de la Agencia:</b> Notoriovs Studio puede asignar a un
-            asesor comercial interno para realizar la evaluación, lo cual implicará un costo adicional que será definido
-            y acordado previamente con El Cliente.
-          </li>
-        </ul>
+      </p>
+      <ul>
+        <li><b>Contratar una Auditoría Comercial Externa:</b> El Cliente puede optar por contratar a un auditor
+          comercial
+          independiente para evaluar los resultados y procesos implementados.
+        </li>
+        <li><b>Asignación de un Asesor Comercial Interno por parte de la Agencia:</b> Notoriovs Studio puede asignar a
+          un
+          asesor comercial interno para realizar la evaluación, lo cual implicará un costo adicional que será definido
+          y acordado previamente con El Cliente.
+        </li>
+      </ul>
+      <p>
         Si la evaluación determina que la agencia no ha cumplido con los estándares acordados, Notoriovs Studio
         reembolsará el 50% de los honorarios ya pagados por El Cliente. Por el contrario, si la evaluación concluye que
         la agencia ha cumplido con sus obligaciones y se identifica que la falta de resultados se debe a deficiencias en

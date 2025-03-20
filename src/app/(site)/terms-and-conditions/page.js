@@ -33,6 +33,12 @@ export default function TermsAndConditions() {
         El Cliente dispondrá de un plazo de 3 días hábiles para revisar cada entregable y solicitar ajustes o
         revisiones. Si el Cliente no responde en este plazo, el entregable se considerará aprobado.</p>
 
+      <h3>2.5 Recomendaciones estratégicas basadas en datos</h3>
+      <p>Las recomendaciones estratégicas y los ajustes en campañas y otros contenidos proporcionados por Notoriovs
+        Studio se fundamentarán en datos cuantitativos y cualitativos obtenidos de las plataformas de anuncios y de las
+        interacciones con los prospectos. Esto garantiza que nuestras estrategias estén respaldadas por información
+        objetiva y relevante.</p>
+
       <h2>3. Pagos y Acceso a Servicios</h2>
       <h3>3.1 Condiciones de Pago</h3>
       <p>El Cliente se compromete a realizar el pago de los servicios en las fechas establecidas en la cotización
@@ -68,16 +74,38 @@ export default function TermsAndConditions() {
       <p>El Cliente deberá proporcionar toda la información, acceso y recursos necesarios para que Notoriovs Studio
         pueda realizar los servicios de manera eficiente y dentro del plazo acordado.</p>
 
+      <h2>5. Inconformidad con los resultados de prospección</h2>
+      <p>En caso de que El Cliente exprese inconformidad con los resultados de prospección, se establecen dos opciones
+        para una evaluación adecuada:<br/>
+        <ul>
+          <li><b>Contratar una Auditoría Comercial Externa:</b> El Cliente puede optar por contratar a un auditor comercial
+            independiente para evaluar los resultados y procesos implementados.
+          </li>
+          <li><b>Asignación de un Asesor Comercial Interno por parte de la Agencia:</b> Notoriovs Studio puede asignar a un
+            asesor comercial interno para realizar la evaluación, lo cual implicará un costo adicional que será definido
+            y acordado previamente con El Cliente.
+          </li>
+        </ul>
+        Si la evaluación determina que la agencia no ha cumplido con los estándares acordados, Notoriovs Studio
+        reembolsará el 50% de los honorarios ya pagados por El Cliente. Por el contrario, si la evaluación concluye que
+        la agencia ha cumplido con sus obligaciones y se identifica que la falta de resultados se debe a deficiencias en
+        el proceso comercial, en la oferta del producto/servicio o en la gestión interna del Cliente, la agencia no será
+        responsable por dichos resultados y, en este caso, El Cliente deberá abonar un 50% adicional sobre los
+        honorarios previamente pactados.
+      </p>
+
       <h2>5. Modificación de los Términos y Condiciones</h2>
       <p>Notoriovs Studio se reserva el derecho de modificar estos Términos y Condiciones. Cualquier cambio será
         notificado al Cliente por escrito y entrará en vigor 30 días después de dicha notificación, salvo que el Cliente
         notifique su desacuerdo por escrito antes de la fecha de entrada en vigor.</p>
 
       <h2>6. Política de Cancelación y Terminación</h2>
-      <p>6.1 Cualquiera de las partes podrá terminar el acuerdo notificando por escrito con un preaviso de 30 días.</p>
-      <p>6.2 En caso de cancelación anticipada por parte del Cliente, este será responsable de pagar los servicios
-        proporcionados hasta
-        la fecha de terminación, así como los gastos adicionales acordados previamente en la propuesta comercial.</p>
+      <h3>6.1 Plazo de cancelación</h3>
+      <p>Cualquiera de las partes podrá terminar el acuerdo notificando por escrito con un preaviso de 30 días.</p>
+      <h3>6.2 Cancelación anticipada</h3>
+      <p>En caso de cancelación anticipada por parte del Cliente, este será responsable de pagar los servicios
+        proporcionados hasta la fecha de terminación, así como los gastos adicionales acordados previamente en la
+        propuesta comercial.</p>
 
       <h2>7. Resolución de Disputas</h2>
       <p>En caso de disputa, ambas partes acuerdan intentar resolver la situación mediante negociación directa. Si no se

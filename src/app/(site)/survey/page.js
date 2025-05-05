@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Radio } from '@/components/formAtoms';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { setCookie, getCookie } from 'cookies-next';
+import { restrictNumber } from '@/utils/formValidators';
 import fbEvents from '@/services/fbEvents';
 
 const formSteps = [
@@ -187,6 +188,23 @@ export default function Survey() {
                         {...register(name, inputOptions)}
                         placeholder={placeholder}
                         className={inputError === idx ? '!border-brand-2 mt-12' : 'mt-12'}
+                      />
+                    </div>
+                  );
+                }
+
+                if (fs.type === 'number') {
+                  const {name, title, description, placeholder, inputOptions} = fs;
+                  return (
+                    // eslint-disable-next-line react/jsx-key
+                    <div className={`my-20 flex-grow ${formStep === idx ? 'block' : 'hidden'}`}>
+                      <p className="ft-3 sans" dangerouslySetInnerHTML={{__html: title}}/>
+                      <p className="mb-12" dangerouslySetInnerHTML={{__html: description}}/>
+                      <input
+                        {...register(name, inputOptions)}
+                        placeholder={placeholder}
+                        className={inputError === idx ? '!border-brand-2 mt-12' : 'mt-12'}
+                        onKeyDown={restrictNumber}
                       />
                     </div>
                   );

@@ -136,7 +136,7 @@ export default function Survey() {
     handleSubmit,
     setError,
     formState: {errors},
-    watch
+    watch,
   } = methods;
 
   const searchParams = useSearchParams();
@@ -165,11 +165,11 @@ export default function Survey() {
     }
     if (watch('currentSales') === '<$20,000') {
       router.push('/not-elegible');
-      return ;
+      return;
     }
     setInputError(null);
     window.scrollTo(0, 0);
-    console.log('THIS ',formStep + 1, formSteps.length)
+    console.log('THIS ', formStep + 1, formSteps.length);
     return formStep + 1 < formSteps.length && setFormStep(formStep + 1);
   };
 
@@ -192,12 +192,12 @@ export default function Survey() {
           'Lead',
           {email, phone, externalID: id},
         );
-        const url = 'https://notoriovsstudio.pipedrive.com/scheduler/bEE1rxHv/consultoria-gratuita';
-
-        const forwardLink = document.createElement('a');
-        forwardLink.href = url;
-        forwardLink.target = '_blank';
-        forwardLink.click();
+        // const url = 'https://notoriovsstudio.pipedrive.com/scheduler/bEE1rxHv/consultoria-gratuita';
+        //
+        // const forwardLink = document.createElement('a');
+        // forwardLink.href = url;
+        // forwardLink.target = '_blank';
+        // forwardLink.click();
 
         router.push('/thankyou');
       });

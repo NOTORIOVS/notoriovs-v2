@@ -60,6 +60,10 @@ button, .button {
     @extend .button;
     @apply bg-transparent border border-brand-1 text-inherit hover:bg-transparent;
   }
+  &-block {
+    @extend .button, .ft-4;
+    @apply w-full inset-x-0;
+  }
   &[type] {
     @extend .button;
   }
@@ -199,4 +203,8 @@ ol {
   background-image: radial-gradient(circle, #eee 30%, transparent 30%), radial-gradient(circle, #eee 30%, transparent 30%);
   background-size: 1rem 1rem;
   background-position: 0 0, 1rem 1rem;
+}
+
+.reading-container {
+  @apply flex flex-col w-full max-w-[40ch] ft-2 p-8 mx-auto space-y-12;
 }

@@ -7,7 +7,7 @@ export default function Thankyou() {
       <div className="fixed flex items-center h-screen w-full z-[-1]"/>
       <section className="relative justify-center items-center z-[1] top-[5rem] pt-[4rem] pb-[10rem]">
         <div className="flex flex-col items-center">
-          <div className="flex items-center w-full h-48 mb-20 relative">
+          <div className="hidden md:flex items-center w-full h-48 mb-20 relative">
             <Image
               src={logo}
               fill={true}
@@ -18,7 +18,7 @@ export default function Thankyou() {
           <h2 className="ft-6 text-center">
             ¡Vientos! ya estamos del otro lado.
           </h2>
-          <p className="mb-12">Selecciona una día y hora para platicar</p>
+          <p className="mb-12 text-center">Selecciona una día y hora para platicar</p>
           <div className="w-full flex justify-center">
             <iframe src="https://notoriovsstudio.pipedrive.com/scheduler/bEE1rxHv/consultoria-gratuita"
                     title="Pipedrive Scheduler Embed" frameBorder="0" height="1000px" width="100%"

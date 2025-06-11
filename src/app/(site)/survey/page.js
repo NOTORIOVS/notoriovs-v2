@@ -10,7 +10,7 @@ import fbEvents from '@/services/fbEvents';
 const formSteps = [
   {
     name: 'firstName',
-    title: `Ok, prometo hacer esto lo más rápido y sencillo posible, <br/>son solo 8 preguntas.`,
+    title: `Ok, prometo hacer esto lo más rápido y sencillo posible, <br/>son solo 10 preguntas.`,
     description: `Empecemos por tu nombre, el que más te guste. Para empezarnos a <i>tutear</i>.`,
     type: 'text',
     inputOptions: {required: 'Compártenos tu nombre'},
@@ -44,11 +44,12 @@ const formSteps = [
   },
   {
     name: 'budget',
-    title: '¿Cuál es tu presupuesto mensual de marketing?',
-    description: 'Con todo y pautas en MXN',
+    title: 'Actualmente, ¿cuál es tu presupuesto mensual de marketing?',
+    description: 'Con honorarios y pautas en MXN',
     type: 'radio',
     inputOptions: {required: 'Selecciona una opción'},
     options: [
+      {value: '<$15,000', label: 'Menos de $15,000 mxn'},
       {value: '$15,000+', label: '$15,000 a $20,000 mxn'},
       {value: '$20,000+', label: '$20,000 a $50,000 mxn'},
       {value: '$50,000+', label: 'Más de $50,000 mxn'},
@@ -56,10 +57,33 @@ const formSteps = [
     cols: 1,
   },
   {
+    name: 'currentSales',
+    title: '¿Cuánto estás vendiendo al mes, aproximadamente?',
+    description: 'Te preguntamos para saber que estrategia tendría un buen impacto en tu negocio.',
+    type: 'radio',
+    inputOptions: {required: 'Selecciona una opción'},
+    options: [
+      {value: '<$20,000', label: 'Menos de $20,000 mxn'},
+      {value: '$20,000-$30,000', label: '$20,000 a $30,000 mxn'},
+      {value: '$30,000-$50,000', label: '$30,000 a $50,000 mxn'},
+      {value: '$50,000-$100,000', label: '$50,000 a $100,000 mxn'},
+      {value: '$100,000-$200,000', label: '$100,000 a $200,000 mxn'},
+      {value: '$200,000+', label: 'Más de $200,000 mxn'},
+    ],
+    cols: 1,
+  },
+  {
+    name: 'targetSales',
+    title: '¿Cuál es tu meta de ventas mensual?',
+    description: 'Para poder construir un plan de crecimiento al rededor de esta meta.',
+    type: 'text',
+    inputOptions: {required: 'Selecciona una opción'},
+  },
+  {
     name: 'whyGrow',
-    title: '¿Por qué hoy es un buen momento para escalar?',
+    title: '¿Cuéntame por qué hoy es un buen momento para escalar?',
     type: 'textarea',
-    placeholder: 'Cuéntame que planes traes',
+    placeholder: 'Cuáles son tus planes',
     cols: 4,
   },
   {
@@ -77,7 +101,7 @@ const formSteps = [
   {
     name: 'compromise',
     title: 'Ok, esta pregunta es la buena. Pues dicen que somos muy buenos pero tampoco somos magos.',
-    description: 'Nuestros servicios van desde los $8,000 MXN al mes más pautas. <br/><br/>Siendo conservadores, y según tu producto o servicio, podemos multiplicar el total de tu inversión (honorarios + pautas) por 5x, aunque lo hemos hecho hasta por 10x. <br/><br/>Estás dispuesto a invertir con este esquema?',
+    description: 'Nuestros honorarios van desde los $12,000 MXN al mes más pautas. <br/><br/>Siendo conservadores, y según tu producto o servicio, podemos multiplicar el total de tu inversión (honorarios + pautas) por 5x, aunque lo hemos hecho hasta por 10x. <br/><br/>Estás dispuesto a invertir con este esquema?',
     type: 'radio',
     inputOptions: {required: 'Selecciona una opción'},
     options: [
@@ -106,7 +130,13 @@ export default function Survey() {
   const [inputError, setInputError] = useState(null);
   const [sending, setSending] = useState(false);
   const methods = useForm({mode: 'all'});
-  const {register, handleSubmit, setError, formState: {errors}} = methods;
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: {errors},
+    watch
+  } = methods;
 
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -126,17 +156,20 @@ export default function Survey() {
     formSteps.map((fs) => setError(fs.name, {}));
   }, [router, searchParams, setError]);
 
-  console.log('formStep', formStep);
-
   const handleNext = () => {
     const formStepName = formSteps[formStep].name;
     if (errors[formStepName]) {
       setInputError(formStep);
       return;
     }
+    if (watch('currentSales') === '<$20,000') {
+      router.push('/not-elegible');
+      return ;
+    }
     setInputError(null);
     window.scrollTo(0, 0);
-    return formStep < 7 && setFormStep(formStep + 1);
+    console.log('THIS ',formStep + 1, formSteps.length)
+    return formStep + 1 < formSteps.length && setFormStep(formStep + 1);
   };
 
   const onSubmit = (data) => {
@@ -155,12 +188,12 @@ export default function Survey() {
     }).then((response) => response)
       .then(() => {
         fbq('track', 'Lead');
-        // const url = 'https://notoriovsstudio.pipedrive.com/scheduler/bEE1rxHv/consultoria-gratuita';
-        //
-        // const forwardLink = document.createElement('a');
-        // forwardLink.href = url;
-        // forwardLink.target = '_blank';
-        // forwardLink.click();
+        const url = 'https://notoriovsstudio.pipedrive.com/scheduler/bEE1rxHv/consultoria-gratuita';
+
+        const forwardLink = document.createElement('a');
+        forwardLink.href = url;
+        forwardLink.target = '_blank';
+        forwardLink.click();
 
         router.push('/thankyou');
       });
@@ -255,13 +288,13 @@ export default function Survey() {
                 >Atrás
                 </button>
                 <button
-                  type={formStep < 7 ? 'button' : 'submit'}
+                  type={formStep + 1 < formSteps.length ? 'button' : 'submit'}
                   disabled={sending}
                   onClick={() => handleNext()}
                   className="mt-auto"
                 >
                   {sending && <span className="animate-spin mr-4">+</span>}
-                  {formStep === 7 ? 'Agendar cita' : sending ? 'Abriendo Calendario' : 'Siguiente'}
+                  {formStep + 1 === formSteps.length ? 'Agendar cita' : sending ? 'Abriendo Calendario' : 'Siguiente'}
                 </button>
               </div>
             </form>

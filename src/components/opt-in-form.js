@@ -6,6 +6,7 @@ import { setCookie } from 'cookies-next';
 import { useState } from 'react';
 import { restrictNumber, emailRegExp } from '@/utils/formValidators';
 import fbEvents from '@/services/fbEvents';
+import fbEvent from '@/services/fbEvents';
 
 export default function OptInForm() {
   const [sending, setSending] = useState(false);
@@ -32,10 +33,20 @@ export default function OptInForm() {
       },
     }).then((result) => result.json())
       .then(({id}) => {
+        fbEvent(
+          'CompleteRegistration',
+          {email: data.email, phone: data.phone, externalID: id},
+        );
         setCookie('lead', {...data, id});
         router.push(`/survey?id=${id}`);
+      })
+      .catch(() => {
+        fbEvent(
+          'CompleteRegistration',
+          {email: data.email, phone: data.phone, externalID: ''},
+        );
+        setCookie('lead', {...data});
       });
-
   };
 
   return (

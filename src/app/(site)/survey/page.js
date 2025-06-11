@@ -6,6 +6,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { setCookie, getCookie } from 'cookies-next';
 import { restrictNumber } from '@/utils/formValidators';
 import fbEvents from '@/services/fbEvents';
+import fbEvent from '@/services/fbEvents';
 
 const formSteps = [
   {
@@ -187,7 +188,10 @@ export default function Survey() {
       },
     }).then((response) => response)
       .then(() => {
-        fbq('track', 'Lead');
+        fbEvent(
+          'Lead',
+          {email, phone, externalID: id},
+        );
         const url = 'https://notoriovsstudio.pipedrive.com/scheduler/bEE1rxHv/consultoria-gratuita';
 
         const forwardLink = document.createElement('a');

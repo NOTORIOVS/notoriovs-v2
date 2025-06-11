@@ -1,46 +1,56 @@
+'use client';
 import Image from 'next/image';
 import logo from '../../../../public/images/svg/NTRS-Logo-Green.png';
 import cover from '../../../../public/images/NTRS-StarterMarketing-Thumbnail.png';
 import Faqs from '@/components/faqs';
+import { useEffect } from 'react';
+import fbEvent from '@/services/fbEvents';
+import { getCookie } from 'cookies-next';
 
 export default function NotElegible() {
   const pmtLink = 'https://pay.hotmart.com/R99467572K';
   const faqs = [
     {
-      q: "¿Este manual sirve si no sé nada de marketing?",
-      a: "Sí. Fue hecho para emprendedores sin experiencia previa. Empieza desde lo esencial."
+      q: '¿Este manual sirve si no sé nada de marketing?',
+      a: 'Sí. Fue hecho para emprendedores sin experiencia previa. Empieza desde lo esencial.',
     },
     {
-      q: "¿Necesito invertir en anuncios para aplicar lo que dice?",
-      a: "No. Muchos ejercicios son estratégicos y puedes implementarlos de forma orgánica."
+      q: '¿Necesito invertir en anuncios para aplicar lo que dice?',
+      a: 'No. Muchos ejercicios son estratégicos y puedes implementarlos de forma orgánica.',
     },
     {
-      q: "¿Qué pasa si no entiendo algo del manual?",
-      a: "Incluye ejemplos, plantillas y explicaciones claras. Además, puedes escribirnos si tienes dudas."
+      q: '¿Qué pasa si no entiendo algo del manual?',
+      a: 'Incluye ejemplos, plantillas y explicaciones claras. Además, puedes escribirnos si tienes dudas.',
     },
     {
-      q: "¿Puedo aplicar esto aunque mi negocio sea físico o local?",
-      a: "Sí. Hay apartados específicos para negocios locales y cómo atraer clientes digitales."
+      q: '¿Puedo aplicar esto aunque mi negocio sea físico o local?',
+      a: 'Sí. Hay apartados específicos para negocios locales y cómo atraer clientes digitales.',
     },
     {
-      q: "¿Cuánto tiempo me tomará aplicarlo?",
-      a: "Puedes completar todo en menos de una semana y comenzar a implementar desde el primer día."
-    }
+      q: '¿Cuánto tiempo me tomará aplicarlo?',
+      a: 'Puedes completar todo en menos de una semana y comenzar a implementar desde el primer día.',
+    },
   ];
+
+  useEffect(() => {
+    const leadCookie = getCookie('lead');
+    const {email, phone, id} = JSON.parse(leadCookie);
+    return () => fbEvent('Not Elegible', {phone, email, externalID: id});
+  }, []);
 
   return (
     <div className="flex flex-col relative">
       <section className="container relative justify-center items-center z-[1] top-[5rem] pt-[4rem] pb-[10rem]">
         <div className="flex flex-col items-center">
           <div className="md:w-1/2">
-            <h2 className="ft-11 md:text-center">
+            <h2 className="ft-11">
               LO SIENTO
             </h2>
-            <p className="my-12 ft-2 md:text-center">
+            <p className="my-12 ft-2">
               Sorry por darte el cortón...<br/>
               pero basado en tu estado actual, <br/><br/>
               te recomiendo que primero le eches un ojo a este manual
-              que creamos para que empieces a tener clientes<br/>
+              que creamos para que empieces a tener clientes<br/><br/>
               sin la necesidad de pagar los honorarios de una agencia.
             </p>
             <a href={pmtLink} className="flex ft-4 items-center w-full pt-[100%] mb-10 relative">
@@ -146,7 +156,8 @@ export default function NotElegible() {
                 src="https://www.lcvaliados.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2F07.a47c5323.jpeg&w=3840&q=75"
                 alt=""/>
             </div>
-            <p className="-ft-1 mt-8 flex-grow">Antes sentía que hacía marketing a ciegas. Con el manual, entendí cómo aterrizar mi mensaje y detectar lo que estaba fallando. Por fin tengo claridad.</p>
+            <p className="-ft-1 mt-8 flex-grow">Antes sentía que hacía marketing a ciegas. Con el manual, entendí cómo
+              aterrizar mi mensaje y detectar lo que estaba fallando. Por fin tengo claridad.</p>
             <p className="-ft-2 py-2 px-4 bg-black text-white mt-8 border-t-4 border-brand-1">Daniela V.</p>
             <p className="-ft-2 mt-2">Marca de joyería artesanal</p>
           </div>
@@ -157,7 +168,8 @@ export default function NotElegible() {
                 src="https://www.lcvaliados.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2F02.966b6c46.jpeg&w=3840&q=75"
                 alt=""/>
             </div>
-            <p className="-ft-1 mt-8 flex-grow">Pensé que sería como otros ebooks llenos de teoría, pero este manual va directo al grano. Me hizo pensar como estratega, no solo como vendedor improvisado.</p>
+            <p className="-ft-1 mt-8 flex-grow">Pensé que sería como otros ebooks llenos de teoría, pero este manual va
+              directo al grano. Me hizo pensar como estratega, no solo como vendedor improvisado.</p>
             <p className="-ft-2 py-2 px-4 bg-black text-white mt-8 border-t-4 border-brand-1">Héctor R.</p>
             <p className="-ft-2 mt-2">Entrenador personal</p>
           </div>
@@ -168,7 +180,8 @@ export default function NotElegible() {
                 src="https://www.lcvaliados.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2F09.cafedd78.jpeg&w=3840&q=75"
                 alt=""/>
             </div>
-            <p className="-ft-1 mt-8 flex-grow">Lo descargué un sábado y el lunes ya estaba aplicando los ejercicios. Me di cuenta de errores que llevaba meses cometiendo sin saberlo.</p>
+            <p className="-ft-1 mt-8 flex-grow">Lo descargué un sábado y el lunes ya estaba aplicando los ejercicios. Me
+              di cuenta de errores que llevaba meses cometiendo sin saberlo.</p>
             <p className="-ft-2 py-2 px-4 bg-black text-white mt-8 border-t-4 border-brand-1">Lorena S.</p>
             <p className="-ft-2 mt-2">Consultora para emprendedores</p>
           </div>
@@ -182,18 +195,23 @@ export default function NotElegible() {
         </div>
       </section>
 
-      <section className="reading-container bg-black">
-        <div className="p-16">
-          <h2 className="text-white mb-20">Pero como vienes de nuestra campaña principal</h2>
-          <p className="text-white mb-20">Te damos chance tener este manual con un descuento para que ya pongas en orden
-            tu prospección y empieces a vender.</p>
-          <div className="p-12 mb-20 border border-brand-1">
-            <h3 className="text-white text-center ft-11">$499</h3>
+      <div className="bg-black py-32">
+        <div className="reading-container border border-brand-1">
+          <div className="p-16">
+            <h2 className="text-white mb-20">Pero como vienes de nuestra campaña principal</h2>
+            <p className="text-white mb-20">Te damos chance tener este manual con un descuento para que ya pongas en
+              orden
+              tu prospección y empieces a vender.</p>
+            <div className="p-12 mb-20 border border-brand-1">
+              <p className="text-red-500 text-center">No vas a pagar $899</p>
+              <p className="sans text-center text-white">Solo:</p>
+              <h3 className="text-white text-center ft-11">$499</h3>
+            </div>
+            <a href={pmtLink} target="_blank" className="button-block hover:!border-brand-1">Descarga el manual</a>
+            <p className="text-white text-center -ft-1 mt-4">Comienza a obtener oportunidades de negocio por $499</p>
           </div>
-          <a href={pmtLink} target="_blank" className="button-block hover:!border-brand-1">Ya dale clic!</a>
-          <p className="text-white text-center -ft-1 mt-4">Comienza a obtener oportunidades de negocio por $499</p>
         </div>
-      </section>
+      </div>
 
       <section className="container flex flex-col items-center my-20 border-t py-20">
         <div className="md:w-1/2">
@@ -208,15 +226,20 @@ export default function NotElegible() {
         </div>
       </section>
 
-      <section className="container flex flex-col items-center mb-20 border-t py-20">
-        <div className="md:w-1/2">
-          <h2 className="text-center">No necesitas una agencia para empezar a vender. Solo necesitas una guía que te muestre el camino.</h2>
+      <div className="border-t py-20 bg-black">
+        <div className="flex flex-col items-center mb-20">
+          <div className="md:w-1/2">
+            <h2 className="text-center text-white">No necesitas una agencia para empezar a vender. Solo necesitas una
+              guía que te
+              muestre el camino.</h2>
+          </div>
+          <div className="w-full md:w-1/2 ft-4 mt-20 text-center">
+            <a href={pmtLink} target="_blank" className="button-block hover:!border-brand-1">Descarga el Manual
+              Ahora</a>
+            <p className="-ft-1 mt-4 text-white">Comienza a obtener oportunidades de negocio por $499</p>
+          </div>
         </div>
-        <div className="w-full md:w-1/2 ft-4 mt-20 text-center">
-          <a href={pmtLink} target="_blank" className="button-block">Descarga el Manual Ahora</a>
-          <p className="-ft-1 mt-4">Comienza a obtener oportunidades de negocio por $499</p>
-        </div>
-      </section>
+      </div>
 
     </div>
   );

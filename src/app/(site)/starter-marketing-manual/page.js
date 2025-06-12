@@ -34,47 +34,36 @@ export default function NotElegible() {
 
   useEffect(() => {
     const leadCookie = getCookie('lead');
-    const lead = JSON.parse(leadCookie || '{}');
+    const lead = JSON.parse(leadCookie || "{}");
     return () => fbEvent('Not Elegible', {phone: lead?.phone, email: lead?.email, externalID: lead?.id});
   }, []);
 
   return (
     <div className="flex flex-col relative">
-      <section className="container relative justify-center items-center z-[1] top-[5rem] pt-[4rem] pb-[10rem]">
-        <div className="flex flex-col items-center">
-          <div className="md:w-1/2">
-            <h2 className="ft-11">
-              LO SIENTO
-            </h2>
-            <p className="my-12 ft-2">
-              Sorry por darte el cortón...<br/>
-              pero basado en tu estado actual, <br/><br/>
-              te recomiendo que primero le eches un ojo a este manual
-              que creamos para que empieces a tener clientes<br/><br/>
-              sin la necesidad de pagar los honorarios de una agencia.
-            </p>
-            <a href={pmtLink} className="flex ft-4 items-center w-full pt-[100%] mb-10 relative">
-              <Image
-                src={cover}
-                fill={true}
-                style={{objectFit: 'contain'}}
-                alt="Notoriovs Studio"
-              />
-            </a>
-            <div className="w-full ft-4 text-center">
-              <a href={pmtLink} target="_blank" className="button-block">Ya dale clic!</a>
-              <p className="-ft-1 mt-4">Comienza a obtener oportunidades de negocio por $800</p>
-            </div>
-          </div>
-        </div>
-      </section>
       <div className="relative">
         <div className="absolute inset-0 z-[9999] bg-[rgba(0,0,0,0)] backdrop-invert pointer-events-none"/>
-        <div className="container py-96">
-          <p className="sans ft-6 mb-8 md:w-1/2 mx-auto">El manual práctico con nuestra metodología para generar tus primeros prospectos
-            sin
-            depender de expertos ni gastar miles en campañas sin sentido</p>
+        <div className="absolute flex items-center h-screen w-full overflow-hidden z-[-1] invert">
+          <Image
+            src="/images/backgrounds/bkg-manual.jpg"
+            fill={true}
+            style={{objectFit: 'cover'}}
+            alt="Proyecto marketing"/>
         </div>
+        <section className="relative min-h-screen justify-center items-center z-[1] invert">
+          <div className="md:w-1/2">
+            <h2 className="ft-11 text-center text-white">
+              Starter Marketing
+            </h2>
+            <p className="sans ft-5 text-center text-white mt-12">Tu negocio todavía no necesita una agencia. Necesita estrategia que funcione desde hoy.</p>
+            <p className="text-center text-white mt-20">Descubre el manual práctico con nuestra metodología para generar tus primeros prospectos sin depender de expertos ni gastar miles en campañas sin sentido</p>
+          </div>
+          <div
+            className="w-full flex flex-col justify-center bottom-40 md:bottom-20 mt-auto mb-0 cursor-pointer absolute"
+          >
+            <span className="text-center text-gray-300">Para abajo</span>
+            <span className="material-icons text-white mx-auto animate-bounce">expand_more</span>
+          </div>
+        </section>
       </div>
       <section className="container flex flex-col items-center mb-20 border-t py-20">
         <div className="md:w-1/2">

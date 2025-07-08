@@ -5,13 +5,13 @@ import { Radio } from '@/components/formAtoms';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { setCookie, getCookie } from 'cookies-next';
 import { restrictNumber } from '@/utils/formValidators';
-import fbEvents from '@/services/fbEvents';
 import fbEvent from '@/services/fbEvents';
+import { info } from '../../../../info';
 
 const formSteps = [
   {
     name: 'firstName',
-    title: `Ok, prometo hacer esto lo más rápido y sencillo posible, <br/>son solo 10 preguntas.`,
+    title: `Ok, prometo hacer esto lo más rápido y sencillo posible.`,
     description: `Empecemos por tu nombre, el que más te guste. Para empezarnos a <i>tutear</i>.`,
     type: 'text',
     inputOptions: {required: 'Compártenos tu nombre'},
@@ -38,29 +38,16 @@ const formSteps = [
   },
   {
     name: 'about',
-    title: 'Cuéntame sobre tu negocio, ¿qué haces?',
+    title: '¿Qué vendes y cómo lo vendes?',
+    description: 'Breve descripción: producto/servicio + cómo consigues clientes hoy.',
     type: 'textarea',
-    placeholder: 'en 2 o 3 líneas... échale crema',
+    placeholder: 'Ej. Somos una consultora legal que trabaja con PYMEs. Nuestros clientes llegan principalmente por recomendación y algunos esfuerzos en LinkedIn.',
     cols: 4,
   },
   {
-    name: 'budget',
-    title: 'Actualmente, ¿cuál es tu presupuesto mensual de marketing?',
-    description: 'Con honorarios y pautas en MXN',
-    type: 'radio',
-    inputOptions: {required: 'Selecciona una opción'},
-    options: [
-      {value: '<$15,000', label: 'Menos de $15,000 mxn'},
-      {value: '$15,000+', label: '$15,000 a $20,000 mxn'},
-      {value: '$20,000+', label: '$20,000 a $50,000 mxn'},
-      {value: '$50,000+', label: 'Más de $50,000 mxn'},
-    ],
-    cols: 1,
-  },
-  {
     name: 'currentSales',
-    title: '¿Cuánto estás vendiendo al mes, aproximadamente?',
-    description: 'Te preguntamos para saber que estrategia tendría un buen impacto en tu negocio.',
+    title: '¿Cuánto vendes al mes, aproximadamente?',
+    description: 'Esto nos ayuda a medir potencial de escalabilidad.',
     type: 'radio',
     inputOptions: {required: 'Selecciona una opción'},
     options: [
@@ -74,18 +61,45 @@ const formSteps = [
     cols: 1,
   },
   {
-    name: 'targetSales',
-    title: '¿Cuál es tu meta de ventas mensual?',
-    description: 'Para poder construir un plan de crecimiento al rededor de esta meta.',
-    type: 'text',
+    name: 'currentMarketing',
+    title: '¿Actualmente estás haciendo campañas pagadas?',
+    type: 'radio',
     inputOptions: {required: 'Selecciona una opción'},
+    options: [
+      {value: 'no', label: 'No, nada de campañas aún'},
+      {value: 'organic', label: 'Solo contenido orgánico'},
+      {value: 'adsBasic', label: 'Sí, campañas básicas (FB/IG)'},
+      {value: 'adsPro', label: 'Sí, con agencia o equipo'},
+    ],
+    cols: 1,
   },
   {
-    name: 'whyGrow',
-    title: '¿Cuéntame por qué hoy es un buen momento para escalar?',
-    type: 'textarea',
-    placeholder: 'Cuáles son tus planes',
-    cols: 4,
+    name: 'budget',
+    title: '¿Cuál es tu presupuesto mensual aproximado para marketing?',
+    description: 'Incluyendo pauta + equipo/agencia (si aplica)',
+    type: 'radio',
+    inputOptions: {required: 'Selecciona una opción'},
+    options: [
+      {value: '<$15,000', label: 'Menos de $15,000 mxn'},
+      {value: '$15,000+', label: '$15,000 a $20,000 mxn'},
+      {value: '$20,000+', label: '$20,000 a $50,000 mxn'},
+      {value: '$50,000+', label: 'Más de $50,000 mxn'},
+    ],
+    cols: 1,
+  },
+  {
+    name: 'need',
+    title: '¿Qué describe mejor tu situación actual?',
+    description: 'Selecciona lo que más te hace sentido.',
+    type: 'radio',
+    inputOptions: {required: 'Selecciona una opción'},
+    options: [
+      {value: 'advice', label: 'Aún no tengo campañas activas, necesito empezar desde cero'},
+      {value: 'setUp', label: 'Tengo campañas corriendo, pero no estoy obteniendo resultados consistentes'},
+      {value: 'strategy', label: 'Ya tengo equipo o agencia, pero necesito dirección estratégica'},
+      {value: 'growthPartner', label: 'Tengo resultados estables y busco escalar con un aliado comercial'},
+    ],
+    cols: 1,
   },
   {
     name: 'immediacy',
@@ -100,21 +114,35 @@ const formSteps = [
     ],
   },
   {
+    name: 'targetSales',
+    title: '¿Cuál es tu meta de ventas mensual?',
+    description: 'Para poder construir un plan de crecimiento al rededor de esta meta.',
+    type: 'text',
+    inputOptions: {required: 'Selecciona una opción'},
+  },
+  {
+    name: 'whyGrow',
+    title: '¿Cuéntame por qué hoy es un buen momento para escalar?',
+    type: 'textarea',
+    placeholder: 'Ej. Queremos superar los $300k/mes para contratar equipo comercial y crecer en CDMX. Buscamos dejar de depender solo de referidos.',
+    cols: 4,
+  },
+  {
     name: 'compromise',
-    title: 'Ok, esta pregunta es la buena. Pues dicen que somos muy buenos pero tampoco somos magos.',
-    description: 'Nuestros honorarios van desde los $12,000 MXN al mes más pautas. <br/><br/>Siendo conservadores, y según tu producto o servicio, podemos multiplicar el total de tu inversión (honorarios + pautas) por 5x, aunque lo hemos hecho hasta por 10x. <br/><br/>Estás dispuesto a invertir con este esquema?',
+    title: '¿Cuál es tu disposición actual para invertir en marketing?',
+    description: 'Para que te des una idea, nuestros programas van desde $1,500 MXN (asesoría) hasta $18,000 MXN al mes (dirección de marketing), además del presupuesto publicitario.<br/><br/>Trabajamos con modelos que buscan multiplicar tu inversión por 3x a 10x, dependiendo de tu tipo de negocio y etapa.',
     type: 'radio',
     inputOptions: {required: 'Selecciona una opción'},
     options: [
-      {value: 'not', label: 'De plano no puedo'},
-      {value: 'can find the way', label: 'Puedo buscar la forma'},
-      {value: 'no problem', label: 'Claro! sin broncas'},
+      {value: 'low', label: 'Estoy explorando opciones, hoy no puedo invertir mucho'},
+      {value: 'medium', label: 'Podría invertir si me hace sentido el plan'},
+      {value: 'high', label: 'Estoy listo para invertir si veo retorno claro'},
     ],
-    cols: 3,
+    cols: 1,
   },
   {
     name: 'commitment',
-    title: '¿Prometes atender a la sesión que estás a punto de agendar? No está chido que nos dejes plantados',
+    title: 'Si resultas calificado, ¿prometes asistir puntual a la sesión que estás a punto de agendar?',
     type: 'radio',
     inputOptions: {required: 'Selecciona una opción'},
     options: [
@@ -136,6 +164,7 @@ export default function Survey() {
     handleSubmit,
     setError,
     formState: {errors},
+    getValues,
     watch,
   } = methods;
 
@@ -157,50 +186,98 @@ export default function Survey() {
     formSteps.map((fs) => setError(fs.name, {}));
   }, [router, searchParams, setError]);
 
-  const handleNext = () => {
-    const formStepName = formSteps[formStep].name;
-    if (errors[formStepName]) {
+  const handlePartialSubmit = async () => {
+    try {
+      setSending(true);
+      const dataSoFar = getValues();
+      const lead = getCookie('lead');
+      const _fbc = getCookie('_fbc');
+      const _fbp = getCookie('_fbp');
+      const { id, email, phone } = JSON.parse(lead || '{}');
+      const payload = { ...dataSoFar, id, email, phone, _fbc, _fbp };
+
+      await fetch(info.surveyWebhook, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {'Content-Type': 'application/json'},
+      });
+
+      fbEvent('Lead', { email, phone, externalID: id });
+      router.push('/thankyou');
+    } catch (e) {
+      console.error('Partial submit failed', e);
+    }
+  };
+
+  const onSubmit = async (data) => {
+    try {
+      setSending(true);
+      const leadRaw = getCookie('lead');
+      const _fbc = getCookie('_fbc');
+      const _fbp = getCookie('_fbp');
+
+      if (!leadRaw) {
+        console.error('❌ No se encontró cookie lead');
+        return;
+      }
+
+      let parsedLead;
+      try {
+        parsedLead = JSON.parse(leadRaw);
+      } catch (err) {
+        console.error('❌ Error al parsear cookie lead:', err);
+        return;
+      }
+
+      const { id, email, phone } = parsedLead;
+      const payload = { ...data, id, email, phone, _fbc, _fbp };
+      console.log('payload', payload);
+
+      const res = await fetch(info.surveyWebhook, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!res.ok) {
+        console.error('❌ Error en el fetch', res.status);
+        return;
+      }
+
+      fbEvent('Lead', { email, phone, externalID: id });
+
+      router.push('/thankyou');
+    } catch (error) {
+      console.error('❌ Error en onSubmit:', error);
+    }
+  };
+
+
+  const handleNext = async () => {
+    const currentStep = formSteps[formStep];
+    const formStepName = currentStep.name;
+
+    const valid = await methods.trigger(formStepName);
+    if (!valid) {
       setInputError(formStep);
       return;
     }
-    if (watch('currentSales') === '<$20,000') {
-      router.push('/not-elegible');
+
+    if (formStepName === 'need' && watch('need') === 'advice') {
+      await handlePartialSubmit();
       return;
     }
+
     setInputError(null);
     window.scrollTo(0, 0);
-    console.log('THIS ', formStep + 1, formSteps.length);
-    return formStep + 1 < formSteps.length && setFormStep(formStep + 1);
-  };
 
-  const onSubmit = (data) => {
-    setSending(true);
-    const lead = getCookie('lead');
-    const {id, email, phone} = JSON.parse(lead);
-    const fbParams = fbEvents('Lead', id);
-    const payload = {...data, id, email, phone, fbParams};
-
-    fetch('https://hook.us1.make.com/f1yv4o13p65ywj5wni139fikancma8tj', {
-      method: 'POST',
-      body: JSON.stringify(payload),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }).then((response) => response)
-      .then(() => {
-        fbEvent(
-          'Lead',
-          {email, phone, externalID: id},
-        );
-        // const url = 'https://notoriovsstudio.pipedrive.com/scheduler/bEE1rxHv/consultoria-gratuita';
-        //
-        // const forwardLink = document.createElement('a');
-        // forwardLink.href = url;
-        // forwardLink.target = '_blank';
-        // forwardLink.click();
-
-        router.push('/thankyou');
-      });
+    if (formStep < formSteps.length - 1) {
+      setFormStep(formStep + 1);
+    } else {
+      await handleSubmit(onSubmit)();
+    }
   };
 
   return (
@@ -292,7 +369,7 @@ export default function Survey() {
                 >Atrás
                 </button>
                 <button
-                  type={formStep + 1 < formSteps.length ? 'button' : 'submit'}
+                  type="button"
                   disabled={sending}
                   onClick={() => handleNext()}
                   className="mt-auto"

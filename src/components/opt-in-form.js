@@ -2,10 +2,9 @@ import Link from 'next/link';
 import { info } from '../../info';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
-import { setCookie } from 'cookies-next';
+import { getCookie, setCookie } from 'cookies-next';
 import { useState } from 'react';
 import { restrictNumber, emailRegExp } from '@/utils/formValidators';
-import fbEvents from '@/services/fbEvents';
 import fbEvent from '@/services/fbEvents';
 
 export default function OptInForm() {
@@ -17,36 +16,41 @@ export default function OptInForm() {
     formState: {errors},
   } = useForm();
 
-  const onSubmit = (data) => {
-    setSending(true);
-    data.phone = '52' + data.phone.replace(/^\+?((MX)?\s?(52)?)?\s?0?1?|\s|\(|\)|-/g, '');
+  const onSubmit = async (data) => {
+    try {
+      setSending(true);
+      data.phone = '521' + data.phone.replace(/^\+?((MX)?\s?(52)?)?\s?0?1?|\s|\(|\)|-/g, '');
+      const _fbc = getCookie('_fbc');
+      const _fbp = getCookie('_fbp');
 
-    const fbParams = fbEvents('CompleteRegistration');
+      const payload = {...data, _fbc, _fbp};
 
-    const payload = {...data, fbParams};
-
-    fetch('https://hook.us1.make.com/yots59pvvj41v9owiy6nicka7drtvyq2', {
-      method: 'POST',
-      body: JSON.stringify(payload),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }).then((result) => result.json())
-      .then(({id}) => {
-        fbEvent(
-          'CompleteRegistration',
-          {email: data.email, phone: data.phone, externalID: id},
-        );
-        setCookie('lead', {...data, id});
-        router.push(`/survey?id=${id}`);
-      })
-      .catch(() => {
-        fbEvent(
-          'CompleteRegistration',
-          {email: data.email, phone: data.phone, externalID: ''},
-        );
-        setCookie('lead', {...data});
+      const result = await fetch(info.optInWebHook, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
+
+      const res = await result.json();
+      const {id} = res;
+
+      fbEvent(
+        'CompleteRegistration',
+        {email: data.email, phone: data.phone, externalID: id},
+      );
+      setCookie('lead', {...data, id});
+      router.push(`/survey?id=${id}`);
+
+    } catch {
+      fbEvent(
+        'CompleteRegistration',
+        {email: data.email, phone: data.phone, externalID: ''},
+      );
+      setCookie('lead', {...data});
+      router.push(`/thankyou`)
+    }
   };
 
   return (

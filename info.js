@@ -27,4 +27,6 @@ export const info = {
     country: 'MEX'
   },
   privacyNotice: '/privacy-notice',
+  optInWebHook: 'https://n8n.notoriovs.com/webhook/d5d543c7-1e45-44ad-8897-a55776d59005',
+  surveyWebhook: 'https://n8n.notoriovs.com/webhook/22249426-fe9e-4f24-8b68-c09075e0e3c9'
 }

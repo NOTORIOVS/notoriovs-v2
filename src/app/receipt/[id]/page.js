@@ -28,11 +28,11 @@ export async function generateMetadata({params}) {
     openGraph: {
       title: `NotoriovsReceipt_${data.ref_code}`,
       description: data.concept,
-      url: `${baseUrl}/receipt?id=${id}`,
+      url: `https://marketing.notoriovs.com/images/receipt?id=${id}`,
       type: 'website',
       images: [
         {
-          url: 'https://notoriovs.com/images/receipt-cover.png',
+          url: 'https://marketing.notoriovs.com/images/receipt-cover.png',
           width: 1200,
           height: 630,
           alt: `NotoriovsReceipt_${data.ref_code}`,

@@ -4,6 +4,7 @@ import Logotype from '../../../../public/images/NT-Logotype.svg';
 import PrintButton from '@/components/print-button';
 import '@/styles/receipt.scss';
 import { headers } from 'next/headers';
+import Head from 'next/head';
 
 const getData = (id) => {
   const headersList = headers();

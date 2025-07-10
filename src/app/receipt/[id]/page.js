@@ -91,19 +91,19 @@ export default async function Receipt({params}) {
           <div>
             <p className="ft-2 uppercase font-bold">{type}</p>
           </div>
-          <div className="py-4 md:py-16 grid grid-cols-2">
-            <p className="text-left">Fecha de emisión:</p>
-            <p className="text-right">{issueDate}</p>
-            <p className="text-left">Fecha límite pago:</p>
-            <p className="text-right">{dueDate}</p>
-            <p className="text-left">Cliente:</p>
-            <p className="text-right">{client}</p>
-            <p className="text-left">Marca:</p>
-            <p className="text-right">{brand}</p>
-            <p className="text-left">Referencia:</p>
+          <div className="md:py-16 grid grid-cols-2 gap-0">
+            <p className="text-left" style={{marginBlockEnd:0}}>Fecha de emisión:</p>
+            <p className="text-right" style={{marginBlockEnd:0}}>{issueDate}</p>
+            <p className="text-left" style={{marginBlockEnd:0}}>Límite de pago:</p>
+            <p className="text-right" style={{marginBlockEnd:0}}>{dueDate}</p>
+            <p className="text-left" style={{marginBlockEnd:0}}>Cliente:</p>
+            <p className="text-right" style={{marginBlockEnd:0}}>{client}</p>
+            <p className="text-left" style={{marginBlockEnd:0}}>Proyecto:</p>
+            <p className="text-right" style={{marginBlockEnd:0}}>{brand}</p>
+            <p className="text-left" style={{marginBlockEnd:0}}>Referencia:</p>
             <p className="text-right uppercase">{refCode}</p>
           </div>
-          <div className="grid pb-8 grid-cols-2 border-dashed border-b-2 border-black">
+          <div className="grid py-8 grid-cols-2 border-dashed border-b-2 border-black">
             <p className="font-bold text-left uppercase italic">Concepto</p>
             <p className="font-bold text-right uppercase italic">Monto</p>
           </div>

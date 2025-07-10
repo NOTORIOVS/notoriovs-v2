@@ -24,6 +24,7 @@ export async function generateMetadata({params}) {
 
   return {
     title: `NotoriovsReceipt_${data.ref_code}`,
+    description: data.concept
   };
 }
 

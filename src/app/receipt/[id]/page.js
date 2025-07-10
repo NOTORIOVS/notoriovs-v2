@@ -24,7 +24,21 @@ export async function generateMetadata({params}) {
 
   return {
     title: `NotoriovsReceipt_${data.ref_code}`,
-    description: data.concept
+    description: data.concept,
+    openGraph: {
+      title: `NotoriovsReceipt_${data.ref_code}`,
+      description: data.concept,
+      url: `${baseUrl}/receipt?id=${id}`,
+      type: 'website',
+      images: [
+        {
+          url: 'https://notoriovs.com/images/receipt-cover.png',
+          width: 1200,
+          height: 630,
+          alt: `NotoriovsReceipt_${data.ref_code}`,
+        },
+      ],
+    },
   };
 }
 
@@ -77,7 +91,7 @@ export default async function Receipt({params}) {
           <div>
             <p className="ft-2 uppercase font-bold">{type}</p>
           </div>
-          <div className="py-16 grid grid-cols-2">
+          <div className="py-4 md:py-16 grid grid-cols-2">
             <p className="text-left">Fecha de emisión:</p>
             <p className="text-right">{issueDate}</p>
             <p className="text-left">Fecha límite pago:</p>

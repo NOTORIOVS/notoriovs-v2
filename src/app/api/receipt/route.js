@@ -24,6 +24,7 @@ export async function POST(request) {
       client: brand.properties.v_partner.formula.string,
       contact: brand.properties['Contact Person'].rich_text[0]?.plain_text,
       email: brand.properties['Contact Email'].email,
+      phone: brand.properties['Contact Phone'].phone_number,
       bankAccount: {
         name: bank.bank_name.rich_text[0]?.plain_text || 'N/A',
         acctNumber: bank.acct_number.rich_text[0]?.plain_text || 'N/A',
@@ -54,6 +55,7 @@ export async function POST(request) {
       client: payload.client,
       contact: payload.contact,
       email: payload.email,
+      phone: payload.phone,
       brand: payload.brand,
       ref_code: payload.refCode,
       concept: payload.concept,

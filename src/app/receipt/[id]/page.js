@@ -19,7 +19,7 @@ const getData = (id) => {
 };
 
 export async function generateMetadata({params}) {
-  const {id} = params;
+  const {id, baseUrl} = params;
   const data = await getData(id);
 
   return {

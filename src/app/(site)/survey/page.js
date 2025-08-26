@@ -51,25 +51,26 @@ const formSteps = [
     type: 'radio',
     inputOptions: {required: 'Selecciona una opción'},
     options: [
-      {value: '<$20,000', label: 'Menos de $20,000 mxn'},
-      {value: '$20,000-$30,000', label: '$20,000 a $30,000 mxn'},
-      {value: '$30,000-$50,000', label: '$30,000 a $50,000 mxn'},
+      {value: '<$50,000', label: 'Menos de $50,000 mxn'},
       {value: '$50,000-$100,000', label: '$50,000 a $100,000 mxn'},
-      {value: '$100,000-$200,000', label: '$100,000 a $200,000 mxn'},
-      {value: '$200,000+', label: 'Más de $200,000 mxn'},
+      {value: '$100,000-$300,000', label: '$100,000 a $300,000 mxn'},
+      {value: '$300,000-$500,000', label: '$300,000 a $500,000 mxn'},
+      {value: '$500,000+', label: 'Más de $500,000 mxn'},
     ],
     cols: 1,
   },
   {
-    name: 'currentMarketing',
-    title: '¿Actualmente estás haciendo campañas pagadas?',
+    name: 'averageTicket',
+    title: '¿Cuál es el valor promedio de cada venta en tu negocio?',
+    description: 'Esto nos ayuda a calcular el retorno de inversión esperado y ver qué tan rentable puede ser escalar tu prospección',
     type: 'radio',
     inputOptions: {required: 'Selecciona una opción'},
     options: [
-      {value: 'no', label: 'No, nada de campañas aún'},
-      {value: 'organic', label: 'Solo contenido orgánico'},
-      {value: 'adsBasic', label: 'Sí, campañas básicas (FB/IG)'},
-      {value: 'adsPro', label: 'Sí, con agencia o equipo'},
+      {value: '<$1,000', label: 'Menos de $1,000 MXN'},
+      {value: '$1,000-$5,000', label: '$1,000 a $5,000 MXN'},
+      {value: '$5,000-$20,000', label: '$5,000 a $20,000 MXN'},
+      {value: '$20,000-$100,000', label: '$20,000 a $100,000 MXN'},
+      {value: '$100,000+', label: 'Más de $100,000 MXN'}
     ],
     cols: 1,
   },
@@ -80,9 +81,9 @@ const formSteps = [
     type: 'radio',
     inputOptions: {required: 'Selecciona una opción'},
     options: [
-      {value: '<$15,000', label: 'Menos de $15,000 mxn'},
-      {value: '$15,000+', label: '$15,000 a $20,000 mxn'},
-      {value: '$20,000+', label: '$20,000 a $50,000 mxn'},
+      {value: '<$10,000', label: 'Menos de $10,000 mxn'},
+      {value: '$10,000-$25,000', label: '$10,000 a $25,000 mxn'},
+      {value: '$25,000-$50,000', label: '$25,000 a $50,000 mxn'},
       {value: '$50,000+', label: 'Más de $50,000 mxn'},
     ],
     cols: 1,
@@ -94,24 +95,12 @@ const formSteps = [
     type: 'radio',
     inputOptions: {required: 'Selecciona una opción'},
     options: [
-      {value: 'advice', label: 'Aún no tengo campañas activas, necesito empezar desde cero'},
-      {value: 'setUp', label: 'Tengo campañas corriendo, pero no estoy obteniendo resultados consistentes'},
-      {value: 'strategy', label: 'Ya tengo equipo o agencia, pero necesito dirección estratégica'},
-      {value: 'growthPartner', label: 'Tengo resultados estables y busco escalar con un aliado comercial'},
+      {value: 'advice', label: 'Aún no tengo campañas, necesito empezar desde cero'},
+      {value: 'setUp', label: 'Tengo campañas pero no son consistentes'},
+      {value: 'strategy', label: 'Tengo equipo/agencia, pero necesito dirección estratégica'},
+      {value: 'growthPartner', label: 'Tengo resultados estables y quiero escalar con un aliado'},
     ],
     cols: 1,
-  },
-  {
-    name: 'immediacy',
-    title: 'Si tu proyecto es aceptado, ¿cuándo tienes pensado comenzar?',
-    description: '...para irnos programando',
-    type: 'radio',
-    inputOptions: {required: 'Selecciona una opción'},
-    options: [
-      {value: '3months', label: 'Máximo en 3 meses'},
-      {value: '1month', label: 'En 1 mes'},
-      {value: 'instantly', label: 'De inmediato'},
-    ],
   },
   {
     name: 'targetSales',
@@ -130,7 +119,12 @@ const formSteps = [
   {
     name: 'compromise',
     title: '¿Cuál es tu disposición actual para invertir en marketing?',
-    description: 'Para que te des una idea, nuestros programas van desde $1,500 MXN (asesoría) hasta $18,000 MXN al mes (dirección de marketing), además del presupuesto publicitario.<br/><br/>Trabajamos con modelos que buscan multiplicar tu inversión por 3x a 10x, dependiendo de tu tipo de negocio y etapa.',
+    description: `
+      Nuestros programas empiezan desde $4,000 MXN por diagnóstico 
+      y pueden superar los $26,000 MXN al mes por una dirección de marketing, 
+      más el presupuesto de pautas.<br/><br/>
+      La idea siempre es que cada peso invertido busque retornos de 3x a 10x, 
+      dependiendo de tu negocio y su etapa.`,
     type: 'radio',
     inputOptions: {required: 'Selecciona una opción'},
     options: [
@@ -139,6 +133,19 @@ const formSteps = [
       {value: 'high', label: 'Estoy listo para invertir si veo retorno claro'},
     ],
     cols: 1,
+  },
+  {
+    name: 'immediacy',
+    title: 'Si tu proyecto es aceptado, ¿cuándo tienes pensado comenzar?',
+    description: '...para irnos programando',
+    type: 'radio',
+    inputOptions: {required: 'Selecciona una opción'},
+    options: [
+      {value: 'noDate', label: 'No tengo idea'},
+      {value: '3months', label: 'Máximo en 3 meses'},
+      {value: '1month', label: 'En 1 mes'},
+      {value: 'instantly', label: 'De inmediato'},
+    ],
   },
   {
     name: 'commitment',
@@ -158,6 +165,7 @@ export default function Survey() {
   const [formStep, setFormStep] = useState(0);
   const [inputError, setInputError] = useState(null);
   const [sending, setSending] = useState(false);
+  const [leadClassification, setLeadClassification] = useState('free_consult');
   const methods = useForm({mode: 'all'});
   const {
     register,
@@ -167,7 +175,6 @@ export default function Survey() {
     getValues,
     watch,
   } = methods;
-
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -186,6 +193,59 @@ export default function Survey() {
     formSteps.map((fs) => setError(fs.name, {}));
   }, [router, searchParams, setError]);
 
+  const classifyLead = ({ currentSales, budget, need }) => {
+    const SALES_RANK = {
+      '<$50,000': 0,
+      '$50,000-$100,000': 1,
+      '$100,000-$300,000': 2,
+      '$300,000-$500,000': 3,
+      '$500,000+': 4
+    };
+
+    const BUDGET_RANK = {
+      '<$10,000': 0,
+      '$10,000-$25,000': 1,
+      '$25,000-$50,000': 2,
+      '$50,000+': 3,
+    };
+
+    const NEED_RANK = {
+      advice: 0,
+      setUp: 1,
+      strategy: 2,
+      growthPartner: 3,
+    };
+
+    const s = SALES_RANK[currentSales] ?? -1;
+    const b = BUDGET_RANK[budget] ?? -1;
+    const n = NEED_RANK[need] ?? -1;
+
+    // Salida temprana: descalificados / consultoría gratuita
+    if (n === 0 /* advice */ || s <= 0 || b <= 0) {
+      return { tier: 'free_consult', reason: 'low sales/budget or need=advice', action: 'submit' };
+    }
+
+    // Partnership: ventas y presupuesto altos + necesidad avanzada
+    if ((s >= 4 && b >= 3 && (n === 2 || n === 3)) || // regla fuerte
+      (s >= 5 && b >= 2 && n === 3)                  // flex si es whale
+    ) {
+      return { tier: 'partnership', reason: 'high sales & budget & need', action: 'submit' };
+    }
+
+    // Set Up: medio-alto
+    if (s >= 3 && b >= 2 && (n === 1 || n === 2)) {
+      return { tier: 'setup', reason: 'mid-high sales & budget, setup/strategy', action: 'submit' };
+    }
+
+    // Diagnóstico: entrada
+    if (s >= 1 && b >= 1 && (n === 1 || n === 2)) {
+      return { tier: 'diagnostic', reason: 'entry tier', action: 'submit' };
+    }
+
+    // Fallback
+    return { tier: 'free_consult', reason: 'default fallback', action: 'submit' };
+  }
+
   const handlePartialSubmit = async () => {
     try {
       setSending(true);
@@ -194,7 +254,7 @@ export default function Survey() {
       const _fbc = getCookie('_fbc');
       const _fbp = getCookie('_fbp');
       const { id, email, phone } = JSON.parse(lead || '{}');
-      const payload = { ...dataSoFar, id, email, phone, _fbc, _fbp };
+      const payload = { ...dataSoFar, id, email, phone, leadClassification,  _fbc, _fbp };
 
       await fetch(info.surveyWebhook, {
         method: 'POST',
@@ -230,7 +290,7 @@ export default function Survey() {
       }
 
       const { id, email, phone } = parsedLead;
-      const payload = { ...data, id, email, phone, _fbc, _fbp };
+      const payload = { ...data, id, email, phone, leadClassification, _fbc, _fbp };
       console.log('payload', payload);
 
       const res = await fetch(info.surveyWebhook, {
@@ -254,7 +314,6 @@ export default function Survey() {
     }
   };
 
-
   const handleNext = async () => {
     const currentStep = formSteps[formStep];
     const formStepName = currentStep.name;
@@ -265,13 +324,31 @@ export default function Survey() {
       return;
     }
 
-    if (formStepName === 'need' && watch('need') === 'advice') {
-      await handlePartialSubmit();
-      return;
-    }
-
     setInputError(null);
     window.scrollTo(0, 0);
+
+    // Cuando ya tengamos las 3 respuestas clave, clasificamos y TERMINAMOS
+    const have3 =
+      !!methods.getValues('currentSales') &&
+      !!methods.getValues('budget') &&
+      !!methods.getValues('need');
+
+    if (have3) {
+      const classification = classifyLead({
+        currentSales: methods.getValues('currentSales'),
+        budget: methods.getValues('budget'),
+        need: methods.getValues('need'),
+      });
+
+      setLeadClassification(classification.tier);
+
+      console.log(leadClassification);
+
+      if (classification.action === 'submit') {
+        await handlePartialSubmit();
+        return; // finaliza aquí
+      }
+    }
 
     if (formStep < formSteps.length - 1) {
       setFormStep(formStep + 1);

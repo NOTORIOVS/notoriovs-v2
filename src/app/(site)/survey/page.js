@@ -225,21 +225,21 @@ export default function Survey() {
       return { tier: 'free_consult', reason: 'low sales/budget or need=advice', action: 'submit' };
     }
 
+    // Diagnóstico: entrada
+    if (s <= 1 && b <= 1 && (n === 1 || n === 2)) {
+      return { tier: 'diagnostic', reason: 'entry tier', action: 'submit' };
+    }
+
+    // Set Up: medio-alto
+    if (s >= 1 && b >= 2 && n <= 2) {
+      return { tier: 'setup', reason: 'mid-high sales & budget, setup/strategy', action: 'submit' };
+    }
+
     // Partnership: ventas y presupuesto altos + necesidad avanzada
     if ((s >= 4 && b >= 3 && (n === 2 || n === 3)) || // regla fuerte
       (s >= 5 && b >= 2 && n === 3)                  // flex si es whale
     ) {
       return { tier: 'partnership', reason: 'high sales & budget & need', action: 'submit' };
-    }
-
-    // Set Up: medio-alto
-    if (s >= 3 && b >= 2 && (n === 1 || n === 2)) {
-      return { tier: 'setup', reason: 'mid-high sales & budget, setup/strategy', action: 'submit' };
-    }
-
-    // Diagnóstico: entrada
-    if (s >= 1 && b >= 1 && (n === 1 || n === 2)) {
-      return { tier: 'diagnostic', reason: 'entry tier', action: 'submit' };
     }
 
     // Fallback
@@ -344,7 +344,7 @@ export default function Survey() {
 
       console.log(leadClassification);
 
-      if (classification.action === 'submit') {
+      if (classification.tier === 'free_consult' || classification.tier === 'diagnostic') {
         await handlePartialSubmit();
         return; // finaliza aquí
       }

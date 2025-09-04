@@ -165,7 +165,6 @@ export default function Survey() {
   const [formStep, setFormStep] = useState(0);
   const [inputError, setInputError] = useState(null);
   const [sending, setSending] = useState(false);
-  const [leadClassification, setLeadClassification] = useState('free_consult');
   const methods = useForm({mode: 'all'});
   const {
     register,
@@ -193,60 +192,7 @@ export default function Survey() {
     formSteps.map((fs) => setError(fs.name, {}));
   }, [router, searchParams, setError]);
 
-  const classifyLead = ({ currentSales, budget, need }) => {
-    const SALES_RANK = {
-      '<$50,000': 0,
-      '$50,000-$100,000': 1,
-      '$100,000-$300,000': 2,
-      '$300,000-$500,000': 3,
-      '$500,000+': 4
-    };
-
-    const BUDGET_RANK = {
-      '<$10,000': 0,
-      '$10,000-$25,000': 1,
-      '$25,000-$50,000': 2,
-      '$50,000+': 3,
-    };
-
-    const NEED_RANK = {
-      advice: 0,
-      setUp: 1,
-      strategy: 2,
-      growthPartner: 3,
-    };
-
-    const s = SALES_RANK[currentSales] ?? -1;
-    const b = BUDGET_RANK[budget] ?? -1;
-    const n = NEED_RANK[need] ?? -1;
-
-    // Salida temprana: descalificados / consultoría gratuita
-    if (n === 0 /* advice */ || s <= 0 || b <= 0) {
-      return { tier: 'free_consult', reason: 'low sales/budget or need=advice', action: 'submit' };
-    }
-
-    // Diagnóstico: entrada
-    if (s <= 1 && b <= 1 && (n === 1 || n === 2)) {
-      return { tier: 'diagnostic', reason: 'entry tier', action: 'submit' };
-    }
-
-    // Set Up: medio-alto
-    if (s >= 1 && b >= 2 && n <= 2) {
-      return { tier: 'setup', reason: 'mid-high sales & budget, setup/strategy', action: 'submit' };
-    }
-
-    // Partnership: ventas y presupuesto altos + necesidad avanzada
-    if ((s >= 4 && b >= 3 && (n === 2 || n === 3)) || // regla fuerte
-      (s >= 5 && b >= 2 && n === 3)                  // flex si es whale
-    ) {
-      return { tier: 'partnership', reason: 'high sales & budget & need', action: 'submit' };
-    }
-
-    // Fallback
-    return { tier: 'free_consult', reason: 'default fallback', action: 'submit' };
-  }
-
-  const handlePartialSubmit = async () => {
+  const handlePartialSubmit = async (tier) => {
     try {
       setSending(true);
       const dataSoFar = getValues();
@@ -254,7 +200,8 @@ export default function Survey() {
       const _fbc = getCookie('_fbc');
       const _fbp = getCookie('_fbp');
       const { id, email, phone } = JSON.parse(lead || '{}');
-      const payload = { ...dataSoFar, id, email, phone, leadClassification,  _fbc, _fbp };
+
+      const payload = { ...dataSoFar, id, email, phone, tier,  _fbc, _fbp };
 
       await fetch(info.surveyWebhook, {
         method: 'POST',
@@ -268,7 +215,6 @@ export default function Survey() {
       console.error('Partial submit failed', e);
     }
   };
-
   const onSubmit = async (data) => {
     try {
       setSending(true);
@@ -290,7 +236,13 @@ export default function Survey() {
       }
 
       const { id, email, phone } = parsedLead;
-      const payload = { ...data, id, email, phone, leadClassification, _fbc, _fbp };
+      const { tier } = classifyLead({
+        currentSales: data.currentSales,
+        budget: data.budget,
+        need: data.need,
+      });
+
+      const payload = { ...data, id, email, phone, tier, _fbc, _fbp };
       console.log('payload', payload);
 
       const res = await fetch(info.surveyWebhook, {
@@ -313,6 +265,53 @@ export default function Survey() {
       console.error('❌ Error en onSubmit:', error);
     }
   };
+  const classifyLead = ({ currentSales, budget, need }) => {
+    const SALES_RANK = {
+      '<$50,000': 0,
+      '$50,000-$100,000': 1,
+      '$100,000-$300,000': 2,
+      '$300,000-$500,000': 3,
+      '$500,000+': 4
+    };
+    const BUDGET_RANK = {
+      '<$10,000': 0,
+      '$10,000-$25,000': 1,
+      '$25,000-$50,000': 2,
+      '$50,000+': 3,
+    };
+    const NEED_RANK = {
+      advice: 0,
+      setUp: 1,
+      strategy: 2,
+      growthPartner: 3,
+    };
+
+    const s = SALES_RANK[currentSales] ?? -1;
+    const b = BUDGET_RANK[budget] ?? -1;
+    const n = NEED_RANK[need] ?? -1;
+
+    // Salida temprana
+    if (s <= 0 && b <= 0 && n <= 0) {
+      console.log('branch: early_exit');
+      return { tier: 'free_consult', reason: 'early_exit_low', action: 'submit' };
+    }
+
+    // Partnership
+    if (s >= 2 && b >= 1 && n >= 2) {
+      console.log('branch: partnership');
+      return { tier: 'partnership', reason: 'high sales & budget & need', action: 'continue' };
+    }
+
+    // Set Up
+    if (s >= 1 && b >= 1 && n >= 1) {
+      console.log('branch: setup');
+      return { tier: 'setup', reason: 'mid-high sales & budget, setup/strategy', action: 'continue' };
+    }
+
+    // Fallback Diagnóstico
+    console.log('branch: diagnostic');
+    return { tier: 'diagnostic', reason: 'entry tier', action: 'submit' };
+  };
 
   const handleNext = async () => {
     const currentStep = formSteps[formStep];
@@ -334,18 +333,16 @@ export default function Survey() {
       !!methods.getValues('need');
 
     if (have3) {
+      console.log(methods.getValues());
+
       const classification = classifyLead({
         currentSales: methods.getValues('currentSales'),
         budget: methods.getValues('budget'),
         need: methods.getValues('need'),
       });
 
-      setLeadClassification(classification.tier);
-
-      console.log(leadClassification);
-
-      if (classification.tier === 'free_consult' || classification.tier === 'diagnostic') {
-        await handlePartialSubmit();
+      if (classification.action === 'submit') {
+        await handlePartialSubmit(classification.tier);
         return; // finaliza aquí
       }
     }

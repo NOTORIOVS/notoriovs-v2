@@ -304,13 +304,13 @@ export default function Survey() {
 
     // Set Up
     if (s >= 1 && b >= 1 && n >= 1) {
-      console.log('branch: setup');
-      return { tier: 'setup', reason: 'mid-high sales & budget, setup/strategy', action: 'continue' };
+      console.log('branch: cmo');
+      return { tier: 'cmo', reason: 'mid-high sales & budget, setup/strategy', action: 'continue' };
     }
 
     // Fallback Diagnóstico
-    console.log('branch: diagnostic');
-    return { tier: 'diagnostic', reason: 'entry tier', action: 'submit' };
+    console.log('branch: anti');
+    return { tier: 'anti', reason: 'entry tier', action: 'submit' };
   };
 
   const handleNext = async () => {

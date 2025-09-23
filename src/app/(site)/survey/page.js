@@ -66,10 +66,10 @@ const formSteps = [
     type: 'radio',
     inputOptions: {required: 'Selecciona una opción'},
     options: [
-      {value: '<$1,000', label: 'Menos de $1,000 MXN'},
-      {value: '$1,000-$5,000', label: '$1,000 a $5,000 MXN'},
-      {value: '$5,000-$20,000', label: '$5,000 a $20,000 MXN'},
-      {value: '$20,000-$100,000', label: '$20,000 a $100,000 MXN'},
+      {value: '<$10,000', label: 'Menos de $10,000 MXN'},
+      {value: '$10,000-$20,000', label: '$10,000 a $20,000 MXN'},
+      {value: '$20,000-$50,000', label: '$20,000 a $50,000 MXN'},
+      {value: '$50,000-$100,000', label: '$50,000 a $100,000 MXN'},
       {value: '$100,000+', label: 'Más de $100,000 MXN'}
     ],
     cols: 1,

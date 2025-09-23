@@ -93,6 +93,30 @@ export default function Home() {
           <p className="-ft-3 mt-4 text-center">Agenda una sesión gratuita para analizar tu proyecto</p>
         </div>
 
+
+        <div className="max-w-[80ch] space-y-8">
+          <h2 className=" mt-20">Quieres saber si hacemos match?</h2>
+          <p>No nos importa qué vendes, no somos de esos que se especializan en un nicho y le hacen la misma campaña a
+            tu competencia.</p>
+          <p>Jalamos mejor con negocios que venden productos y servicios high ticket, como:</p>
+          <ul>
+            <li>Servicios o consultorías</li>
+            <li>Productos premium</li>
+            <li>Bienes raíces</li>
+            <li>Cursos y talleres</li>
+            <li>Seguros</li>
+          </ul>
+
+          <p>Si vendes playeras de $200 o cupcakes de $50, seguro eres bien chido… pero no sé que tanto te podamos
+            ayudar.</p>
+          <p>La neta: si tu ticket promedio no pasa los $10,000 MXN, te vamos a perjudicar en lugar de ayudar.</p>
+          <p>Pero si sí… estás tardando en agendar con nosotros.</p>
+        </div>
+        <div className="max-w-[80ch] flex flex-col mt-20">
+          <Link href={{href: '/', hash: 'contact'}} className="button !w-full text-center">Seguro hacemos match, Click!</Link>
+          <p className="-ft-3 mt-4 text-center">Agenda una sesión gratuita para analizar tu proyecto</p>
+        </div>
+
         <div className="max-w-[80ch] space-y-8">
           <h2 className=" mt-20">Permítame tantito, le venimos ofreciendo…</h2>
           <p>Te voy a ser honesto,</p>

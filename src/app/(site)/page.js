@@ -246,9 +246,33 @@ export default function Home() {
                 de SOC Asesores a nivel nacional.</p>
               <div className="mt-8">
                 <p className="-ft-3" style={{fontWeight: 'bold'}}>Resultados:</p>
-                <h4 className="mb-0">812 Website Leads</h4>
-                <p className="-ft-2 mb-8">Costo por lead: $54 MXN</p>
-                <p className="-ft-4">Resultados de estrategia de 6 meses</p>
+                <h4 className="mb-0">4,709 Leads Perfilados</h4>
+                <p className="-ft-2 mb-8">Costo por lead: $65 MXN</p>
+                <p className="-ft-4">Resultados de estrategia de 1 año</p>
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 border border-black">
+            <div className="w-full pt-[100%] relative">
+              <Image
+                src="/images/landings/encore.png"
+                fill={true}
+                style={{objectFit: 'cover'}}
+                alt="marketing y branding"
+              />
+            </div>
+            <div className="p-8 my-auto">
+              <h3>Hoteles Encore</h3>
+              <div>
+                <p className="-ft-2 text-brand-1">Branding // Estrategia</p>
+              </div>
+              <p className="-ft-1">La cadena de hoteles ejecutivos con 9 propiedades en el país que ayudamos a
+                estabilizar sus indicadores tras varias experiencias que no traían más que likes.</p>
+              <div className="mt-8">
+                <p className="-ft-3" style={{fontWeight: 'bold'}}>Resultados:</p>
+                <h4 className="mb-0">567 Pre Reservas</h4>
+                <p className="-ft-2 mb-8">Costo por rre reserva: $49.79 MXN</p>
+                <p className="-ft-4">Estrategia de 3 meses</p>
               </div>
             </div>
           </div>
@@ -264,45 +288,22 @@ export default function Home() {
             <div className="md:order-first p-8 my-auto">
               <h3>Compra Casas USA</h3>
               <div>
-                <p className="-ft-2 text-brand-1">Estrategia</p>
-              </div>
-              <p className="-ft-1">La inmobiliaria que ayudamos a transformar en una consultora en inversiones
-                inmobiliarias, dejando atrás el típico enfoque de producto que todas las inmobiliarias utilizan.</p>
-              <div className="mt-8">
-                <p className="-ft-3" style={{fontWeight: 'bold'}}>Resultados:</p>
-                <h4 className="mb-0">487 Leads</h4>
-                <p className="-ft-2 mb-8">Costo por lead: $230 MXN</p>
-                <p className="-ft-4">Resultados de estrategia de 6 meses</p>
-              </div>
-            </div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 border border-black">
-            <div className="w-full pt-[100%] relative">
-              <Image
-                src="/images/landings/2g.png"
-                fill={true}
-                style={{objectFit: 'cover'}}
-                alt="marketing y branding"
-              />
-            </div>
-            <div className="p-8 my-auto">
-              <h3>2G Iluminación</h3>
-              <div>
                 <p className="-ft-2 text-brand-1">Branding // Estrategia</p>
               </div>
-              <p className="-ft-1">2G llegó con un estilo y mensaje poco definidos pero con ganas de
-                posicionarse como iluminación más allá de los espacios para revolucionar los hogares y negocios.</p>
+              <p className="-ft-1">La inmobiliaria que ayudamos a transformar en una consultora en inversiones
+                internacionales, dejando atrás el típico enfoque de producto que todas las inmobiliarias utilizan.</p>
               <div className="mt-8">
                 <p className="-ft-3" style={{fontWeight: 'bold'}}>Resultados:</p>
-                <h4 className="mb-0">+1.2K followers*</h4>
-                <p className="-ft-2 mb-8">Más de 9.5k reacciones</p>
-                <p className="-ft-4">Estrategia de 3 meses.</p>
+                <h4 className="mb-0">596 Citas</h4>
+                <p className="-ft-2 mb-8">Costo por cita: $393 MXN</p>
+                <p className="-ft-4">Resultados de estrategia de 1 año</p>
               </div>
             </div>
           </div>
         </div>
         <div className="max-w-[80ch] flex flex-col mt-20">
-          <Link href={{href: '/', hash: 'contact'}} className="button !w-full text-center">¿No quisieras ver tu marca ahí arriba?
+          <Link href={{href: '/', hash: 'contact'}} className="button !w-full text-center">¿No quisieras ver tu marca
+            ahí arriba?
             Click!</Link>
           <p className="-ft-3 mt-4 text-center">Agenda una sesión gratuita para analizar tu proyecto</p>
         </div>

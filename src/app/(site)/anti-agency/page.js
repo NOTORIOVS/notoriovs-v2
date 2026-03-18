@@ -130,7 +130,7 @@ export default function Home() {
                 href="#contacto"
                 className="button flex-grow"
               >
-                Quiero mi consultoría gratuita
+                Quiero mi consultoría
               </a>
               <a
                 href="#modelo"
@@ -224,7 +224,7 @@ export default function Home() {
             </p>
             <ul className="space-y-3 my-10">
               {[
-                'Sesión de diagnóstico de 45 min con el Director (gratuita)',
+                'Sesión de diagnóstico de 45 min con el Director sin costo',
                 'Entregable completo en 15 días hábiles',
                 '10 módulos estructurados en 3 partes',
                 'Proyección financiera en 3 escenarios',
@@ -239,7 +239,7 @@ export default function Home() {
               href="#contacto"
               className="button"
             >
-              Agendar sesión gratuita
+              Agenda una sesión
             </a>
           </div>
 
@@ -407,7 +407,7 @@ export default function Home() {
       <section className="reading-container">
         <p className="-ft-2 text-brand-1">Primer paso</p>
         <h2 className="text-neutral-100">
-          Agenda una sesión gratuita para analizar tu proyecto
+          Agenda una sesión para analizar tu proyecto
         </h2>
         <p className="text-neutral-100">Para garantizar que nuestros clientes cuenten con una estrategia óptima,
           solo

@@ -41,9 +41,10 @@ export default function NotElegible() {
 
   return (
     <>
-      <head>
-        <title key="title">Notoriovs Starter Marketing Manual</title>
-      </head>
+      <Head>
+        <title>Notoriovs Studio Starter Marketing Manual</title>
+        <meta name="description" content="El manual práctico con nuestra metodología para generar tus primeros prospectos sin gastar miles en campañas gurús"/>
+      </Head>
       <div className="flex flex-col relative">
         <div className="relative">
           <div className="absolute inset-0 z-[9999] bg-[rgba(0,0,0,0)] backdrop-invert pointer-events-none"/>

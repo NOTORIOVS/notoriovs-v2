@@ -13,15 +13,15 @@ input, select, textarea {
   }
 }
 
-input[type=radio] {
+input[type=radio], input[type=checkbox] {
   display: none;
 }
 
-input[type=radio] + label {
+input[type=radio] + label, input[type=checkbox] + label {
   @extend .ft-0;
   @apply flex p-4 border border-black w-full text-center justify-center items-center cursor-pointer;
 }
-input[type=radio]:checked + label {
+input[type=radio]:checked + label, input[type=checkbox]:checked + label {
   @apply bg-brand-1;
 }
 

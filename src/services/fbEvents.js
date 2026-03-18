@@ -8,7 +8,7 @@ export default function fbEvent(
   eventID = Date.now(),
   clientData = {}
 ) {
-  const standardEvents = ['PageView', 'Purchase', 'Lead', 'CompleteRegistration', 'InitiateCheckout'];
+  const standardEvents = ['PageView', 'Purchase', 'Lead', 'Contact', 'CompleteRegistration', 'InitiateCheckout'];
   const isStandard = standardEvents.includes(eventName);
 
   console.log(userData);

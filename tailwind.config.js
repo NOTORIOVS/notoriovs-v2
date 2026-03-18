@@ -12,7 +12,7 @@ module.exports = {
           1: '#cccc00',
           2: '#ff00ff',
           3: '#00ff00',
-          4: '#dedb4f',
+          4: '#B8D96C',
         }
       },
       container: {

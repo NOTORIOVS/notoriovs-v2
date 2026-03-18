@@ -11,12 +11,12 @@ export default function Faqs({questions}) {
           <div key={`faq-${i}`} className="shadow-sm mb-2">
             <p
               id={i}
-              className="w-full p-4 font-bold bg-black text-white mb-0 cursor-pointer rounded-lg border border-gray-200"
+              className="w-full sans p-4 bg-black text-white mb-0 cursor-pointer border border-neutral-600"
               onClick={(e) => setFaqOpen(e.target.id)}
             >
               <span className="font-bold mr-4 text-brand-1">›</span>{q.q}
             </p>
-            <p className={`${faqOpen == i ? 'flex' : 'hidden'} bg-gray-50 p-12`}>
+            <p className={`${faqOpen == i ? 'flex' : 'hidden'} bg-neutral-700 text-neutral-200 p-12`}>
               {q.a}
             </p>
           </div>

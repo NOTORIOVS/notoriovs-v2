@@ -6,7 +6,7 @@ export function formatDate(value = new Date, separator = '-', addedDays = 0) {
   return year + separator + month + separator + day;
 }
 
-export const formatCurr = new Intl.NumberFormat('en-US', {
+export const formatCurr = new Intl.NumberFormat('es-MX', {
   style: 'currency',
   minimumFractionDigits: 2,
   currency: 'MXN',

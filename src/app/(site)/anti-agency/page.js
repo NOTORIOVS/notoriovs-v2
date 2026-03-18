@@ -373,8 +373,7 @@ export default function Home() {
           className="border-l-[3px] border-brand-4 bg-neutral-800 p-20"
         >
           <p className="text-neutral-400 mb-8">
-            "No sé qué están haciendo pero todas las citas que he tenido han sido con gente muy bien perfilada.
-            ¡Síganle!"
+            {`"No sé qué están haciendo pero todas las citas que he tenido han sido con gente muy bien perfilada. ¡Síganle!"`}
           </p>
           <p className="-ft-2 text-neutral-500 text-right">— Director General, CompraCasasUSA</p>
         </div>

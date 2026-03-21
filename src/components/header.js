@@ -63,7 +63,7 @@ export default function Header() {
         </div>
       </div>
 
-      <div className="fixed top-0 inset-x-0 flex lg:hidden justify-center bg-neutral-90/50 backdrop-blur-xl border-b p-4 z-[9999]">
+      <div className="fixed top-0 inset-x-0 flex lg:hidden justify-center bg-neutral-900/60 backdrop-blur-xl border-b p-4 z-[9999]">
         <Link href="/">
           <div id="logo" className="relative flex justify-start w-[16rem] pt-[4rem] top-0">
             <Img

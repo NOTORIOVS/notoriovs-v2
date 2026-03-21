@@ -8,29 +8,8 @@ import fbEvent from '@/services/fbEvents';
 import { getCookie } from 'cookies-next';
 
 export default function NotElegible() {
-  const pmtLink = 'https://pay.hotmart.com/R99467572K';
-  const faqs = [
-    {
-      q: '¿Este manual sirve si no sé nada de marketing?',
-      a: 'Sí. Fue hecho para emprendedores sin experiencia previa. Empieza desde lo esencial.',
-    },
-    {
-      q: '¿Necesito invertir en anuncios para aplicar lo que dice?',
-      a: 'No. Muchos ejercicios son estratégicos y puedes implementarlos de forma orgánica.',
-    },
-    {
-      q: '¿Qué pasa si no entiendo algo del manual?',
-      a: 'Incluye ejemplos, plantillas y explicaciones claras. Además, puedes escribirnos si tienes dudas.',
-    },
-    {
-      q: '¿Puedo aplicar esto aunque mi negocio sea físico o local?',
-      a: 'Sí. Hay apartados específicos para negocios locales y cómo atraer clientes digitales.',
-    },
-    {
-      q: '¿Cuánto tiempo me tomará aplicarlo?',
-      a: 'Puedes completar todo en menos de una semana y comenzar a implementar desde el primer día.',
-    },
-  ];
+  const msg = encodeURI('Hola! Podemos programar una llamada para que me ayuden con el marketing de mi negocio?')
+  const waLink = `https://wa.me/+523317628442?text=${msg}`;
 
   useEffect(() => {
     const leadCookie = getCookie('lead');
@@ -39,82 +18,69 @@ export default function NotElegible() {
   }, []);
 
   return (
-    <div className="flex flex-col relative">
-      <section className="container relative justify-center items-center z-[1] top-[5rem] pt-[4rem] pb-[10rem]">
-        <div className="flex flex-col items-center">
-          <div className="md:w-1/2">
-            <h2 className="ft-11">
-              LO SIENTO
-            </h2>
-            <p className="my-12 ft-2">
-              Sorry por darte el cortón...<br/>
-              pero basado en tu estado actual, <br/><br/>
-              te recomiendo que primero le eches un ojo a este manual
-              que creamos para que empieces a tener clientes<br/><br/>
-              sin la necesidad de pagar los honorarios de una agencia.
-            </p>
-            <a href={pmtLink} className="flex ft-4 items-center w-full pt-[100%] mb-10 relative">
-              <Image
-                src={cover}
-                fill={true}
-                style={{objectFit: 'contain'}}
-                alt="Notoriovs Studio"
-              />
-            </a>
-            <div className="w-full ft-4 text-center">
-              <a href={pmtLink} target="_blank" className="button-block">Ya dale clic!</a>
-              <p className="-ft-1 mt-4">Comienza a obtener oportunidades de negocio por $800</p>
-            </div>
-          </div>
-        </div>
+    <div className="flex flex-col relative pt-[5rem]">
+      <section className="reading-container mb-20 !border-0 !mt-0 relative z-[1]">
+        <h2 className="flex flex-col ft-8">
+          <span>Todavía no eres perfil para Notoriovs.</span>
+          <span className="text-brand-1">Pero te tenemos una solución.</span>
+        </h2>
+        <p>
+          <span className="ft-2">No es por gachos pero te estaríamos robando.</span><br/><br/>
+          Nuestro modelo opera con empresas que ya tienen estructura comercial y presupuesto para un sistema
+          completo.<br/><br/>
+          En este momento, lo que nos compartiste encaja mejor con algo diferente y tenemos exactamente eso para ti.
+        </p>
       </section>
-      <div className="relative">
+      <div className="relative pb-20">
         <div className="absolute inset-0 z-[9999] bg-[rgba(0,0,0,0)] backdrop-invert pointer-events-none"/>
-        <div className="container py-96">
-          <p className="sans ft-6 mb-8 md:w-1/2 mx-auto">El manual práctico con nuestra metodología para generar tus primeros prospectos
-            sin
-            depender de expertos ni gastar miles en campañas sin sentido</p>
-        </div>
-      </div>
-      <section className="container flex flex-col items-center mb-20 border-t py-20">
-        <div className="md:w-1/2">
-          <h2 className="mb-12">Para qué sirve esta madre?</h2>
-          <p className="ft-2 mb-8">Ok, con este manual vas a poder:</p>
-          <ul>
-            <li className="ft-2 mb-4">Diagnosticar tu negocio como un profesional, sin tecnicismos ni paja.</li>
-            <li className="ft-2 mb-4">Estructurar una estrategia simple pero efectiva para atraer prospectos en redes.
-            </li>
-            <li className="ft-2 mb-4">Evitar errores comunes que te hacen perder tiempo y dinero.</li>
-            <li className="ft-2 mb-4">Crear mensajes que conectan con clientes reales, no con likes vacíos.</li>
-            <li className="ft-2 mb-4">Avanzar sin ayuda externa y demuestra que sí puedes vender con tus propios
-              medios.
-            </li>
-          </ul>
-          <div className="w-full ft-4 text-center mt-12">
-            <a href={pmtLink} target="_blank" className="button-block">Ya dale clic!</a>
+        <div className="reading-container !border-0 !mt-0">
+          <p className="sans ft-6">Te presentamos: 3Cuartos AG</p>
+          <p>Nuestro brother, Pier Bravo, fue COO de Notoriovs.<br/><br/>
+            Aprendió el modelo de captación de nuevos clientes desde adentro y decidió crear su propia agencia orientada
+            a un perfil como el tuyo.<br/><br/>
+            No es un competidor.<br/><br/>
+            Es parte del mismo ecosistema.</p>
+          <div className="w-full text-center">
+            <a href={waLink} target="_blank" className="button !w-full invert">Programa una llamada!</a>
             <p className="-ft-1 mt-4">Comienza a obtener oportunidades de negocio por $800</p>
           </div>
         </div>
-      </section>
-      <section className="container flex flex-col items-center mb-20 border-t py-20">
-        <h2 className="mb-12">Por qué está chido este manual?</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <p className="p-12 bg-black text-white text-center">100% práctico: sin teoría innecesaria ni relleno</p>
-          <p className="p-12 bg-black text-white text-center">Aplicable desde el día 1: no necesitas herramientas
-            costosas</p>
-          <p className="p-12 bg-black text-white text-center">Incluye ejercicios guiados para que apliques cada módulo
-            al instante</p>
-          <p className="p-12 bg-black text-white text-center">Enfocado en resultados: pensado para que generes
-            prospectos, no solo aprendas</p>
-          <p className="p-12 bg-black text-white text-center">Compatible con cualquier tipo de negocio: productos
-            físicos, servicios, coaching, etc.</p>
-          <p className="p-12 bg-black text-white text-center">Pensado para que traigas a la IA como tu el chalán que
-            siempre soñaste</p>
+      </div>
+      <section className="reading-container flex flex-col items-center mb-20 border-t py-20">
+        <h2 className="mb-12">Una agencia con mejor fit para ti</h2>
+        <p className="mb-8">
+          Trabaja con negocios en etapa de crecimiento temprano que necesitan:<br/>
+          — Presencia digital<br/>
+          — Captación básica<br/>
+          — Campañas que funcionen sin un equipo de ventas detrás.<br/><br/>
+          Misma mentalidad de resultados, escala diferente.
+        </p>
+        <div className="w-full text-center">
+          <a href={waLink} target="_blank" className="button !w-full">Programa una llamada!</a>
+          <p className="-ft-1 mt-4">Comienza a obtener oportunidades de negocio por $800</p>
         </div>
 
-        <div className="w-full md:w-1/2 ft-4 text-center mt-12">
-          <a href={pmtLink} target="_blank" className="button-block">Ya dale clic!</a>
-          <p className="-ft-1 mt-4">Comienza a obtener oportunidades de negocio por $800</p>
+      </section>
+      <section className="container flex flex-col items-center mb-20 border-t py-20">
+        <h2 className="mb-12">Que encuentras en 3Cuartos AG?</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+          <div className="p-16 bg-black">
+            <p className="text-white sans ft-2">Generación de Leads</p>
+            <p className="text-white">Básico pero bien hecho:<br/>
+              Campañas de prospección digital para que empieces a generar oportunidades de negocio.
+            </p>
+          </div>
+          <div className="p-16 bg-black">
+            <p className="text-white sans ft-2">Presencia Digital</p>
+            <p className="text-white">Presencia sin complicarnos la vida:<br/>
+              Campañas de prospección, contenido y gestión de redes.
+            </p>
+          </div>
+        </div>
+
+        <div className="reading-container !border-0 !mt-0">
+          <a href={waLink} target="_blank" className="button !w-full">Programa una llamada!</a>
+          <p className="-ft-1 text-center">Sin compromiso. Sin pitch agresivo. 20 minutos.</p>
         </div>
       </section>
 
@@ -127,9 +93,8 @@ export default function NotElegible() {
                 src="https://www.lcvaliados.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2F06.591ff87c.jpeg&w=3840&q=75"
                 alt=""/>
             </div>
-            <p className="-ft-1 mt-8 flex-grow">Tenía miedo de seguir probando cosas sin sentido. Este manual fue como
-              tener un
-              mentor explicándome paso a paso. En menos de una semana armé mi primera campaña.</p>
+            <p className="-ft-1 mt-8 flex-grow">Tenía miedo de otra vez tirar mi dinero a la basura. Pero me supieron
+              guiar y ahora todos los WhatsApps que llegan tienen sentido.</p>
             <p className="-ft-2 py-2 px-4 bg-black text-white mt-8 border-t-4 border-brand-1">Elena M.</p>
             <p className="-ft-2 mt-2">Emprendedora de productos artesanales</p>
           </div>
@@ -139,9 +104,8 @@ export default function NotElegible() {
                 src="https://www.lcvaliados.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fportrait.fac6f4d6.png&w=3840&q=75"
                 alt=""/>
             </div>
-            <p className="-ft-1 mt-8 flex-grow">Con cero experiencia estructuré una estrategia real. Ya tengo leads que
-              preguntan
-              por mis planes de ahorro.</p>
+            <p className="-ft-1 mt-8 flex-grow">Después de vivir de puros referidos ya tengo leads que preguntan por mis
+              planes de ahorro diario.</p>
             <p className="-ft-2 py-2 px-4 bg-black text-white mt-8 border-t-4 border-brand-1">Luis C.</p>
             <p className="-ft-2 mt-2">Asesor financiero independiente</p>
           </div>
@@ -152,8 +116,7 @@ export default function NotElegible() {
                 alt=""/>
             </div>
             <p className="-ft-1 mt-8 flex-grow">No pensé que algo tan simple pudiera tener tanto impacto. Me dio foco,
-              me dio
-              claridad y me hizo avanzar.</p>
+              me dio claridad y me hizo avanzar.</p>
             <p className="-ft-2 py-2 px-4 bg-black text-white mt-8 border-t-4 border-brand-1">Marcela T.</p>
             <p className="-ft-2 mt-2">Diseñadora freelance</p>
           </div>
@@ -164,8 +127,8 @@ export default function NotElegible() {
                 src="https://www.lcvaliados.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2F07.a47c5323.jpeg&w=3840&q=75"
                 alt=""/>
             </div>
-            <p className="-ft-1 mt-8 flex-grow">Antes sentía que hacía marketing a ciegas. Con el manual, entendí cómo
-              aterrizar mi mensaje y detectar lo que estaba fallando. Por fin tengo claridad.</p>
+            <p className="-ft-1 mt-8 flex-grow">Con otras agencias solo me publicaban en insta y face pero ni un alma me
+              mandaba mensaje para comprar. Con 3Cuartos si se vio la diferencia.</p>
             <p className="-ft-2 py-2 px-4 bg-black text-white mt-8 border-t-4 border-brand-1">Daniela V.</p>
             <p className="-ft-2 mt-2">Marca de joyería artesanal</p>
           </div>
@@ -176,8 +139,8 @@ export default function NotElegible() {
                 src="https://www.lcvaliados.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2F02.966b6c46.jpeg&w=3840&q=75"
                 alt=""/>
             </div>
-            <p className="-ft-1 mt-8 flex-grow">Pensé que sería como otros ebooks llenos de teoría, pero este manual va
-              directo al grano. Me hizo pensar como estratega, no solo como vendedor improvisado.</p>
+            <p className="-ft-1 mt-8 flex-grow">Pensé que sería como todas las agencias que te hacen tu parrilla de
+              contenido pero si jaló y ahi vamos con algunos nuevos clientes.</p>
             <p className="-ft-2 py-2 px-4 bg-black text-white mt-8 border-t-4 border-brand-1">Héctor R.</p>
             <p className="-ft-2 mt-2">Entrenador personal</p>
           </div>
@@ -188,65 +151,29 @@ export default function NotElegible() {
                 src="https://www.lcvaliados.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2F09.cafedd78.jpeg&w=3840&q=75"
                 alt=""/>
             </div>
-            <p className="-ft-1 mt-8 flex-grow">Lo descargué un sábado y el lunes ya estaba aplicando los ejercicios. Me
-              di cuenta de errores que llevaba meses cometiendo sin saberlo.</p>
+            <p className="-ft-1 mt-8 flex-grow">Empezamos un viernes y el siguiente viernes ya había logrado mi primer
+              venta.</p>
             <p className="-ft-2 py-2 px-4 bg-black text-white mt-8 border-t-4 border-brand-1">Lorena S.</p>
             <p className="-ft-2 mt-2">Consultora para emprendedores</p>
           </div>
-
-
         </div>
 
-        <div className="w-full md:w-1/2 ft-4 text-center mt-12">
-          <a href={pmtLink} target="_blank" className="button-block">Ya dale clic!</a>
-          <p className="-ft-1 mt-4">Comienza a obtener oportunidades de negocio por $800</p>
-        </div>
-      </section>
-
-      <div className="relative py-32">
-        <div className="absolute inset-0 z-[9999] bg-[rgba(0,0,0,0)] backdrop-invert pointer-events-none"/>
-        <div className="reading-container border border-brand-1 invert">
-          <div className="p-16">
-            <h2 className="text-white mb-20">Pero como vienes de nuestra campaña principal</h2>
-            <p className="text-white mb-20">Te damos chance tener este manual con un descuento para que ya pongas en
-              orden
-              tu prospección y empieces a vender.</p>
-            <div className="p-12 mb-20 border border-brand-1">
-              <p className="text-red-500 text-center">No vas a pagar $1,499</p>
-              <p className="sans text-center text-white">Solo:</p>
-              <h3 className="text-white text-center ft-11">$800</h3>
-            </div>
-            <a href={pmtLink} target="_blank" className="button-block hover:!border-brand-1">Descarga el manual</a>
-            <p className="text-white text-center -ft-1 mt-4">Comienza a obtener oportunidades de negocio por $800</p>
-          </div>
-        </div>
-      </div>
-
-      <section className="container flex flex-col items-center my-20 border-t py-20">
-        <div className="md:w-1/2">
-          <h2>Todo lo que necesitas saber sobre el manual Starter Marketing ya está aquí:</h2>
-          <div className="w-full">
-            <Faqs questions={faqs}/>
-          </div>
-        </div>
-        <div className="w-full md:w-1/2 ft-4 text-center">
-          <a href={pmtLink} target="_blank" className="button-block">Ya dale clic!</a>
-          <p className="-ft-1 mt-4">Comienza a obtener oportunidades de negocio por $800</p>
+        <div className="reading-container !border-0 !mt-0">
+          <a href={waLink} target="_blank" className="button !w-full">Programa una llamada!</a>
+          <p className="-ft-1 text-center">Sin compromiso. Sin pitch agresivo. 20 minutos.</p>
         </div>
       </section>
 
       <div className="border-t py-20 bg-black">
-        <div className="container flex flex-col items-center mb-20">
-          <div className="md:w-1/2">
-            <h2 className="text-center text-white">No necesitas una agencia para empezar a vender. Solo necesitas una
-              guía que te
-              muestre el camino.</h2>
-          </div>
-          <div className="w-full md:w-1/2 ft-4 mt-20 text-center">
-            <a href={pmtLink} target="_blank" className="button-block hover:!border-brand-1">Descarga el Manual
-              Ahora</a>
-            <p className="-ft-1 mt-4 text-white">Comienza a obtener oportunidades de negocio por $800</p>
-          </div>
+        <div className="reading-container !border-0 !mt-0 flex flex-col items-center">
+          <h2 className="text-white">No necesitas una sistema complejo para empezar a vender. Solo
+            necesitas un buen guía que te muestre el camino.</h2>
+          <p className="text-white">Agenda una llamada gratuita con Pier. Ya tiene un brief de lo que
+            encontramos en tu quiz para que no empieces desde cero.</p>
+        </div>
+        <div className="reading-container !border-0 !mt-0">
+          <a href={waLink} target="_blank" className="button !w-full">Programa una llamada!</a>
+          <p className="-ft-1 text-center text-neutral-300">Sin compromiso. Sin pitch agresivo. 20 minutos.</p>
         </div>
       </div>
 

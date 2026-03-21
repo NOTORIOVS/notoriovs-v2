@@ -42,7 +42,7 @@ export default function NotElegible() {
             Es parte del mismo ecosistema.</p>
           <div className="w-full text-center">
             <a href={waLink} target="_blank" className="button !w-full invert">Programa una llamada!</a>
-            <p className="-ft-1 mt-4">Comienza a obtener oportunidades de negocio por $800</p>
+            <p className="-ft-1 mt-4">Sin compromiso. Sin pitch agresivo. 20 minutos.</p>
           </div>
         </div>
       </div>
@@ -57,7 +57,7 @@ export default function NotElegible() {
         </p>
         <div className="w-full text-center">
           <a href={waLink} target="_blank" className="button !w-full">Programa una llamada!</a>
-          <p className="-ft-1 mt-4">Comienza a obtener oportunidades de negocio por $800</p>
+          <p className="-ft-1 mt-4">Sin compromiso. Sin pitch agresivo. 20 minutos.</p>
         </div>
 
       </section>

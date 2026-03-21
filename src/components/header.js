@@ -63,13 +63,14 @@ export default function Header() {
         </div>
       </div>
 
-      <div className="fixed top-0 inset-x-0 flex lg:hidden justify-between bg-white border-b p-4 z-[9999]">
+      <div className="fixed top-0 inset-x-0 flex lg:hidden justify-center bg-neutral-90/50 backdrop-blur-xl border-b p-4 z-[9999]">
         <Link href="/">
           <div id="logo" className="relative flex justify-start w-[16rem] pt-[4rem] top-0">
             <Img
               src={logotype}
               fill={true}
-              style={{objectFit: 'contain', filter: 'brightness(0)'}}
+              style={{objectFit: 'contain'}}
+              className="invert"
             />
           </div>
         </Link>

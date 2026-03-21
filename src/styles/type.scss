@@ -68,11 +68,15 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 800;
   font-style: normal;
   color: #1a1a1a;
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
 
 p {
   @extend .ft-0;
   color: #1a1a1a;
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
 
 a {

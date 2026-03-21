@@ -34,7 +34,7 @@ export default function NotElegible() {
       <div className="relative pb-20">
         <div className="absolute inset-0 z-[9999] bg-[rgba(0,0,0,0)] backdrop-invert pointer-events-none"/>
         <div className="reading-container !border-0 !mt-0">
-          <p className="sans ft-6">Te presentamos: 3Cuartos AG</p>
+          <p className="sans ft-6">Te presentamos: <nobr>3Cuartos AG</nobr></p>
           <p>Nuestro brother, Pier Bravo, fue COO de Notoriovs.<br/><br/>
             Aprendió el modelo de captación de nuevos clientes desde adentro y decidió crear su propia agencia orientada
             a un perfil como el tuyo.<br/><br/>

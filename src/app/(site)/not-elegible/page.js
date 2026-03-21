@@ -166,7 +166,7 @@ export default function NotElegible() {
 
       <div className="border-t py-20 bg-black">
         <div className="reading-container !border-0 !mt-0 flex flex-col items-center">
-          <h2 className="text-white">No necesitas una sistema complejo para empezar a vender. Solo
+          <h2 className="text-white">No necesitas un sistema complejo para empezar a vender. Solo
             necesitas un buen guía que te muestre el camino.</h2>
           <p className="text-white">Agenda una llamada gratuita con Pier. Ya tiene un brief de lo que
             encontramos en tu quiz para que no empieces desde cero.</p>

@@ -131,11 +131,11 @@ export default function Home() {
           <div className="ft-2 flex flex-col gap-12 max-w-[60ch]">
             <p className="-ft-1 text-brand-1 text-center uppercase !mb-0">Direct-Response Marketing Studio</p>
             <h1 className="flex flex-col ft-10 text-white text-center !my-0">
-              <span>No somos oootra agencia de marketing digital.</span>
-              <span className="mt-6">Somos algo más chido.</span>
+              <span>En algún momento vas a tener que aceptar que el problema no es la segmentación</span>
             </h1>
             <p className="ft-2 text-white text-center">
-              Ejecutamos un sistema de Adquisición de Clientes que va desde la prospección hasta el entrenamiento de tus vendedores para que cierren al menos el 5% de leads que generamos
+              9 de cada 10 empresas en México pierden ventas porque no tienen un sistema de adquisición completo.
+              Déjanos decirte exactamente qué está faltando en tu negocio.
             </p>
           </div>
           <div

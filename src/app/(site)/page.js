@@ -131,12 +131,10 @@ export default function Home() {
           <div className="ft-2 flex flex-col gap-12 max-w-[60ch]">
             <p className="-ft-1 text-brand-1 text-center uppercase !mb-0">Direct-Response Marketing Studio</p>
             <h1 className="flex flex-col ft-10 text-white text-center !my-0">
-              {/*<span>En algún momento vas a tener que aceptar que el problema no es la segmentación</span>*/}
-              Tu competencia va a pensar que estás haciendo trampa
+              Como NITRO para tu embudo de ventas
             </h1>
             <p className="ft-2 text-white text-center">
-              9 de cada 10 empresas en México pierden ventas porque no tienen un sistema de adquisición completo.
-              Nos encargamos desde tu prospección hasta capacitar a tu equipo de ventas.
+              Crecer tu negocio es difícil y estresante. Nosotros lo hacemos sencillo, menos estresante y predecible con nuestro método de adquisición de clientes.
             </p>
           </div>
           <div
@@ -147,12 +145,6 @@ export default function Home() {
           </div>
         </section>
       </div>
-
-      <section className="mt-16">
-        <p className="ft-2 sans text-center py-2 px-12 bg-brand-1 rounded-2xl">
-          ADVERTENCIA:<br/>No sigas si no quieres darte cuenta del problema en tu negocio
-        </p>
-      </section>
 
       {/* PROBLEMA */}
       <section id="problema">
@@ -165,19 +157,10 @@ export default function Home() {
           <p className="text-neutral-100">
             Llevamos 8 años viendo cómo las empresas pierden oportunidades de negocio y no podemos seguir arreglando
             solo la mitad del problema.<br/><br/>
-            Y seguro estás aquí porque:
-            <br/><br/>Ya te hicieron unas parrillas de contenido super bonitas y llenas de likes.
-            <br/><br/>Ya te dijeron que generaron miles de leads en $2 pesos.
-            <br/><br/>Hasta instalaste un chatbot con IA... porque tooodo el mundo lo está haciendo.
-            <br/><br/>Y nada!</p>
-          <p className="text-neutral-100">
-            Es que nadie te aclara que el problema viene en 3 partes:<br/><br/>
-            La primera es que es muy probable que no hayan entendido tu negocio y generan leads sin
-            perfil.<br/><br/>
-            Esto es muy común.<br/><br/>
-            La segunda es que a todas las agencias les da miedo hablar de la cantidad de pautas que necesitas para tus metas millonarias.<br/><br/>
-            Esto es más común.<br/><br/>
-            Y por último es que 9 de 10 empresas no tienen un proceso de ventas funcional.<br/><br/>
+            Es que nadie te sabe decir que tus campañas no están jalando por 2 cosas:<br/><br/>
+            1. Es muuuuy probable que no hayan entendido la necesidad de tu negocio.<br/><br/>
+            Y por eso llevas 3 meses pagando por unos posts bonitos que ni likes tienen y clientes... menos.<br/><br/>
+            Y 2. Es que 9 de 10 empresas no tienen un proceso de ventas funcional.<br/><br/>
             Esto probablemente te esté pasando a ti y no lo sepas.<br/><br/>
             Nosotros no le echamos más sal a esa herida.<br/><br/>
             Diagnosticamos tu negocio desde el día uno y construimos el sistema para que empieces a vender.
@@ -187,15 +170,15 @@ export default function Home() {
           <div className="w-full grid grid-cols-1 md:grid-cols-3">
             {[
               {num: '8', label: 'años diagnosticando y ejecutando estrategias de crecimiento'},
-              {num: '20+', label: 'clientes activos en servicios B2B, bienes raíces e industria'},
-              {num: '100+', label: 'sesiones de diagnóstico realizadas en 2025'},
+              {num: '20+', label: 'negocios escalados en 2025'},
+              {num: '100+', label: 'clientes asesorados en 2025'},
             ].map((stat, i) => (
               <div key={i}
                    className="w-full p-8 border border-neutral-700">
-                <div className="ft-11 font-black text-brand-1 mb-2">
+                <div className="ft-11 text-center font-black text-brand-1 mb-2">
                   {stat.num}
                 </div>
-                <div className="-ft-2 text-neutral-100">
+                <div className="-ft-2 text-center text-neutral-100">
                   {stat.label}
                 </div>
               </div>

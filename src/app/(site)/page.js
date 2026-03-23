@@ -131,11 +131,12 @@ export default function Home() {
           <div className="ft-2 flex flex-col gap-12 max-w-[60ch]">
             <p className="-ft-1 text-brand-1 text-center uppercase !mb-0">Direct-Response Marketing Studio</p>
             <h1 className="flex flex-col ft-10 text-white text-center !my-0">
-              <span>En algún momento vas a tener que aceptar que el problema no es la segmentación</span>
+              {/*<span>En algún momento vas a tener que aceptar que el problema no es la segmentación</span>*/}
+              Tu competencia va a pensar que estás haciendo trampa
             </h1>
             <p className="ft-2 text-white text-center">
               9 de cada 10 empresas en México pierden ventas porque no tienen un sistema de adquisición completo.
-              Déjanos decirte exactamente qué está faltando en tu negocio.
+              Nos encargamos desde tu prospección hasta capacitar a tu equipo de ventas.
             </p>
           </div>
           <div

@@ -46,6 +46,7 @@ export default function Header() {
                 src={logotype}
                 fill={true}
                 style={{objectFit: 'contain'}}
+                className="invert"
               />
             </div>
           </Link>
@@ -53,13 +54,13 @@ export default function Header() {
             id="headerFoot"
             className="mt-auto"
           >
-            <p className="-ft-3">English // Spanish</p>
+            <p className="-ft-3 text-white">English // Spanish</p>
           </div>
         </div>
         <div className="fixed flex flex-col h-full flex-grow w-[20rem] right-0 p-4 items-end space-y-2">
-          <a href={`https://instagram.com/${info.social.instagram}`} className="-ft-3" target="_blank">Instagram</a>
-          <a href={`https://facebook.com/${info.social.facebook}`} className="-ft-3" target="_blank">Facebook</a>
-          <a href={`https://wa.me/${info.whatsapp.value}`} className="-ft-3" target="_blank">WhatsApp</a>
+          <a href={`https://instagram.com/${info.social.instagram}`} className="-ft-3 text-white" target="_blank">Instagram</a>
+          <a href={`https://facebook.com/${info.social.facebook}`} className="-ft-3 text-white" target="_blank">Facebook</a>
+          <a href={`https://wa.me/${info.whatsapp.value}`} className="-ft-3 text-white" target="_blank">WhatsApp</a>
         </div>
       </div>
 

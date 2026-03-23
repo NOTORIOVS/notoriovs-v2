@@ -4,6 +4,7 @@ import OptInForm from '@/components/opt-in-form';
 import scrollDepth from '@/utils/scrollDepth';
 import { useEffect, useState } from 'react';
 import Faqs from '@/components/faqs';
+import Link from 'next/link';
 
 const CASOS = [
   {
@@ -106,6 +107,7 @@ const FAQ = [
 ];
 
 export default function Home() {
+  const [lastClick, setLastClick] = useState('');
   useEffect(() => {
     scrollDepth({
       values: [25, 50, 75, 100],
@@ -113,10 +115,16 @@ export default function Home() {
     });
   });
 
-  const CTA = (origin) => {
+  const CTA = ({ origin }) => {
     return (
-      <div className="ft-2 max-w-[40ch] mt-8 mx-auto flex flex-col">
-        <a href="#contacto" className="button !bg-brand-3 !w-full mb-4">Quiero mi consultoría</a>
+      <div className="ft-2 max-w-[40ch] mt-8 mx-auto flex flex-col z-20">
+        <Link
+          href="/#contact"
+          onClick={() => setLastClick(origin)}
+          className="button !bg-brand-3 !w-full mb-4"
+        >
+          Quiero mi consultoría
+        </Link>
         <p className="-ft-2 text-center text-neutral-400">Programa una consultoría para analizar la escalabilidad de tu
           negocio</p>
       </div>
@@ -387,7 +395,7 @@ export default function Home() {
 
       </section>
 
-      <section className="reading-container">
+      <section id="contact" className="reading-container">
         <p className="-ft-2 text-brand-1">Primer paso</p>
         <h2 className="text-neutral-100">
           Agenda una sesión para analizar tu proyecto
@@ -397,7 +405,7 @@ export default function Home() {
           seleccionamos los proyectos en los que podamos ayudar mejor.<br/><br/>
           Pero ya llegaste hasta acá…<br/><br/>
           Regálanos unos datos y agenda una cita para hacer un diagnóstico de tu proyecto.</p>
-        <OptInForm/>
+        <OptInForm lastClick={lastClick}/>
       </section>
     </div>
   );

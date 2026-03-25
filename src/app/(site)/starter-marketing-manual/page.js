@@ -36,7 +36,7 @@ export default function NotElegible() {
   useEffect(() => {
     const leadCookie = getCookie('lead');
     const lead = JSON.parse(leadCookie || '{}');
-    return () => fbEvent('Not Elegible', {phone: lead?.phone, email: lead?.email, externalID: lead?.id});
+    fbEvent('Not Elegible', {phone: lead?.phone, email: lead?.email, externalID: lead?.id});
   }, []);
 
   return (

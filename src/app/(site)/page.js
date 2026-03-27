@@ -56,27 +56,27 @@ const CASOS = [
 const PROCESO = [
   {
     num: '01',
-    titulo: 'Calificación',
+    titulo: 'Nos vamos conociendo',
     descripcion:
-      'Una sesión corta donde validamos que efectivamente te podemos ayudar. Si tus objetivos, industria y contexto encajan, te agendamos la sesión de diagnóstico.',
+      'Una sesión corta para decirte si el problema que crees tener es el problema real y validar que te podemos ayudar La mayoría se sorprende.',
   },
   {
     num: '02',
-    titulo: 'Diagnóstico',
+    titulo: '45min que valen más que 6 meses de errores',
     descripcion:
-      '45 minutos por Zoom. Sin speech de ventas a huevo. Preguntamos, escuchamos y mapeamos en vivo dónde está el cuello de botella real de tu empresa.',
+      'Por Zoom, sin speech de ventas. Preguntamos lo que tu equipo no se pregunta, mapeamos en vivo el cuello de botella real y te decimos exactamente dónde se está fugando el dinero.',
   },
   {
     num: '03',
-    titulo: 'Render',
+    titulo: 'Aquí ya nos ponemos a chambear',
     descripcion:
-      'Te entregamos la arquitectura del sistema que necesitas y una hoja de ruta de 90 días con prioridades, responsables y proyección financiera en tres escenarios.',
+      'Construimos el sistema. Captación, nutrición, cierre. Cada pieza en su lugar, ejecutada por nuestro equipo o dirigida al tuyo — según lo que necesite tu negocio.',
   },
   {
     num: '04',
-    titulo: 'Hallazgos',
+    titulo: 'Tu negocio crece y vivimos felices por siempre',
     descripcion:
-      'Una sesión de cierre donde te explicamos cada módulo, resolvemos dudas y te mostramos exactamente qué se implementa en el siguiente paso y por qué. Sin sorpresas.',
+      'Sabes cuántos leads entran, cuántos avanzan y cuántos cierran. Tu equipo tiene un proceso documentado. Los números dejan de ser una sorpresa y empiezan a ser una herramienta.',
   },
 ];
 
@@ -115,7 +115,7 @@ export default function Home() {
     });
   });
 
-  const CTA = ({ origin }) => {
+  const CTA = ({ cta = 'Ya dale click!', origin }) => {
     return (
       <div className="ft-2 max-w-[40ch] mt-8 mx-auto flex flex-col z-20">
         <Link
@@ -123,10 +123,11 @@ export default function Home() {
           onClick={() => setLastClick(origin)}
           className="button !bg-brand-3 !w-full mb-4"
         >
-          Quiero mi consultoría
+          {cta}
         </Link>
-        <p className="-ft-2 text-center text-neutral-400">Programa una consultoría para analizar la escalabilidad de tu
-          negocio</p>
+        <p className="-ft-2 text-center text-neutral-400">
+          Agenda una sesión gratuita para analizar tu proyecto
+        </p>
       </div>
     );
   };
@@ -142,7 +143,7 @@ export default function Home() {
               Como NITRO para tu embudo de ventas
             </h1>
             <p className="ft-2 text-white text-center">
-              Crecer tu negocio es difícil y estresante. Nosotros lo hacemos sencillo, menos estresante y predecible con nuestro método de adquisición de clientes.
+              Antes de hacerte otras campañas, diagnosticamos en donde se te está yendo feria y construimos el puente entre marketing y tu proceso de ventas.
             </p>
           </div>
           <div
@@ -163,13 +164,14 @@ export default function Home() {
           </h2>
 
           <p className="text-neutral-100">
-            Llevamos 8 años viendo cómo las empresas pierden oportunidades de negocio y no podemos seguir arreglando
-            solo la mitad del problema.<br/><br/>
-            Es que nadie te sabe decir que tus campañas no están jalando por 2 cosas:<br/><br/>
-            1. Es muuuuy probable que no hayan entendido la necesidad de tu negocio.<br/><br/>
+            En los 8 años que llevamos chambeando en esto del marketing,
+            nos hemos topado que, casi siempre, las empresas pierden ventas
+            por una de 2:<br/><br/>
+            1. Es muuuuy probable que quien te hace tus campañas nunca le entendido a tu negocio.<br/><br/>
             Y por eso llevas 3 meses pagando por unos posts bonitos que ni likes tienen y clientes... menos.<br/><br/>
             Y 2. Es que 9 de 10 empresas no tienen un proceso de ventas funcional.<br/><br/>
             Esto probablemente te esté pasando a ti y no lo sepas.<br/><br/>
+            Sad but true...<br/><br/>
             Nosotros no le echamos más sal a esa herida.<br/><br/>
             Diagnosticamos tu negocio desde el día uno y construimos el sistema para que empieces a vender.
           </p>
@@ -194,13 +196,18 @@ export default function Home() {
           </div>
         </div>
 
-        <CTA origin="problem"/>
-
-        {/*<div className="ft-2 max-w-[40ch] mt-12 mx-auto flex flex-col">*/}
-        {/*  <a href="#contacto" className="button !w-full">Quiero mi consultoría</a>*/}
-        {/*  <p className="-ft-2 text-center text-neutral-400 mt-4">Programa una consultoría para analizar la escalabilidad de tu negocio</p>*/}
-        {/*</div>*/}
+        <CTA
+          cta="Te suena? Dale click!"
+          origin="problem"
+        />
       </section>
+      {/*<section className="mt-16">*/}
+      {/*  <p className="ft-2 sans text-center py-8 px-12 bg-brand-1 rounded-2xl">*/}
+      {/*    <span className="ft-4 font-bold">ADVERTENCIA:</span><br/>*/}
+      {/*    Si la idea de invertir $20,000 al mes en crecer tu negocio todavía te parece un gran riesgo, probablemente te vamos a perjudicar más que ayudar.*/}
+      {/*  </p>*/}
+      {/*</section>
+      */}
 
       {/* CASOS */}
       <section id="casos">
@@ -238,7 +245,10 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <CTA origin="study-cases"/>
+        <CTA
+          cta="No quisieras ver tu marca aquí? Click!"
+          origin="study-cases"
+        />
       </section>
 
       {/* MODELO */}
@@ -305,22 +315,25 @@ export default function Home() {
           </div>
         </div>
 
-        <CTA origin="model"/>
+        <CTA
+          cta="Tiene más sentido, no? Click!"
+          origin="model"
+        />
 
       </section>
 
       {/* AUDITORÍA PROCESO */}
       <section id="auditoria">
         <div className="reading-container mb-16">
-          <p className="-ft-2 text-brand-1">La Auditoría de Crecimiento Comercial</p>
+          <p className="-ft-2 text-brand-1">El Proceso Notoriovs</p>
           <h2 className="text-neutral-100">
-            Así funciona<br/>el <span className="text-brand-1">proceso</span>
+            Lo que nadie te ha dicho todavía sobre tu negocio
           </h2>
           <p className="text-neutral-100">
-            No arrancamos con una propuesta. <br/><br/>
-            Arrancamos con una conversación. <br/><br/>
-            Primero entendemos qué está pasando, luego construimos el mapa y al final te decimos exactamente qué hacer
-            con él.
+            No arrancamos con una propuesta ni con una presentación bonita.<br/><br/>
+            Arrancamos preguntando lo que nadie te ha preguntado.<br/><br/>
+            Porque el problema casi nunca está donde crees que está.<br/><br/>
+            Y cada semana sin saberlo, te está costando.
           </p>
         </div>
 
@@ -345,11 +358,10 @@ export default function Home() {
           ))}
         </div>
 
-        <p className="text-neutral-500">
-          $36,000 MXN — entregable completo en 15 días hábiles a partir de la sesión.
-        </p>
-
-        <CTA origin="process"/>
+        <CTA
+          cta="Quieres conocer todo el proceso? Click!"
+          origin="process"
+        />
       </section>
 
       {/* PARA QUIÉN */}
@@ -370,7 +382,10 @@ export default function Home() {
             ayudar..<br/><br/>
             Y si el problema que traes es que los leads no se convierten o que te llegan suficientes...<br/><br/>
             Ya dale click al botón.</p>
-          <CTA origin="target"/>
+          <CTA
+            cta="Listo para chambear juntos? Click!"
+            origin="target"
+          />
         </div>
         <div
           className="border-l-[3px] border-brand-4 bg-neutral-800 p-20"
@@ -398,13 +413,12 @@ export default function Home() {
       <section id="contact" className="reading-container">
         <p className="-ft-2 text-brand-1">Primer paso</p>
         <h2 className="text-neutral-100">
-          Agenda una sesión para analizar tu proyecto
+          Estás a nada de evolucionar tu negocio
         </h2>
         <p className="text-neutral-100">Para garantizar que nuestros clientes cuenten con una estrategia óptima,
-          solo
-          seleccionamos los proyectos en los que podamos ayudar mejor.<br/><br/>
+          solo seleccionamos los proyectos en los que podamos ayudar mejor.<br/><br/>
           Pero ya llegaste hasta acá…<br/><br/>
-          Regálanos unos datos y agenda una cita para hacer un diagnóstico de tu proyecto.</p>
+          Regálanos unos datos y agenda una cita para analizar tu proyecto.</p>
         <OptInForm lastClick={lastClick}/>
       </section>
     </div>

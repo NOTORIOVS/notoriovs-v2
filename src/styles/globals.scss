@@ -51,9 +51,10 @@ a.link {
 
 button, .button {
   font-size: 1.6rem;
+  font-family: pragmatica, sans-serif;
   @apply flex justify-center
   w-max px-8 py-4
-  uppercase
+  font-semibold uppercase
   bg-brand-1 text-black border border-black
   hover:bg-black hover:text-white hover:border-neutral-400;
   &-secondary {

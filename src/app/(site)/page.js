@@ -156,6 +156,19 @@ export default function Home() {
         </section>
       </div>
 
+      <section id="contact" className="reading-container">
+        <p className="-ft-2 text-brand-1">Primer paso</p>
+        <h2 className="text-neutral-100">
+          Agenda tu diagnóstico de marketing gratuito y descubre en donde se te está yendo la feria
+        </h2>
+        <p className="text-neutral-100">
+          {/*Para garantizar que nuestros clientes cuenten con una estrategia óptima,*/}
+          {/*solo seleccionamos los proyectos en los que podamos ayudar mejor.<br/><br/>*/}
+          {/*Pero ya llegaste hasta acá…<br/><br/>*/}
+          Regálanos unos datos y agenda una cita para analizar tu proyecto.</p>
+        <OptInForm lastClick={lastClick}/>
+      </section>
+
       {/* PROBLEMA */}
       <section id="problema">
         <div className="reading-container mb-16">
@@ -412,18 +425,11 @@ export default function Home() {
 
         <Faqs questions={FAQ}/>
 
-      </section>
+        <CTA
+          cta="Todavía tienes dudas? Click!"
+          origin="faqs"
+        />
 
-      <section id="contact" className="reading-container">
-        <p className="-ft-2 text-brand-1">Primer paso</p>
-        <h2 className="text-neutral-100">
-          Agenda tu diagnóstico de marketing gratuito y descubre en donde se te está yendo la feria
-        </h2>
-        <p className="text-neutral-100">Para garantizar que nuestros clientes cuenten con una estrategia óptima,
-          solo seleccionamos los proyectos en los que podamos ayudar mejor.<br/><br/>
-          Pero ya llegaste hasta acá…<br/><br/>
-          Regálanos unos datos y agenda una cita para analizar tu proyecto.</p>
-        <OptInForm lastClick={lastClick}/>
       </section>
     </div>
   );

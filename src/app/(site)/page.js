@@ -134,10 +134,9 @@ export default function Home() {
 
   return (
     <div className="pb-20 bg-black">
-      <input type="text" style={{opacity: 0, position: 'absolute', top: 0}} tabIndex="-1"/>
       {/* HERO */}
       <div className="relative bg-[url('/images/backgrounds/bkg-5.jpg')]">
-        <section className="min-h-screen justify-center items-center z-1">
+        <section className="py-[16rem] justify-center items-center z-1">
           <div className="ft-2 flex flex-col gap-12 max-w-[60ch]">
             <p className="-ft-1 text-brand-1 text-center uppercase !mb-0">Direct-Response Marketing Studio</p>
             <h1 className="flex flex-col ft-10 text-white text-center !my-0">
@@ -418,7 +417,7 @@ export default function Home() {
       <section id="contact" className="reading-container">
         <p className="-ft-2 text-brand-1">Primer paso</p>
         <h2 className="text-neutral-100">
-          Estás a nada de evolucionar tu negocio
+          Agenda tu diagnóstico de marketing gratuito y descubre en donde se te está yendo la feria
         </h2>
         <p className="text-neutral-100">Para garantizar que nuestros clientes cuenten con una estrategia óptima,
           solo seleccionamos los proyectos en los que podamos ayudar mejor.<br/><br/>

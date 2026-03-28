@@ -134,6 +134,7 @@ export default function Home() {
 
   return (
     <div className="pb-20 bg-black">
+      <input type="text" style={{opacity: 0, position: 'absolute', top: 0}} tabIndex="-1"/>
       {/* HERO */}
       <div className="relative bg-[url('/images/backgrounds/bkg-5.jpg')]">
         <section className="min-h-screen justify-center items-center z-1">
@@ -143,7 +144,8 @@ export default function Home() {
               Como NITRO para tu embudo de ventas
             </h1>
             <p className="ft-2 text-white text-center">
-              Antes de hacerte otras campañas, diagnosticamos en donde se te está yendo feria y construimos el puente entre marketing y tu proceso de ventas.
+              Antes de hacerte otras campañas, diagnosticamos en donde se te está yendo feria y construimos el puente
+              entre marketing y tu proceso de ventas.
             </p>
           </div>
           <div
@@ -259,7 +261,8 @@ export default function Home() {
             Primero el <span className="text-brand-1">diagnóstico,</span> luego el sistema
           </h2>
           <p className="text-neutral-100">
-            Nos cansamos de los planes mensuales que terminas contratando porque te endulzaron el oído bien perro.<br/><br/>
+            Nos cansamos de los planes mensuales que terminas contratando porque te endulzaron el oído bien
+            perro.<br/><br/>
             Y es que...<br/>
             Hazte una pregunta:<br/>
             tú construirías tu casa así sin planos, ni un render, ni nada?<br/><br/>
@@ -278,7 +281,8 @@ export default function Home() {
             <h3 className="text-neutral-100">
               Acompañamiento
             </h3>
-            <p className="text-neutral-300">Para empresas que tienen equipo propio pero necesitan dirección y supervisión continua. Tu equipo ejecuta, nosotros dirigimos.</p>
+            <p className="text-neutral-300">Para empresas que tienen equipo propio pero necesitan dirección y
+              supervisión continua. Tu equipo ejecuta, nosotros dirigimos.</p>
             <ul className="space-y-3">
               {[
                 '4 sesiones mensuales vía Zoom',
@@ -299,7 +303,8 @@ export default function Home() {
             <h3 className="font-display font-black text-white leading-tight mb-3">
               Agencia
             </h3>
-            <p className="text-neutral-300">El sistema completo ejecutado por nuestro equipo. Captación, nutrición y cierre. Nosotros construimos y operamos el sistema.</p>
+            <p className="text-neutral-300">El sistema completo ejecutado por nuestro equipo. Captación, nutrición y
+              cierre. Nosotros construimos y operamos el sistema.</p>
             <ul className="space-y-3">
               {[
                 'Sistema completo de captación y perfilamiento',

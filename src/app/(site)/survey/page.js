@@ -51,6 +51,19 @@ export const formSteps = [
     cols: 2,
   },
   {
+    name: 'customerType',
+    title: '¿Quién es tu cliente ideal?',
+    description: 'Selecciona una.',
+    type: 'radio',
+    inputOptions: { required: 'Selecciona una opción' },
+    options: [
+      { value: 'b2b', label: 'Otros negocios' },
+      { value: 'b2c', label: 'Consumidor final' },
+      { value: 'both', label: 'Ambos' },
+    ],
+    cols: 2,
+  },
+  {
     name: 'about',
     title: '¿Qué vendes?',
     description: 'Descríbeme brevemente qué producto o servicio vendes y quién es tu cliente típico.',
@@ -177,9 +190,8 @@ export default function Survey() {
     register,
     handleSubmit,
     setError,
-    formState: {errors},
+    formState: {},
     getValues,
-    watch,
   } = methods;
   const searchParams = useSearchParams();
   const router = useRouter();

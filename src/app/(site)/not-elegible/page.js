@@ -1,15 +1,12 @@
 'use client';
-import Image from 'next/image';
-import logo from '../../../../public/images/svg/NTRS-Logo-Green.png';
-import cover from '../../../../public/images/NTRS-StarterMarketing-Thumbnail.png';
-import Faqs from '@/components/faqs';
+
 import { useEffect } from 'react';
 import fbEvent from '@/services/fbEvents';
 import { getCookie } from 'cookies-next';
 
 export default function NotElegible() {
   const msg = encodeURI('Hola! Podemos programar una llamada para que me ayuden con el marketing de mi negocio?')
-  const waLink = `https://wa.me/+523317628442?text=${msg}`;
+  const waLink = `https://wa.me/+523310909387?text=${msg}`;
 
   useEffect(() => {
     const leadCookie = getCookie('lead');

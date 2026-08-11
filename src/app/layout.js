@@ -1,4 +1,5 @@
 import '@/styles/globals.scss';
+import { SCROLL_GUARD } from '@/lib/scroll-guard';
 import TrackingAnalytics from '@/components/trackingAnalytics';
 
 export async function generateMetadata() {
@@ -21,6 +22,7 @@ export default function RootLayout({children}) {
       {/*<title>{metadata.title}</title>*/}
     </head>
     <body>
+      <script dangerouslySetInnerHTML={{ __html: SCROLL_GUARD }} />
       {children}
     </body>
     </html>

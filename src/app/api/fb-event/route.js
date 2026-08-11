@@ -10,7 +10,7 @@ export async function POST(request) {
     const body = await request.json();
     const { eventName, eventID, user, clientData } = body;
 
-    const hash = (string) => createHash('sha256').update(string).digest('hex');
+    const hash = (value) => createHash('sha256').update(String(value)).digest('hex');
 
     const cookieStore = cookies();
     const fbc = cookieStore.get('_fbc')?.value;

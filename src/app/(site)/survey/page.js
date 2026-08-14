@@ -262,7 +262,8 @@ export default function Survey() {
 
       const payload = { ...data, id, email, phone, status, _fbc, _fbp };
 
-      const redirectURL = status === 'qualified' ? '/thankyou' : '/not-elegible';
+      // const redirectURL = status === 'qualified' ? '/thankyou' : '/not-elegible';
+      const redirectURL = '/thankyou';
 
       const res = await fetch(info.surveyWebhook, {
         method: 'POST',
@@ -277,7 +278,8 @@ export default function Survey() {
         return;
       }
 
-      status === 'qualified' && fbEvent('Lead', { email, phone, externalID: id });
+      // status === 'qualified' && fbEvent('Lead', { email, phone, externalID: id });
+      fbEvent('Lead', { email, phone, externalID: id });
 
       router.push(redirectURL);
     } catch (error) {

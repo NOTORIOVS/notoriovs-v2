@@ -1,5 +1,6 @@
 import '@/styles/globals.scss';
 import Image from 'next/image';
+import { info } from '../../../info';
 
 const MONTHS_ES = [
   'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',

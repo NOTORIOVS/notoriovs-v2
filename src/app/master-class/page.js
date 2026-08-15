@@ -28,7 +28,7 @@ const formatEventDate = (date) => `${date.getDate()} de ${MONTHS_ES[date.getMont
 const formatBadgeDate = (date) => `${date.getDate()} de ${MONTHS_ES[date.getMonth()]}`;
 
 export default function MasterClass() {
-  const checkoutLink = `https://wa.me/+${info.whatsapp.value}`;
+  const checkoutLink = `https://wa.me/${info.whatsapp.value}`;
   const eventDate = getNextMasterClassDate();
 
   const whatYouGet = [
@@ -94,7 +94,7 @@ export default function MasterClass() {
             Juzgarnos a nosotros.
           </p>
           <div className="w-full text-center mt-12 text-neutral-50">
-            <a href={checkoutLink} className="button-block">Apartar mi lugar</a>
+            <a href={checkoutLink} target="_blank" className="button-block">Apartar mi lugar</a>
             <p className="sans ft-4 mt-4 text-neutral-50">$800 MXN</p>
             <p className="-ft-1 mt-2 text-neutral-50">Pago único. Cupo limitado. No se graba.</p>
           </div>
@@ -216,7 +216,7 @@ export default function MasterClass() {
           </p>
         </div>
         <div className="reading-container !border-0 !mt-0">
-          <a href={checkoutLink} className="button-block">Apartar mi lugar por $800</a>
+          <a href={checkoutLink} target="_blank" className="button-block">Apartar mi lugar por $800</a>
         </div>
       </div>
     </div>

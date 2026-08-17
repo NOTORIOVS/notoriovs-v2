@@ -28,37 +28,38 @@ const formatEventDate = (date) => `${date.getDate()} de ${MONTHS_ES[date.getMont
 const formatBadgeDate = (date) => `${date.getDate()} de ${MONTHS_ES[date.getMonth()]}`;
 
 export default function MasterClass() {
-  const checkoutLink = `https://wa.me/${info.whatsapp.value}`;
+  const waText = encodeURI('')
+  const checkoutLink = `https://buy.stripe.com/7sY9AS0rn77P2Sc2rD9k400`;
   const eventDate = getNextMasterClassDate();
 
   const whatYouGet = [
     {
       title: 'Comprobar si te están viendo la cara',
-      text: 'Hoy juzgas a quien te maneja la pauta por qué tan seguido te habla y si los posts se ven distintos. Así se corren agencias buenas y se conservan agencias malas, y nunca te enteras de cuál fue cuál. Vas a salir con criterios que no dependen de la opinión de nadie, ni de la mía.',
+      text: 'Hoy juzgas a quien te maneja tus campañas si te gustan sus posts. Por eso corres agencias buenas y las agencias malas se aprovechan de tu nobleza. Aprende a no depender de la opinión de nadie, ni de la mía.',
     },
     {
       title: 'Subirle o bajarle a la pauta sin que sea una apuesta',
-      text: 'La mayoría de los negocios de tu tamaño no se estanca porque la campaña se muera. Se estanca porque llega a un techo que nadie se atreve a romper a ciegas. Con el tablero puesto, subirle deja de ser apostar y se vuelve multiplicar.',
+      text: 'La mayoría de las PyMEs no se estanca por una mala segmentación. Se estanca porque invierten a ciegas. Con datos puestos, subirle a la inversión deja de ser apuesta y se vuelve crecimiento.',
     },
     {
       title: 'Cachar en qué punto estás dejando dinero en la mesa',
-      text: 'O te faltan leads, o los leads llegan y se te mueren adentro. Desde tu silla las dos cosas se ven idénticas: gente que no compra. Y cada una se arregla de forma completamente distinta. Vas a salir sabiendo cuál de las dos es la tuya.',
+      text: 'O te faltan leads o se te mueren. Desde tus zapatos las dos cosas son iguales: gente descalificada que no compra. Y cada una se arregla de forma distinta. Vas a descubrir cuál de las dos es tu problema.',
     },
   ];
 
   const howItWorks = [
     {
-      time: '25 min',
+      time: 'Bloque 1',
       title: 'Los 5 indicadores, uno por uno.',
-      text: 'De dónde sale cada uno y cómo se lee. Nada guardado para los que compren.',
+      text: 'De dónde sale cada uno y cómo se lee. Con eso ya sabrás donde puede vivir tu problema real.',
     },
     {
-      time: '15 min',
+      time: 'Bloque 2',
       title: 'Diagnóstico en vivo.',
-      text: 'Abrimos la cuenta de uno o dos asistentes frente al grupo y la leemos en tiempo real. Sin ensayo. Puede ser la tuya si levantas la mano.',
+      text: 'Abrimos la cuenta de uno o dos asistentes frente al grupo y la leemos en tiempo real. Puede ser la tuya si levantas la mano.',
     },
     {
-      time: '10 min',
+      time: 'Bloque 3',
       title: 'Al final te hago una oferta.',
       text: 'De eso vivo y no me voy a hacer el interesante. No es obligatorio comprarlo y lo que aprendiste te lo llevas de todas formas.',
     },
@@ -66,8 +67,8 @@ export default function MasterClass() {
 
   const notForYou = [
     'Buscas tips de contenido, redes o community management. Aquí no se habla de eso ni un minuto.',
-    'No tienes pauta corriendo en Meta ni piensas tenerla. Todo se aplica sobre datos reales, no sobre teoría.',
-    'Quieres una hora donde nadie te venda nada. Al final hay oferta y lo digo desde ahora.',
+    'No tienes pauta corriendo ni piensas tenerla. Todo se aplica sobre datos reales, no sobre teoría.',
+    'Quieres una hora donde nadie te venda nada. Al final hay una oferta y lo digo desde ahora.',
   ];
 
   const eventDetails = [
@@ -83,7 +84,7 @@ export default function MasterClass() {
       <section className="container flex flex-col items-start pt-20 pb-20 md:pt-32 text-neutral-50">
         <div className="w-full md:w-1/2 mx-auto flex flex-col">
           <p className="-ft-2 uppercase mono w-max text-brand-1">
-            Master Class en vivo · Zoom · {formatBadgeDate(eventDate)} · 17:00 hrs
+            Master Class en vivo · {formatBadgeDate(eventDate)}
           </p>
           <h1 className="ft-8 mt-8 text-neutral-50">Deja de adivinar por qué las agencias a veces funcionan y a veces
             no</h1>
@@ -102,9 +103,9 @@ export default function MasterClass() {
       </section>
 
       <section className="container flex flex-col items-center mb-20 border-t py-20">
-        <div className="md:w-1/2 mb-12">
+        <div className="w-full md:w-1/2 mb-12">
           <p className="overhead text-brand-1">Aprenderás</p>
-          <h2 className="mt-8 text-neutral-50">Tres cosas que hoy no puedes hacer</h2>
+          <h2 className="text-neutral-50">Tres cosas que hoy no puedes hacer</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {whatYouGet.map((item) => (
@@ -117,13 +118,13 @@ export default function MasterClass() {
       </section>
 
       <section className="container flex flex-col items-center mb-20 border-t py-20">
-        <div className="md:w-1/2 mb-12">
+        <div className="w-full md:w-1/2 mb-12">
           <p className="overhead text-brand-1">Cómo funciona la Master Class</p>
-          <h2 className="mt-8 text-neutral-50">Sin misterios</h2>
+          <h2 className="text-neutral-50">Sin misterios</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
           {howItWorks.map((step) => (
-            <div key={step.time} className="p-12 bg-black flex flex-col">
+            <div key={step.time} className="bg-black flex flex-col border-t pt-8">
               <p className="mono ft-4 text-brand-1">{step.time}</p>
               <h3 className="text-neutral-50 mt-4 mb-4">{step.title}</h3>
               <p className="text-neutral-50">{step.text}</p>
@@ -135,10 +136,10 @@ export default function MasterClass() {
       <section className="container flex flex-col items-center mb-20 border-t py-20">
         <div className="w-full md:w-1/2 mb-12">
           <p className="overhead text-brand-1">Quién la imparte</p>
-          <h2 className="mt-8 text-neutral-50">A quién vas a aguantar 90 min?</h2>
+          <h2 className="text-neutral-50">A quién vas a aguantar <nobr>90 min</nobr>?</h2>
         </div>
         <div className="md:w-1/2 flex flex-col">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full border-y py-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full border-b pb-16">
             <div
               className="relative w-full aspect-square overflow-hidden flex items-center justify-center bg-black">
               <Image src="/images/fer-portrait.png" alt="Fernando Mendez" layout="fill"/>
@@ -196,6 +197,7 @@ export default function MasterClass() {
 
       <section className="container flex flex-col items-center mb-20 border-t py-20">
         <p className="overhead text-brand-1">Los datos</p>
+        <h2 className="text-neutral-50">Cómo, dónde, cuándo?</h2>
         <div className="md:w-1/2 w-full border border-neutral-500 divide-y divide-neutral-500 mt-8">
           {eventDetails.map((row) => (
             <div key={row.label} className="flex justify-between p-6 text-neutral-50">
@@ -215,8 +217,10 @@ export default function MasterClass() {
             lo que tienes que hacer.
           </p>
         </div>
-        <div className="reading-container !border-0 !mt-0">
-          <a href={checkoutLink} target="_blank" className="button-block">Apartar mi lugar por $800</a>
+        <div className="reading-container !gap-4 text-center mt-12 text-neutral-50">
+          <a href={checkoutLink} target="_blank" className="button-block">Apartar mi lugar</a>
+          <p className="sans ft-4 text-neutral-50">$800 MXN</p>
+          <p className="-ft-1 text-neutral-50">Pago único. Cupo limitado. No se graba.</p>
         </div>
       </div>
     </div>

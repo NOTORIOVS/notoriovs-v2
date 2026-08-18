@@ -27,6 +27,13 @@ function getNextMasterClassDate() {
 const formatEventDate = (date) => `${date.getDate()} de ${MONTHS_ES[date.getMonth()]} de ${date.getFullYear()}`;
 const formatBadgeDate = (date) => `${date.getDate()} de ${MONTHS_ES[date.getMonth()]}`;
 
+export async function generateMetadata() {
+  return {
+    title: 'Notoriovs Studio // Master Class',
+    description: 'Deja de adivinar por qué las agencias a veces funcionan y a veces no',
+  };
+}
+
 export default function MasterClass() {
   const waText = encodeURI('')
   const checkoutLink = `https://buy.stripe.com/7sY9AS0rn77P2Sc2rD9k400`;

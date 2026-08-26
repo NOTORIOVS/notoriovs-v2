@@ -34,7 +34,7 @@ export default function LeadQualifier({ answers }) {
   // Piso = precio_mensual / margen.
   const MARGIN = 0.40;
   const SERVICE_PRICE = {
-    encendido:  2600,
+    encendido:  1800,
     pulso:      8000,
     enterprise: 24000,
   };

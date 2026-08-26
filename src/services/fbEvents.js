@@ -32,6 +32,8 @@ export default function fbEvent(
       em: userData.email,
       externalID: userData.externalID
     },
+    fbc: userData.fbc,
+    fbp: userData.fbp,
     clientData
   });
 

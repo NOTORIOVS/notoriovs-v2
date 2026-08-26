@@ -174,7 +174,7 @@ export default function Survey() {
         headers: {'Content-Type': 'application/json'},
       });
 
-      fbEvent('Lead', {email, phone, externalID: id});
+      fbEvent('Lead', {email, phone, externalID: id, fbc: _fbc, fbp: _fbp});
       router.push('/thankyou');
     } catch (e) {
       console.error('Partial submit failed', e);
@@ -224,7 +224,7 @@ export default function Survey() {
         return;
       }
 
-      status === 'qualified' && fbEvent('Lead', { email, phone, externalID: id });
+      status === 'qualified' && fbEvent('Lead', { email, phone, externalID: id, fbc: _fbc, fbp: _fbp });
       // fbEvent('Lead', {email, phone, externalID: id});
 
       router.push(redirectURL);

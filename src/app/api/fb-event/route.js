@@ -8,13 +8,27 @@ export async function POST(request) {
     const ip = request.headers.get('x-forwarded-for') || undefined;
 
     const body = await request.json();
-    const { eventName, eventID, user, clientData } = body;
+    const {
+      eventName,
+      eventID,
+      user,
+      clientData,
+      fbc: fbcFromBody,
+      fbp: fbpFromBody,
+      eventSourceUrl,
+      actionSource,
+    } = body;
 
-    const hash = (value) => createHash('sha256').update(String(value)).digest('hex');
+    // Meta pide el email/telefono en minusculas y sin espacios antes de hashear.
+    const hash = (value) => createHash('sha256').update(String(value).trim().toLowerCase()).digest('hex');
 
+    // Si la llamada viene del navegador (fbEvents.js), _fbc/_fbp viajan como cookies
+    // de la request. Si viene server-to-server (n8n disparando este endpoint al
+    // crearse una cita en Pipedrive), no hay cookies: fbc/fbp deben llegar en el
+    // body, tomados de lo que se guardo en Pipedrive cuando se creo el lead.
     const cookieStore = cookies();
-    const fbc = cookieStore.get('_fbc')?.value;
-    const fbp = cookieStore.get('_fbp')?.value;
+    const fbc = fbcFromBody || cookieStore.get('_fbc')?.value;
+    const fbp = fbpFromBody || cookieStore.get('_fbp')?.value;
 
     const userData = {
       em: user?.em ? [hash(user.em)] : undefined,
@@ -36,8 +50,8 @@ export async function POST(request) {
           event_name: eventName,
           event_id: eventID,
           event_time: Math.floor(Date.now() / 1000),
-          action_source: 'website',
-          event_source_url: referer,
+          action_source: actionSource || 'website',
+          event_source_url: eventSourceUrl || referer,
           user_data: filteredUserData,
           custom_data: clientData || {},
         },

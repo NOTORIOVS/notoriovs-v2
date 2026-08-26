@@ -193,9 +193,9 @@ export default function Home() {
         <div className="w-full flex flex-col items-center">
           <div className="w-full grid grid-cols-1 md:grid-cols-3">
             {[
-              {num: '8', label: 'años diagnosticando y ejecutando estrategias de crecimiento'},
-              {num: '20+', label: 'negocios escalados en 2025'},
-              {num: '100+', label: 'clientes asesorados en 2025'},
+              {num: '9', label: 'años ejecutando estrategias de crecimiento'},
+              {num: '+120', label: 'Negocios escalados con sistema'},
+              {num: '+1k', label: 'Dueños de negocio asesorados'},
             ].map((stat, i) => (
               <div key={i}
                    className="w-full p-8 border border-neutral-700">

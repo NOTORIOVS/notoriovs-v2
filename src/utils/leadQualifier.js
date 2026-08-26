@@ -1,154 +1,154 @@
-export default function LeadQualifier({answers}) {
+export default function LeadQualifier({ answers }) {
 
-  const MARGIN_TABLE = {
-    service: {
-      b2b: {
-        professionalServices: 0.55,
-        medical:              0.50,
-        finance:              0.55,
-        realEstate:           0.42,
-        industrial:           0.38,
-        eCommerce:            0.35,
-        education:            0.52,
-        other:                0.38,
-      },
-      b2c: {
-        professionalServices: 0.50,
-        medical:              0.48,
-        finance:              0.50,
-        realEstate:           0.38,
-        industrial:           0.32,
-        eCommerce:            0.30,
-        education:            0.48,
-        other:                0.35,
-      },
-      both: {
-        professionalServices: 0.52,
-        medical:              0.49,
-        finance:              0.52,
-        realEstate:           0.40,
-        industrial:           0.35,
-        eCommerce:            0.32,
-        education:            0.50,
-        other:                0.36,
-      },
-    },
-    product: {
-      b2b: {
-        professionalServices: 0.42,
-        medical:              0.38,
-        finance:              0.38,
-        realEstate:           0.35,
-        industrial:           0.38,
-        eCommerce:            0.30,
-        education:            0.35,
-        other:                0.32,
-      },
-      b2c: {
-        professionalServices: 0.28,
-        medical:              0.32,
-        finance:              0.22,
-        realEstate:           0.22,
-        industrial:           0.22,
-        eCommerce:            0.18,
-        education:            0.22,
-        other:                0.20,
-      },
-      both: {
-        professionalServices: 0.35,
-        medical:              0.35,
-        finance:              0.30,
-        realEstate:           0.28,
-        industrial:           0.30,
-        eCommerce:            0.24,
-        education:            0.28,
-        other:                0.26,
-      },
-    },
+  // ── Midpoints: convierten los buckets del quiz en números estimados ──
+  const TICKET_MIDPOINT = {
+    '<2.5k':     1750,
+    '2.5k-5k':   4000,
+    '5k-15k':    10000,
+    '15k-50k':   35000,
+    '50k-150k':  120000,
+    '150k+':     200000,
   };
 
   const REVENUE_MIDPOINT = {
-    '<100k':      80000,
-    '100k-300k':  200000,
-    '300k-600k':  450000,
-    '600k-1.5m':  1050000,
-    '1.5m+':      2000000,
+    '<50k':      30000,
+    '50k-100k':  75000,
+    '100k-300k': 200000,
+    '300k-600k': 450000,
+    '600k-1.5m': 1050000,
+    '1.5m+':     2000000,
   };
 
-  const TICKET_MIDPOINT = {
-    '<5k':      3500,
-    '5k-15k':   10000,
-    '15k-50k':  32500,
-    '50k-150k': 100000,
-    '150k+':    200000,
-  };
-
+  // Compras por año, para estimar el valor anual del cliente
   const LTV_MULTIPLIER = {
-    '1x':       1,
-    '2x':       2,
-    '3x':       3,
-    '4x+':      5,
+    '1x':        1,
+    '2x':        2,
+    '3x':        3,
+    '4x+':       5,
     'recurring': 12,
   };
 
-  function estimateLTV(answers) {
-    const ticket     = TICKET_MIDPOINT[answers.averageTicket];
-    const multiplier = LTV_MULTIPLIER[answers.ltv];
+  // ── Precios de servicio y margen esperado del prospecto ──
+  // Regla de negocio: la utilidad (~30%) que un solo cliente del prospecto genera
+  // debe alcanzar para pagar, al menos, UN MES del servicio correspondiente.
+  // Piso = precio_mensual / margen.
+  const MARGIN = 0.40;
+  const SERVICE_PRICE = {
+    encendido:  2600,
+    pulso:      8000,
+    enterprise: 24000,
+  };
 
-    if (!ticket || !multiplier) return null;
+  // ── Umbrales derivados (no se editan a mano, salen de SERVICE_PRICE y MARGIN) ──
+  const LTV_FLOOR      = SERVICE_PRICE.encendido  / MARGIN;
+  const PULSO_LTV      = SERVICE_PRICE.pulso      / MARGIN;
+  const PULSO_TICKET   = PULSO_LTV;
+  const ENTERPRISE_LTV = SERVICE_PRICE.enterprise / MARGIN;
 
-    return {
-      annualLTV:    Math.round(ticket * multiplier),
-      monthlyLTV:   Math.round((ticket * multiplier) / 12),
-    };
+  const PULSO_REVENUE  = 100000;  // facturación mínima para Pulso (piso de escala, no de margen)
+
+  const fmt = (n) => '$' + Math.round(n).toLocaleString('es-MX') + ' MXN';
+
+  function metrics(a) {
+    const ticket  = TICKET_MIDPOINT[a.averageTicket];
+    const revenue = REVENUE_MIDPOINT[a.currentSales];
+    const mult    = LTV_MULTIPLIER[a.ltv];
+    if (ticket == null || revenue == null || mult == null) return null;
+    const annualLTV = ticket * mult;
+    return { ticket, revenue, mult, annualLTV, monthlyLTV: Math.round(annualLTV / 12) };
   }
 
-  function estimateMonthlyProfit(answers) {
-    const { productType, customerType, businessVertical, currentSales } = answers;
-
-    const margin = MARGIN_TABLE[productType]?.[customerType]?.[businessVertical];
-    const revenue = REVENUE_MIDPOINT[currentSales];
-
-    if (!margin || !revenue) return null;
-
-    return {
-      estimatedRevenue:      revenue,
-      estimatedMargin:       margin,
-      estimatedMonthlyProfit: Math.round(revenue * margin),
-    };
+  function buildFlags(a) {
+    const flags = [];
+    if (a.salesTeam === 'solo' || a.salesTeam === 'noProcess') {
+      flags.push('Capacidad de cierre limitada: validar en llamada quién atiende y cierra los leads.');
+    }
+    if (a.customerType === 'transactional') {
+      flags.push('Modelo transaccional: confirmar que aplica captación filtrada y no más bien contenido o reseñas.');
+    }
+    if (a.customerType === 'mixed') {
+      flags.push('Modelo mixto: confirmar de dónde viene la mayoría del ingreso.');
+    }
+    return flags;
   }
 
-  function getQualificationResult(answers) {
-    const ltv    = estimateLTV(answers);
-    const profit = estimateMonthlyProfit(answers);
-    const lowRevenue = answers.currentSales === '<100k';
-    const lowLtv = !ltv || ltv.annualLTV < 50000;
-    const lowProfit = profit && profit.estimatedMonthlyProfit < 40000;
+  function suggestTier(a, m) {
+    const hasTeam = a.salesTeam === '2-4' || a.salesTeam === '5+';
 
-    if (lowRevenue && !lowLtv) {
+    // Enterprise: jugadores grandes con equipo comercial y valor de cliente
+    // suficiente para justificar el precio de Enterprise.
+    const isEnterprise =
+      hasTeam && (m.ticket >= ENTERPRISE_LTV || m.annualLTV >= ENTERPRISE_LTV);
+    if (isEnterprise) return 'Enterprise';
+
+    // Pulso: el núcleo del modelo
+    const pulsoValue = m.ticket >= PULSO_TICKET || m.annualLTV >= PULSO_LTV;
+    if (pulsoValue && m.revenue >= PULSO_REVENUE) return 'Pulso';
+
+    // Encendido: califica pero es chico
+    return 'El Encendido';
+  }
+
+  function getQualificationResult(a) {
+    const m = metrics(a);
+    if (!m) {
       return {
-        status:  'qualified',
-        reason:  'high_lifetime_value',
-        message: `Lifetimevalue estimado suficiente (~$${ltv.annualLTV.toLocaleString('es-MX')} MXN/año).`,
-        profit,
+        status: 'needs_info',
+        reason: 'missing_data',
+        tier: null,
+        message: 'Faltan datos para calificar (ticket, facturación o recompra).',
+        metrics: null,
+        flags: [],
       };
     }
 
-    if (lowRevenue && lowProfit) {
-      return {
-        status:  'disqualified',
-        reason:  'low_margin',
-        message: `Utilidad bruta estimada insuficiente (~$${profit.estimatedMonthlyProfit.toLocaleString('es-MX')} MXN/mes).`,
-        profit,
-      };
+    // Compuerta económica: la utilidad estimada del cliente del prospecto debe
+    // alcanzar para pagar el servicio de entrada (El Encendido).
+    if (a.customerType === 'transactional') {
+      // Para transaccional, el LTV equivale a una sola transacción: se compara
+      // el ticket directo contra el piso, no el valor anual con recompra.
+      if (a.ltv === '1x') {
+        return {
+          status: 'disqualified',
+          reason: 'transactional_no_repeat',
+          tier: null,
+          message: `Modelo transaccional sin recompra (ticket ${fmt(m.ticket)}). Sin repetición de compra no califica, sin importar el ticket.`,
+          metrics: m,
+          flags: buildFlags(a),
+        };
+      }
+      if (m.ticket < LTV_FLOOR) {
+        return {
+          status: 'disqualified',
+          reason: 'transactional_weak_economics',
+          tier: null,
+          message: `Ticket insuficiente para un modelo transaccional (${fmt(m.ticket)}). La utilidad de una sola transacción debe alcanzar para pagar el servicio de entrada (piso ${fmt(LTV_FLOOR)}).`,
+          metrics: m,
+          flags: buildFlags(a),
+        };
+      }
+    } else {
+      if (m.annualLTV < LTV_FLOOR) {
+        return {
+          status: 'disqualified',
+          reason: 'low_lifetime_value',
+          tier: null,
+          message: `Valor anual por cliente insuficiente (${fmt(m.annualLTV)}). La utilidad de un cliente debe alcanzar para pagar el servicio de entrada (piso ${fmt(LTV_FLOOR)}).`,
+          metrics: m,
+          flags: buildFlags(a),
+        };
+      }
     }
 
-    // Calificado
+    // Calificado -> sugerir tier
+    const tier = suggestTier(a, m);
     return {
-      status:  'qualified',
-      reason:  null,
-      message: 'Prospecto calificado.',
-      profit,
+      status: 'qualified',
+      reason: null,
+      tier,
+      message: `Prospecto calificado. Tier sugerido: ${tier}. Valor anual estimado ${fmt(m.annualLTV)}.`,
+      metrics: m,
+      flags: buildFlags(a),
     };
   }
 

@@ -10,8 +10,7 @@ export const Select = ({name, inputOptions, options, placeholder, className = ''
         className={className}
       >
         <option value="" disabled selected>{placeholder}</option>
-        {/* eslint-disable-next-line react/jsx-key */}
-        {options.map((opt) => <option value={opt.value}>{opt.name}</option>)}
+        {options.map((opt) => <option key={opt.value} value={opt.value}>{opt.name}</option>)}
       </select>
     </div>
   );
@@ -27,14 +26,12 @@ export const Radio = ({name, inputOptions, options, optCols = 3, className = ''}
         style={{gridTemplateColumns: `repeat(${optCols}, minmax(0, 1fr))`}}
       >
         {options.map((opt) => (
-          <>
-            <div className="flex items-stretch">
-              <input
-                {...register(name, inputOptions)}
-                type="radio" id={opt.value} name={name} value={opt.value} />
-              <label htmlFor={opt.value} className={className}>{opt.label}</label>
-            </div>
-          </>
+          <div key={opt.value} className="flex items-stretch">
+            <input
+              {...register(name, inputOptions)}
+              type="radio" id={opt.value} name={name} value={opt.value} />
+            <label htmlFor={opt.value} className={className} dangerouslySetInnerHTML={{__html: opt.label}}/>
+          </div>
         ))}
       </fieldset>
     </div>
@@ -51,14 +48,12 @@ export const Checkbox = ({name, inputOptions, options, optCols = 3, className = 
         style={{gridTemplateColumns: `repeat(${optCols}, minmax(0, 1fr))`}}
       >
         {options.map((opt) => (
-          <>
-            <div className="flex items-stretch">
-              <input
-                {...register(name, inputOptions)}
-                type="checkbox" id={opt.value} name={name} value={opt.value} />
-              <label htmlFor={opt.value} className={className}>{opt.label}</label>
-            </div>
-          </>
+          <div key={opt.value} className="flex items-stretch">
+            <input
+              {...register(name, inputOptions)}
+              type="checkbox" id={opt.value} name={name} value={opt.value} />
+            <label htmlFor={opt.value} className={className} dangerouslySetInnerHTML={{__html: opt.label}}/>
+          </div>
         ))}
       </fieldset>
     </div>

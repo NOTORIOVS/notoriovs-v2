@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { extractUtm } from '@/utils/utm';
 
 export function middleware(req) {
   let _fbc = req.cookies.get('_fbc');
@@ -11,6 +12,19 @@ export function middleware(req) {
     res.cookies.set({
       name: '_fbc',
       value: `fb.1.${Date.now()}.${fbclid}`,
+      expires: new Date(date.setDate(date.getDate() + 7)),
+    });
+  }
+
+  // Guarda los UTMs de la visita (último toque) para que sigan disponibles
+  // aunque el usuario navegue a otra página antes de enviar el formulario.
+  const utm = extractUtm(req.nextUrl.searchParams);
+
+  if (Object.keys(utm).length) {
+    const date = new Date();
+    res.cookies.set({
+      name: 'utm',
+      value: JSON.stringify(utm),
       expires: new Date(date.setDate(date.getDate() + 7)),
     });
   }

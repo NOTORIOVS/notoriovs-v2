@@ -2,10 +2,11 @@ import Link from 'next/link';
 import { info } from '../../info';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
-import { getCookie, setCookie } from 'cookies-next';
+import { setCookie } from 'cookies-next';
 import { useState } from 'react';
 import { restrictNumber, emailRegExp } from '@/utils/formValidators';
 import fbEvent from '@/services/fbEvents';
+import getTrackingData from '@/utils/getTrackingData';
 
 export default function OptInForm({lastClick}) {
   const [sending, setSending] = useState(false);
@@ -20,10 +21,11 @@ export default function OptInForm({lastClick}) {
     try {
       setSending(true);
       data.phone = '521' + data.phone.replace(/^\+?((MX)?\s?(52)?)?\s?0?1?|\s|\(|\)|-/g, '');
-      const _fbc = getCookie('_fbc');
-      const _fbp = getCookie('_fbp');
+      const {utm, fbc: _fbc, fbp: _fbp} = getTrackingData(
+        new URLSearchParams(window.location.search),
+      );
 
-      const payload = {...data, _fbc, _fbp, lastClick};
+      const payload = {...data, utm, _fbc, _fbp, lastClick};
 
       const result = await fetch(info.optInWebHook, {
         method: 'POST',

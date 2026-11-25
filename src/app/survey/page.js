@@ -226,7 +226,7 @@ export default function Survey() {
 
       status === 'qualified'
         ? fbEvent('Lead', { email, phone, externalID: id, fbc: _fbc, fbp: _fbp })
-        : fbEvent('Not Elegible', {phone, email, externalID: id});
+        : fbEvent('Not Elegible', {phone, email, externalID: id,  fbc: _fbc, fbp: _fbp});
 
 
       router.push(redirectURL);

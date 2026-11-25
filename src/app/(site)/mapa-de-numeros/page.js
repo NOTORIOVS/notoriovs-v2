@@ -166,11 +166,6 @@ function PayCTA({origin, cta = 'Elegir horario', microcopy}) {
 export default function MapaDeNumeros() {
   const waLink = `https://wa.me/${SETTER_WHATSAPP}?text=${encodeURIComponent(SETTER_MESSAGE)}`;
 
-  useEffect(() => {
-    const lead = JSON.parse(getCookie('lead') || '{}');
-    fbEvent('Not Elegible', {phone: lead?.phone, email: lead?.email, externalID: lead?.id});
-  }, []);
-
   return (
     <div className="pb-20 bg-black">
       {/* 0. HERO */}

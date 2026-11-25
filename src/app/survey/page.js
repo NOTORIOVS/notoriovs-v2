@@ -224,8 +224,10 @@ export default function Survey() {
         return;
       }
 
-      status === 'qualified' && fbEvent('Lead', { email, phone, externalID: id, fbc: _fbc, fbp: _fbp });
-      // fbEvent('Lead', {email, phone, externalID: id});
+      status === 'qualified'
+        ? fbEvent('Lead', { email, phone, externalID: id, fbc: _fbc, fbp: _fbp })
+        : fbEvent('Not Elegible', {phone, email, externalID: id});
+
 
       router.push(redirectURL);
     } catch (error) {

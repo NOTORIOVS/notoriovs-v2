@@ -343,8 +343,7 @@ export default function Home() {
               Agencia de marketing
             </p>
             <h1 className="ft-10 text-white text-center !my-0 tracking-tighter">
-              Te garantizamos un mínimo de leads PERFILADOS en 90 días o seguimos trabajando gratis hasta
-              conseguirlos
+              Te garantizamos un mínimo de leads PERFILADOS <nobr>o seguimos</nobr> trabajando gratis hasta conseguirlos
             </h1>
             {/*<p className="ft-4 text-brand-1 text-center font-bold !mb-0 sans">*/}
             {/*  No, no nos volvimos locos.<br/>Y sí, va por escrito.*/}

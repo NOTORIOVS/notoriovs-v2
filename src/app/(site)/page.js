@@ -76,6 +76,11 @@ const TESTIMONIOS = [
     role: 'Consultoría de Restaurantes',
   },
   {
+    text: 'Yo ya había hecho mis pautas y me trajeron clientes, pero era prueba y error. Con la estructura armada y el sistema hecho, fue más sencillo que estar divagando',
+    author: 'Sergio Larios',
+    role: 'Inversión en Bienes Raíces',
+  },
+  {
     text: 'Creo que van en el transcurso del mes como 11 consultas programadas. Creo que te puedo decir que casi el doble de lo que normalmente llevaria.',
     author: 'Dr Roy Villafranca',
     role: 'Cirujano Plástico',

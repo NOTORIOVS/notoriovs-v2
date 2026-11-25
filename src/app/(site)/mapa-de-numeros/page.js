@@ -40,6 +40,18 @@ const QUOTE = [
     text: 'Dejé de inventar el hilo negro y me di cuenta que afinando el proceso comercial puedo cerrar más clientes',
     author: 'Alejandro Serrano',
   },
+  {
+    text: 'A mí no me gustan los cantos de sirena. Me dijiste las cosas directas, qué tenía que hacer y ya jaló',
+    author: 'Sergio Larios',
+  },
+  {
+    text: 'Fue muy transparente: "hay que hacer esto, en tanto tiempo vas a tener esto, y luego te preocupas por esto otro"',
+    author: 'Diego Ramirez',
+  },
+  {
+    text: 'Me identifiqué mucho con los ejemplos su forma de comunicar',
+    author: 'María José M.',
+  },
 ];
 
 const QUE_TE_LLEVAS = [

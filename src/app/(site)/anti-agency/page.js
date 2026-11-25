@@ -4,6 +4,7 @@ import OptInForm from '@/components/opt-in-form';
 import scrollDepth from '@/utils/scrollDepth';
 import { useEffect, useState } from 'react';
 import Faqs from '@/components/faqs';
+import Quote from '@/components/quote';
 import Link from 'next/link';
 import { info } from '../../../../info';
 
@@ -21,12 +22,12 @@ const QUOTES = {
     role: 'Sconsi [Redes y ciberseguridad]',
   },
   davidCaliente: {
-    text: 'No es que lleguen leads de gente curioseando. Llega el cliente caliente, el que sí te quiere comprar.',
+    text: 'No es que lleguen leads de gente curioseando. Llega el cliente con intención, el que sí te quiere comprar.',
     author: 'José Luis',
     role: 'Disalud [Distribuidora de insumos médicos]',
   },
   asesorAgencias: {
-    text: 'Ya había trabajado con 2 o 3 agencias y todas traían la misma narrativa: no te puedo garantizar un resultado.',
+    text: 'Ya había tenido 2 o 3 agencias antes y todas traían la misma narrativa: no te puedo garantizar un resultado.',
     author: 'Luis Castañeda',
     role: 'LCV Aliados [Seguros e inversión patrimonial]',
   },
@@ -62,6 +63,21 @@ const TESTIMONIOS = [
     text: 'Desde el día uno empezaron a caer prospectos. Y hoy, 4 meses después, siguen cayendo y seguimos cerrando clientes.',
     author: 'José Luis',
     role: 'Distribuidora de Insumos Médicos',
+  },
+  {
+    text: 'Se volvieron parte fundamental en el crecimiento de mi negocio.',
+    author: 'Javier Sierra',
+    role: 'Desarrollo de Software',
+  },
+  {
+    text: 'Les aviso que hoy cerré otro proyecto con una cliente que me contactó la semana pasada, así que oficialmente ya son 2 en un mes.',
+    author: 'Chef Oliver Canto',
+    role: 'Consultoría de Restaurantes',
+  },
+  {
+    text: 'Creo que van en el transcurso del mes como 11 consultas programadas. Creo que te puedo decir que casi el doble de lo que normalmente llevaria.',
+    author: 'Dr Roy Villafranca',
+    role: 'Cirujano Plástico',
   },
   {
     text: 'Tengo 1,200 seguidores y no importó, empecé a generar clientes desde el primer mes.',
@@ -189,11 +205,12 @@ const PROCESO = [
 ];
 
 const NOSOTROS = [
-  'Escribimos los guiones y armamos los anuncios',
+  'Escribimos tus hooks y guiones',
+  'Diseñamos y editamos tus anuncios',
   'Manejamos y optimizamos tus campañas en Meta',
   'Segmentamos para que solo te lleguen prospectos de tu zona',
   'Cuidamos las políticas de Meta para que tus anuncios no se caigan',
-  'Mantenemos tu formulario, tus avisos, tu CRM y tu tablero',
+  'Mantenemos tus notificaciones, CRM y dashboard',
 ];
 
 const TU = [
@@ -263,19 +280,7 @@ const FAQ = [
 ];
 
 function Eyebrow({children}) {
-  return <p className="-ft-2 text-brand-1 uppercase !mb-0">{children}</p>;
-}
-
-function Quote({quote, className = ''}) {
-  return (
-    <blockquote className={`border-l-[3px] border-brand-4 bg-neutral-900 p-8 md:p-10 ${className}`}>
-      <p className="text-neutral-200 italic mb-4">“{quote.text}”</p>
-      <p className="-ft-2 text-neutral-400 !mb-0">
-        <span className="font-bold text-neutral-200">{quote.author}</span><br/>
-        {quote.role}
-      </p>
-    </blockquote>
-  );
+  return <div><p className="-ft-2 text-brand-1 uppercase !mb-0">{children}</p></div>;
 }
 
 function Firma() {
@@ -307,7 +312,7 @@ export default function Home() {
     return (
       <div className="ft-2 w-full max-w-[40ch] mt-8 mx-auto flex flex-col z-20">
         <Link
-          href="/#contact"
+          href="#contact"
           onClick={() => setLastClick(origin)}
           className="button !bg-brand-3 !w-full mb-4 text-center"
         >
@@ -327,17 +332,17 @@ export default function Home() {
         <section className="pt-40 pb-16 justify-center items-center z-1">
           <div className="ft-2 flex flex-col gap-10 max-w-[60ch] mx-auto">
             <p className="-ft-1 text-brand-1 text-center uppercase !mb-0">
-              Agencia de captación de clientes
+              Agencia de marketing
             </p>
-            <h1 className="ft-8 text-white text-center !my-0">
-              Te garantizamos un mínimo de leads PERFILADOS en 90 días. O seguimos trabajando gratis hasta
-              conseguirlos.
+            <h1 className="ft-10 text-white text-center !my-0 tracking-tighter">
+              Te garantizamos un mínimo de leads PERFILADOS en 90 días o seguimos trabajando gratis hasta
+              conseguirlos
             </h1>
-            <p className="ft-3 text-brand-1 text-center font-bold !mb-0 sans">
-              No, no nos volvimos locos. Y sí, va por escrito.
-            </p>
-            <p className="text-center text-neutral-100 !mb-0 sans">
-              Instalamos un sistema de captación de prospectos con dinero e intención real de compra, sin preguntones y sin que tomes otro curso más
+            {/*<p className="ft-4 text-brand-1 text-center font-bold !mb-0 sans">*/}
+            {/*  No, no nos volvimos locos.<br/>Y sí, va por escrito.*/}
+            {/*</p>*/}
+            <p className="ft-2 text-center text-neutral-100 !mb-0 sans">
+              Instalamos un sistema de captación de prospectos con dinero e intención real de compra, sin preguntones.
             </p>
             <CTA
               cta="Descubre si tu negocio califica"
@@ -356,8 +361,8 @@ export default function Home() {
           <div className="w-full grid grid-cols-1 md:grid-cols-3 mt-16 bg-black/60">
             {CREDENCIALES.map((stat, i) => (
               <div key={i} className="w-full p-8 border border-neutral-700">
-                <div className="ft-9 text-center font-black text-brand-1 mb-2">{stat.num}</div>
-                <div className="-ft-2 text-center text-neutral-100 sans">{stat.label}</div>
+                <div className="ft-11 text-center font-black extended text-brand-1 mb-2">{stat.num}</div>
+                <div className="ft-1 text-center text-neutral-100 sans">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -368,24 +373,24 @@ export default function Home() {
       <section id="para-quien">
         <div className="reading-container">
           <Eyebrow>Para quién es esto</Eyebrow>
-          <h2 className="text-neutral-100 !my-0">Déjame adivinar.</h2>
-          <div className="text-neutral-100 flex flex-col gap-6">
-            <p className="text-neutral-50">
-              Tu negocio funciona. Tienes buen producto, clientes contentos y alguien que sabe vender.
-              <br/><br/>
-              Casi todas tus ventas del año llegaron por un conocido o el cliente de siempre que te
-              volvió a llamar.
-              <br/><br/>
-              O sea: tu crecimiento depende de que alguien se acuerde de ti.
-              <br/><br/>
-              Hasta que un día decidiste contratar a una agencia y la decepción llegó...
-              <br/><br/>
-              Se la pasaron haciendo posts y reportes de likes cada fin de mes.<br/>
-              También te consiguieron un montón de {'"info"'} y {'“presio”'} que no te pagaron ni un peso.
-              <br/><br/>
-              Y al final, solo era {'"hay que esperar a que el algoritmo aprenda"'}.
-            </p>
-          </div>
+          <h2 className="text-neutral-100 !my-0">Déjame adivinar...</h2>
+
+          <p className="text-neutral-50">
+            Tu negocio funciona. Tienes buen producto, clientes contentos y alguien que sabe vender.
+            <br/><br/>
+            Casi todas tus ventas del año llegaron por un conocido o el cliente de siempre que te
+            volvió a llamar.
+            <br/><br/>
+            O sea: tu crecimiento depende de que alguien se acuerde de ti.
+            <br/><br/>
+            Hasta que un día decidiste contratar a una agencia y la decepción llegó...
+            <br/><br/>
+            Se la pasaron haciendo posts y reportes de likes cada fin de mes.<br/>
+            También te consiguieron un montón de {'"info"'} y {'“presio”'} que no te pagaron ni un peso.
+            <br/><br/>
+            Y al final, solo era {'"hay que esperar a que el algoritmo aprenda"'}.
+          </p>
+
           <Quote quote={QUOTES.davidCampana}/>
         </div>
         <CTA origin="dejame-adivinar"/>
@@ -396,8 +401,8 @@ export default function Home() {
         <div className="reading-container mb-12">
           <Eyebrow>El problema de fondo</Eyebrow>
           <h2 className="text-neutral-100 !my-0">
-            Los anuncios sí funcionan. Lo que falla es <span className="text-brand-1">todo lo que pasa
-            alrededor</span>.
+            Los anuncios sí funcionan. Lo que falla es <span className="text-brand-1">lo que pasa
+            alrededor</span>
           </h2>
           {/*<p className="text-neutral-100">*/}
           {/*  Más pauta sí trae más gente. Pero si quien la maneja no entiende tu negocio, no filtra y no mide, nomás te*/}
@@ -412,7 +417,7 @@ export default function Home() {
         <div className="w-full grid grid-cols-1 md:grid-cols-3">
           {PROBLEMAS.map((p, i) => (
             <div key={i} className="flex flex-col gap-6 p-8 md:p-10 border border-neutral-700">
-              <p className="ft-8 font-bold text-brand-1/50 !mb-0">{i + 1}</p>
+              <p className="ft-8 font-black extended text-brand-1/50 !mb-0">0{i + 1}</p>
               <h3 className="text-neutral-100 !my-0">{p.titulo}</h3>
               <p className="text-neutral-300 !mb-0">{p.texto}</p>
             </div>
@@ -421,7 +426,7 @@ export default function Home() {
 
         <div className="reading-container !border-t-0 !mt-0">
           <p className="text-neutral-100">
-            <span className="font-bold text-brand-1">Por eso trabajamos al revés:</span> <br/>
+            <span className="font-bold sans ft-2 text-brand-1">Por eso trabajamos al revés:</span> <br/>
             - Filtramos antes de que te escriban<br/>
             - Te notificamos en cuanto llega alguien que sí califica<br/>
             - Medimos cada paso hasta que cierres la venta
@@ -468,12 +473,12 @@ export default function Home() {
             <div key={i} className="grid grid-cols-2 md:grid-cols-3 border-t border-neutral-700">
               <p className="col-span-2 md:col-span-1 px-6 pt-6 md:p-6 font-bold text-neutral-100 !mb-0 sans">{row.label}</p>
               <div className="p-6">
-                <p className="md:hidden -ft-3 uppercase text-neutral-500 !mb-2">La agencia de siempre</p>
-                <p className="text-neutral-400 line-through decoration-neutral-600 !mb-0 -ft-2 sans">{row.agencia}</p>
+                <p className="md:hidden -ft-3 uppercase text-brand-2 !mb-2">Otros</p>
+                <p className="text-neutral-300 !mb-0 -ft-1 sans">{row.agencia}</p>
               </div>
               <div className="p-6 bg-brand-1/5">
                 <p className="md:hidden -ft-3 uppercase text-brand-1 !mb-2">Notoriovs</p>
-                <p className="text-neutral-100 !mb-0 -ft-2 sans">{row.notoriovs}</p>
+                <p className="text-neutral-100 !mb-0 -ft-1 sans">{row.notoriovs}</p>
               </div>
             </div>
           ))}
@@ -503,10 +508,10 @@ export default function Home() {
               <p className="-ft-2 text-brand-1 !mb-0">{caso.label}</p>
               <h3 className="ft-5 text-neutral-100 !my-0">{caso.titulo}</h3>
               <p className="text-neutral-300 flex-grow !mb-0">{caso.descripcion}</p>
-              <div className="border-t border-neutral-700 pt-6">
-                <p className="ft-2 text-brand-1 font-bold !mb-2">{caso.principal}</p>
-                <p className="-ft-2 text-neutral-500 italic !mb-0">{caso.secundaria}</p>
-              </div>
+              {/*<div className="border-t border-neutral-700 pt-6">*/}
+              {/*  <p className="ft-2 text-brand-1 font-bold !mb-2">{caso.principal}</p>*/}
+              {/*  <p className="-ft-2 text-neutral-500 italic !mb-0">{caso.secundaria}</p>*/}
+              {/*</div>*/}
             </div>
           ))}
         </div>
@@ -521,9 +526,6 @@ export default function Home() {
             <Quote key={i} quote={t}/>
           ))}
         </div>
-        <p className="-ft-3 text-neutral-500 text-center mt-8">
-          Resultados de clientes reales. Cada negocio es distinto.
-        </p>
 
         <CTA origin="study-cases"/>
       </section>
@@ -533,15 +535,15 @@ export default function Home() {
         <div className="reading-container mb-12">
           <Eyebrow>El proceso</Eyebrow>
           <h2 className="text-neutral-100 !my-0">
-            Sin propuesta bonita. Sin speech. <span className="text-brand-1">Solo tus números.</span>
+            Sin enchular. Sin labia. <span className="text-brand-1">Solo números.</span>
           </h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2">
           {PROCESO.map((paso, i) => (
             <div key={i} className="flex flex-col gap-6 p-8 md:p-10 border border-neutral-700">
-              <p className="ft-8 font-bold text-brand-1/50 !mb-0">{paso.num}</p>
-              <h3 className="text-neutral-100 !my-0">{paso.titulo}</h3>
+              <p className="ft-8 font-black extended text-brand-1/50 !mb-0">{paso.num}</p>
+              <h3 className="text-neutral-100 sans !my-0">{paso.titulo}</h3>
               <p className="text-neutral-300 !mb-0">{paso.descripcion}</p>
             </div>
           ))}
@@ -558,7 +560,7 @@ export default function Home() {
             No vas a comprar otro curso de mkt digital. <span className="text-brand-1">Ni deberías.</span>
           </h2>
           <p className="text-neutral-100">
-            Tu tiempo vale más cerrando que peleándote con la plataforma de anuncios a las 11 de la noche.
+            Tu tiempo vale más cerrando ventas que peleándote con la plataforma de anuncios a las 11 de la noche.
           </p>
         </div>
 
@@ -567,19 +569,19 @@ export default function Home() {
             <p className="-ft-1 uppercase text-brand-1 !mb-0">Lo que hacemos nosotros</p>
             <ul className="flex flex-col gap-4">
               {NOSOTROS.map((item, i) => (
-                <li key={i} className="text-neutral-100 flex gap-3">
-                  <span className="text-brand-3">✓</span>{item}
-                </li>
+                <div key={i} className="ft-0 text-neutral-100 flex gap-3">
+                  <span>✅</span>{item}
+                </div>
               ))}
             </ul>
           </div>
           <div className="bg-neutral-900 p-8 md:p-12 border border-neutral-700 flex flex-col gap-6">
-            <p className="-ft-1 uppercase text-neutral-400 !mb-0">Lo que te toca a ti</p>
+            <p className="-ft-1 uppercase text-neutral-200 !mb-0">Lo que te toca a ti</p>
             <ul className="flex flex-col gap-4">
               {TU.map((item, i) => (
-                <li key={i} className="text-neutral-300 flex gap-3">
-                  {item}
-                </li>
+                <div key={i} className="ft-0 text-neutral-300 flex gap-3">
+                  <span>☑️</span>{item}
+                </div>
               ))}
             </ul>
           </div>
@@ -628,18 +630,17 @@ export default function Home() {
       </section>
 
       {/* 9. CTA FINAL */}
-      <section id="contact" className="reading-container">
+      <section id="contact">
+        <div className="reading-container">
         <h2 className="text-neutral-100 !my-0">
           Descubre cómo vamos a conseguir <span className="text-brand-1">más ventas</span> para tu negocio.
         </h2>
         <p className="text-neutral-100">
-          Agenda una sesión de 30 minutos, 100% gratis (con valor de $1,800) y sin compromisos.
+          Agenda una sesión de 30 minutos (con valor de $1,800), <nobr className="font-bold">100% gratis</nobr> y sin compromisos.
         </p>
         <p className="text-brand-1 font-bold">Solo para personas con hambre de crecer su negocio.</p>
         <OptInForm lastClick={lastClick}/>
-        <p className="-ft-2 text-center text-neutral-400 italic">
-          Antes de elegir horario respondes 9 preguntas (2 minutos). Así confirmamos que sí te podemos ayudar.
-        </p>
+        </div>
       </section>
 
       {/* 9b. POSDATA */}
@@ -658,7 +659,7 @@ export default function Home() {
             <Firma/>
           </div>
         </div>
-        <CTA cta="Ya, dale. Quiero mi sesión gratis" origin="posdata" microcopy={null}/>
+        <CTA cta="Ya! Quiero mi sesión gratis" origin="posdata" microcopy={null}/>
       </section>
 
       {/* 10. LEGALES (dirección y contacto viven en el Footer global) */}

@@ -208,7 +208,7 @@ export default function Survey() {
       const payload = {...data, id, email, phone, leadQA, _fbc, _fbp};
       console.log('PAYLOAD', payload);
 
-      const redirectURL = status === 'qualified' ? '/thankyou' : '/not-elegible';
+      const redirectURL = status === 'qualified' ? '/thankyou' : '/mapa-de-numeros';
       // const redirectURL = '/thankyou';
 
       const res = await fetch(info.surveyWebhook, {

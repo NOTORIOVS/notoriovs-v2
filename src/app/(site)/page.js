@@ -4,107 +4,303 @@ import OptInForm from '@/components/opt-in-form';
 import scrollDepth from '@/utils/scrollDepth';
 import { useEffect, useState } from 'react';
 import Faqs from '@/components/faqs';
+import Quote from '@/components/quote';
 import Link from 'next/link';
+import { info } from '../../../info';
+import Image from 'next/image';
+
+// Landing v3.5 · Noviembre 2026 · La versión anterior (v3.4) vive en page.v3.4.backup.js
+
+const CTA_TEXT = 'Vamos platicando, da clic!';
+const CTA_MICROCOPY = 'Antes de prometerte cualquier cosa revisamos si hay una oportunidad real de trabajar juntos';
+const TERMS_URL = '/terms-and-conditions';
+
+// Pendiente: confirmar nombres, giros y permisos de cada cita antes de publicar.
+const QUOTES = {
+  davidCampana: {
+    text: 'Pagué casi 6 meses a otra agencia, como 49,000 pesos, y no cayó nada! Nada es nada. No vendí nada. Con ustedes en el primer mes cerré 2 clientes.',
+    author: 'David Nieves',
+    role: 'Sconsi [Redes y ciberseguridad]',
+  },
+  davidCaliente: {
+    text: 'No es que lleguen leads de gente curioseando. Llega el cliente con intención, el que sí te quiere comprar.',
+    author: 'José Luis',
+    role: 'Disalud [Distribuidora de insumos médicos]',
+  },
+  asesorAgencias: {
+    text: 'Ya había tenido 2 o 3 agencias antes y todas traían la misma narrativa: no te puedo garantizar un resultado.',
+    author: 'Luis Castañeda',
+    role: 'LCV Aliados [Seguros e inversión patrimonial]',
+  },
+  asesorProceso: {
+    text: 'El seguimiento y el proceso fueron adaptados específicamente a mi negocio.',
+    author: 'Luis Castañeda',
+    role: 'LCV Aliados [Seguros e inversión patrimonial]',
+  },
+  joseLuisApp: {
+    text: 'El CRM y dashboard se les hicieron muy amigables: solo le muevo aquí, lo puedo hacer en mi cel',
+    author: 'José Luis',
+    role: 'Disalud [Distribuidora de insumos médicos]',
+  },
+  asesorTranquilidad: {
+    text: 'Me hicieron entender de dónde se genera el resultado. Esa tranquilidad lo cambió todo.',
+    author: 'Luis Castañeda',
+    role: 'LCV Aliados [Seguros e inversión patrimonial]',
+  },
+  davidRecomienda: {
+    text: 'Lo recomendaría abiertamente. No te venden espejitos, realmente dan resultados.',
+    author: 'David Nieves',
+    role: 'Sconsi [Redes y ciberseguridad]',
+  },
+};
+
+const TESTIMONIOS = [
+  {
+    text: 'Ya me habían estafado dos veces. Decía: esto no jala, no va a jalar. Y mira qué sorpresa. Te puedo decir que el retorno es bueno. Me voy a quedar con ustedes.',
+    author: 'David Nieves',
+    role: 'Redes y Ciberseguridad',
+  },
+  {
+    text: 'Desde el día uno empezaron a caer prospectos. Y hoy, 4 meses después, siguen cayendo y seguimos cerrando clientes.',
+    author: 'José Luis',
+    role: 'Distribuidora de Insumos Médicos',
+  },
+  {
+    text: 'Se volvieron parte fundamental en el crecimiento de mi negocio.',
+    author: 'Javier Sierra',
+    role: 'Desarrollo de Software',
+  },
+  {
+    text: 'Les aviso que hoy cerré otro proyecto con una cliente que me contactó la semana pasada, así que oficialmente ya son 2 en un mes.',
+    author: 'Chef Oliver Canto',
+    role: 'Consultoría de Restaurantes',
+  },
+  {
+    text: 'Creo que van en el transcurso del mes como 11 consultas programadas. Creo que te puedo decir que casi el doble de lo que normalmente llevaria.',
+    author: 'Dr Roy Villafranca',
+    role: 'Cirujano Plástico',
+  },
+  {
+    text: 'Tengo 1,200 seguidores y no importó, empecé a generar clientes desde el primer mes.',
+    author: 'Luis Castañeda',
+    role: 'Seguros e Inversión Patrimonial',
+  },
+  {
+    text: 'No sé qué están haciendo pero todas las citas que he tenido han sido con gente muy bien perfilada. ¡Síganle!',
+    author: 'Carlos FDC',
+    role: 'Inversión en Bienes Raíces',
+  },
+];
+
+const CREDENCIALES = [
+  {num: '8', label: 'años transformando ads en ventas'},
+  {num: '+120', label: 'negocios acompañados'},
+  {num: '+1,000', label: 'dueños de negocio asesorados'},
+];
+
+const PROBLEMAS = [
+  {
+    titulo: 'Quien te hace las campañas no tiene idea de qué vendes',
+    texto:
+      'No sabe que le duele o con qué sueña tu cliente real. Y como no sabe a quién le vendes, no sabe como filtrar a los que no.',
+  },
+  {
+    titulo: 'Te llegan puros preguntones',
+    texto:
+      'El problema no es que te escriba poca o mucha gente. Es que cuando por fin llega el bueno, piensas que es otro preguntón y nadie lo atiende bien.',
+  },
+  {
+    titulo: 'Nadie sabe dónde se atoran tus prospectos',
+    texto:
+      'Llega el prospecto, le contestan 3 días después, te deja en visto o en el mejor de los casos dice “déjame lo pienso” y ahí muere.',
+  },
+];
+
+const COMPARATIVA = [
+  {
+    label: 'Los reportes',
+    agencia: 'Likes, alcance y costo por lead',
+    notoriovs: 'Prospectos perfilados, cuántos avanzaron y cuántos compraron',
+  },
+  {
+    label: 'La visibilidad',
+    agencia: 'En el reporte de fin de mes',
+    notoriovs: 'En un tablero que se actualiza en tiempo real',
+  },
+  // {
+  //   label: 'Qué te dice que costó',
+  //   agencia: 'Mensajes de WhatsApp',
+  //   notoriovs: 'Cada prospecto perfilado, cada cotización, cada venta cerrada',
+  // },
+  {
+    label: 'La garantía',
+    agencia: '“En marketing no hay garantías”',
+    notoriovs: 'Un mínimo de prospectos perfilados acordado desde el inicio',
+  },
+  // {
+  //   label: 'Si no llega al número',
+  //   agencia: 'Te pide más presupuesto',
+  //   notoriovs: 'Sigue trabajando sin cobrarte',
+  // },
+  {
+    label: 'El amarre',
+    agencia: 'Contrato forzoso de 6 o 12 meses',
+    notoriovs: 'Sin plazo forzoso',
+  },
+];
 
 const CASOS = [
   {
-    label: 'Compra Casas USA — Bienes raíces',
-    titulo: '💰 De catálogo inmobiliario a consultora de inversión en dólares',
+    label: 'Compra Casas USA · Bienes raíces',
+    titulo: '$1.5M USD en propiedades cerradas en 6 meses',
     descripcion:
-      'Llegaron con 1,000+ propiedades, 10+ agentes y cero operaciones documentadas. Reenfocamos todo hacia Houston, reposicionamos la oferta como inversión consultiva y reconstruimos el equipo comercial a 2 setters + 1 closer.',
-    metricas: [
-      {valor: '6', detalle: 'Meses'},
-      {valor: '$1.5M USD', detalle: 'en propiedades transaccionadas'},
-      {valor: '120', detalle: 'leads calificados/mes<br/>$160 MXN CPL'},
-    ],
+      'Llegaron con más de 1,000 propiedades, más de 10 agentes y cero operaciones documentadas. Reposicionamos la oferta como inversión consultiva y, con nuestra metodología y acompañamiento, reorganizaron su equipo en 2 setters y 1 closer.',
+    principal: '6 meses · $1.5M USD transaccionados',
+    secundaria: '120 prospectos perfilados al mes · $160 MXN por prospecto',
   },
   {
-    label: 'AS Sistemas — Desarrollo de software B2B',
-    titulo: '💰 12 años viviendo de referidos. En 12 meses, 7 clientes nuevos.',
+    label: 'AS Sistemas · Software B2B',
+    titulo: '$1.26M MXN en contratos nuevos en 12 meses',
     descripcion:
-      '$2,000,000 MXN anuales atados a que sus clientes se acordaran de recomendarlos. Construimos un discurso diferenciado y un sistema de captación activa desde cero — el primero en su historia.',
-    metricas: [
-      {valor: '12', detalle: 'Meses'},
-      {valor: '$1.26M MXN', detalle: 'en contratos nuevos'},
-      {valor: '349', detalle: 'Leads generados<br/>$256 MXN CPL'},
-    ],
+      '12 años viviendo de referidos. $2M al año dependían de que sus clientes se acordaran de recomendarlos. Armamos su primer canal de clientes activo y un discurso que los separa de la competencia.',
+    principal: '12 meses · 7 clientes nuevos',
+    secundaria: '349 prospectos · $256 MXN por prospecto',
   },
   {
-    label: 'Doble Acento — Distribución de decoración',
-    titulo: '💰 2 años persiguiendo el canal equivocado. 8 semanas para encontrar el modelo real.',
+    label: 'Doble Acento · Comercializadora de decoración',
+    titulo: '$400K MXN en cartera potencial de mayoreo en 8 semanas',
     descripcion:
-      'Nadie les había dicho la verdad: el ecommerce no era su negocio, lo era el mayoreo. Redirigimos el enfoque, construimos una oferta para distribuidores y en menos de 60 días el sistema generaba demanda calificada.',
-    metricas: [
-      {valor: '8', detalle: 'Semanas'},
-      {valor: '481', detalle: 'Leads<br/>$50 MXN CPL'},
-      {valor: '$400K MXN', detalle: 'en valor potencial de cartera'},
-    ],
-  },
-  {
-    label: 'Hoteles Encore — Cadena hotelera ejecutiva',
-    titulo: '💰 Indicadores estables donde antes solo había likes',
-    descripcion:
-      'Cadena de 9 propiedades que llegó después de varias experiencias que no traían más que vanity metrics. Estabilizamos sus indicadores de captación y en 3 meses los números hablaron solos.',
-    metricas: [
-      {valor: '12', detalle: 'semanas'},
-      {valor: '567', detalle: 'pre reservas generadas'},
-      {valor: '$49.79', detalle: 'MXN costo por pre reserva'},
-    ],
+      'Dos años persiguiendo el canal equivocado. Su negocio no era el ecommerce, era el mayoreo. Construimos una oferta para distribuidores y en menos de 60 días ya llegaban compradores por volumen.',
+    principal: '8 semanas · 481 prospectos de mayoreo',
+    secundaria: '$50 MXN por prospecto',
   },
 ];
 
 const PROCESO = [
   {
     num: '01',
-    titulo: 'Nos vamos conociendo',
+    titulo: 'Sesión de diagnóstico (100% gratis)',
     descripcion:
-      'Una sesión corta para decirte si el problema que crees tener es el problema real y validar que te podemos ayudar La mayoría se sorprende.',
+      'Revisamos tus campañas e inversión, y te decimos cuántos leads perfilados te garantizamos. Si no vemos una oportunidad real, te lo decimos y no te hacemos perder el tiempo.',
+    quote: QUOTES.asesorProceso,
+    nota: '¿Decides con un socio? Tráelo. Es más fácil decidir con los mismos números enfrente.',
   },
   {
     num: '02',
-    titulo: '45min que valen más que 6 meses de errores',
+    titulo: 'La infraestructura: el armado inicial',
     descripcion:
-      'Por Zoom, sin speech de ventas. Preguntamos lo que tu equipo no se pregunta, mapeamos en vivo el cuello de botella real y te decimos exactamente dónde se está fugando el dinero.',
+      'Estrategia, landing, filtro, anuncios, primer mensaje automatizado, CRM y tu dashboard. Es un pago único, y todo queda listo antes lanzar la campaña.',
   },
   {
     num: '03',
-    titulo: 'Aquí ya nos ponemos a chambear',
+    titulo: 'Días 1 a 90: resultados en tiempo real',
     descripcion:
-      'Construimos el sistema. Captación, nutrición, cierre. Cada pieza en su lugar, ejecutada por nuestro equipo o dirigida al tuyo — según lo que necesite tu negocio.',
+      'Desde que se encienden los anuncios ves tus resultados en tiempo real y tu Account Manager te guía. Nada de esperar 6 meses para “ver si jala”.',
   },
   {
     num: '04',
-    titulo: 'Tu negocio crece y vivimos felices por siempre',
+    titulo: 'Día 90: decides qué sigue... con datos',
     descripcion:
-      'Sabes cuántos leads entran, cuántos avanzan y cuántos cierran. Tu equipo tiene un proceso documentado. Los números dejan de ser una sorpresa y empiezan a ser una herramienta.',
+      'Sabes cuánto te cuesta generar cada venta. Eso que tu agencia anterior nunca te supo decir. Con eso decidimos juntos el siguiente paso.',
   },
+];
+
+const NOSOTROS = [
+  'Escribimos tus hooks y guiones',
+  'Diseñamos y editamos tus anuncios',
+  'Manejamos y optimizamos tus campañas en Meta',
+  'Segmentamos para que solo te lleguen prospectos de tu zona',
+  'Cuidamos las políticas de Meta para que tus anuncios no se caigan',
+  'Mantenemos tus notificaciones, CRM y dashboard',
+];
+
+const TU = [
+  'Mantener la pauta mínima activa (la pagas directo a Meta)',
+  'Atender a tus prospectos en el tiempo que acordemos',
+  'Marcar qué pasó con cada uno: contactado, cotizado, ganado o perdido',
+  'Aprobar materiales en 3 días hábiles',
 ];
 
 const FAQ = [
   {
-    q: '¿Por qué cobran el diagnóstico si otras agencias lo hacen gratis?',
-    a:
-      'Porque un diagnóstico gratis no es un diagnóstico, es un pitch de ventas disfrazado. La Auditoría toma entre 15 y 20 horas de trabajo real: análisis de tu embudo, benchmark competitivo, proyecciones financieras y diseño de la arquitectura de tu sistema. Eso tiene un valor y un costo. Si pagarlo no hace sentido para ti en este momento, probablemente el plan mensual tampoco lo haría.',
+    q: '¿Neta trabajan gratis si no llegan?',
+    a: 'Neta. Si no completamos tu mínimo de prospectos perfilados en 90 días, seguimos operando sin cobrarte la mensualidad hasta completarlos, por hasta 2 meses. La pauta la sigues pagando tú a Meta, porque es tuya. Y el pago único de armado no se regresa: ese trabajo ya quedó hecho y es con lo que operamos.',
   },
   {
-    q: '¿Por qué no empezamos directo con el plan mensual?',
-    a:
-      'Porque sin diagnóstico no sabemos qué construir. Podríamos arrancarte campañas mañana mismo, pero si el problema real está en el cierre y no en la captación, estaríamos fabricando más leads que nadie va a convertir. Ya vimos eso antes. No lo volvemos a hacer.',
+    q: '¿Qué es un prospecto perfilado?',
+    a: 'Alguien que respondió el formulario, cumple con el perfil de tu cliente (ticket, zona, tipo de empresa) y dejó sus datos de contacto. Un “¿precio?” no cuenta.',
   },
+  // {
+  //   q: '¿Qué tengo que hacer yo para que aplique?',
+  //   a: 'Mantener la pauta mínima activa, marcar qué pasó con cada prospecto, atenderlos en el tiempo que acordemos y aprobar materiales a tiempo. Sin esos datos no hay forma de medir, ni para ti ni para nosotros.',
+  // },
+  {
+    q: '¿Por qué no aplica para todos los negocios?',
+    a: 'Porque no vamos a firmar un número que no podemos cumplir. Si tu negocio no tiene con qué atender a los prospectos o tu ticket no da para pagar la pauta, preferimos decírtelo antes de cobrarte.',
+  },
+  // {
+  //   q: '¿Cuánto tengo que invertir?',
+  //   a: 'Depende de tu negocio, y en la sesión te damos el número exacto. Lo que sí te adelantamos es cómo se arma: un pago único para dejar todo listo, una mensualidad que corre desde que se encienden tus anuncios y la pauta, que es desde $6,000 MXN al mes y la pagas tú directo a Meta.',
+  // },
+  {
+    q: '¿Hay un pago inicial?',
+    a: 'Sí. Armar todo (estrategia, landing, formulario, anuncios, CRM y tablero) tiene un pago único que te damos en la sesión, con tus números enfrente. La garantía cubre la mensualidad, no ese armado. Te lo decimos aquí para que no te enteres en la llamada.',
+  },
+  // {
+  //   q: '¿Por qué no me dan precio desde aquí?',
+  //   a: 'Porque no te vamos a cotizar a ciegas. Primero vemos si te podemos ayudar y con qué números. Te lo damos en la sesión, con tus datos enfrente.',
+  // },
+  // {
+  //   q: '¿La sesión tiene costo?',
+  //   a: 'No. Tiene un valor de $1,800 y para ti es 100% gratis, sin compromiso. Pero tampoco es para cualquiera: primero respondes el cuestionario y, si tu negocio califica, eliges horario.',
+  // },
+  {
+    q: '¿Me amarran con un contrato forzoso?',
+    a: 'No. No hay plazo forzoso. Si te quedas, es porque los números te convienen. Así de simple.',
+  },
+  // {
+  //   q: '¿Qué pasa con mis anuncios si me voy?',
+  //   a: 'Se quedan contigo. Los anuncios, los públicos, el pixel y todo el historial viven en tu cuenta de Meta. Nada de secuestrar cuentas.',
+  // },
   {
     q: '¿En cuánto tiempo veo resultados?',
-    a:
-      'Depende de dónde está el cuello de botella. Si el problema es captación, los primeros MQLs llegan en las primeras semanas. Si el problema es conversión, los resultados se ven cuando el proceso comercial está documentado e implementado, generalmente entre el mes 2 y el 3. La Auditoría te dice exactamente qué esperar y cuándo, antes de que firmes nada.',
+    a: 'Los primeros prospectos llegan en las primeras semanas después de encender los anuncios. En el mes 3 ya ves la tendencia y tienes tus números completos.',
   },
-  {
-    q: '¿Cómo aseguran los resultados?',
-    a: 'Vamos midiendo semana tras semana indicadores que nos permiten ver focos rojos tanto en la captación de leads como en el seguimiento dado.',
-  },
-  {
-    q: '¿Este sistema es para todos los negocios?',
-    a: 'No, este sistema es para negocios que ya tengan un producto o servicio validado, con capacidad de comercial y ambición de crecimiento.',
-  },
+  // {
+  //   q: '¿Tengo que grabar videos o hacer contenido?',
+  //   a: 'No. Nosotros escribimos los guiones y armamos los anuncios. Si estás en la zona metropolitana de Guadalajara, incluye una sesión de grabación básica. Y no, no necesitas una superproducción: lo que importa es a quién le habla el anuncio.',
+  // },
+  // {
+  //   q: '¿Y si Meta me rechaza los anuncios?',
+  //   a: 'Operamos tu cuenta y conocemos las políticas, así que es raro. Pero seremos honestos: a Meta no la controla nadie. Si tu cuenta tiene una restricción, la resolvemos contigo, y mientras dure la garantía no aplica.',
+  // },
+  // {
+  //   q: '¿Me van a llegar prospectos de otros estados?',
+  //   a: 'No, si no vendes ahí. Segmentamos tus anuncios por zona y el formulario confirma la ubicación de cada prospecto.',
+  // },
 ];
+
+function Eyebrow({children}) {
+  return <div><p className="-ft-2 text-brand-1 uppercase !mb-0">{children}</p></div>;
+}
+
+function Firma() {
+  return (
+    <div className="flex items-center gap-6 pt-4">
+      <Image
+        src="/images/fer-portrait.png"
+        alt="Fernando, Director General de Notoriovs Studio"
+        width={80}
+        height={80}
+        className="w-20 h-20 rounded-full object-cover border border-neutral-700"
+      />
+      <p className="text-neutral-100 !mb-0">
+        <span className="font-bold">Fernando</span><br/>
+        <span className="-ft-2 text-neutral-400">Director General<br/> Notoriovs Studio</span>
+      </p>
+    </div>
+  );
+}
 
 export default function Home() {
   const [lastClick, setLastClick] = useState('');
@@ -115,322 +311,368 @@ export default function Home() {
     });
   });
 
-  const CTA = ({ cta = 'Ya dale click!', origin }) => {
+  const CTA = ({cta = CTA_TEXT, origin, microcopy = CTA_MICROCOPY}) => {
     return (
-      <div className="ft-2 max-w-[40ch] mt-8 mx-auto flex flex-col z-20">
+      <div className="ft-2 w-full max-w-[40ch] mt-8 mx-auto flex flex-col z-20">
         <Link
-          href="/#contact"
+          href="#contact"
           onClick={() => setLastClick(origin)}
-          className="button !bg-brand-3 !w-full mb-4"
+          className="button !bg-brand-3 !w-full mb-4 text-center"
         >
           {cta}
         </Link>
-        <p className="-ft-2 text-center text-neutral-400">
-          Agenda una sesión gratuita para analizar tu proyecto
-        </p>
+        {microcopy && (
+          <p className="-ft-2 text-center text-neutral-400">{microcopy}</p>
+        )}
       </div>
     );
   };
 
   return (
     <div className="pb-20 bg-black">
-      {/* HERO */}
-      <div className="relative bg-[url('/images/backgrounds/bkg-5.jpg')]">
-        <section className="py-[16rem] justify-center items-center z-1">
-          <div className="ft-2 flex flex-col gap-12 max-w-[60ch]">
-            <p className="-ft-1 text-brand-1 text-center uppercase !mb-0">Direct-Response Marketing Studio</p>
-            <h1 className="flex flex-col ft-10 text-white text-center !my-0">
-              Como NITRO para tu embudo de ventas
-            </h1>
-            <p className="ft-2 text-white text-center">
-              Antes de hacerte otras campañas, diagnosticamos en donde se te está yendo feria y construimos el puente
-              entre marketing y tu proceso de ventas.
+      {/* 0. HERO */}
+      <div className="relative bg-[url('/images/backgrounds/bkg-5.jpg')] bg-cover bg-center">
+        <section className="pt-40 pb-16 justify-center items-center z-1">
+          <div className="ft-2 flex flex-col gap-10 max-w-[60ch] mx-auto">
+            <p className="-ft-1 text-brand-1 text-center uppercase !mb-0">
+              Agencia de marketing
             </p>
+            <h1 className="ft-10 text-white text-center !my-0 tracking-tighter">
+              Te garantizamos un mínimo de leads PERFILADOS en 90 días o seguimos trabajando gratis hasta
+              conseguirlos
+            </h1>
+            {/*<p className="ft-4 text-brand-1 text-center font-bold !mb-0 sans">*/}
+            {/*  No, no nos volvimos locos.<br/>Y sí, va por escrito.*/}
+            {/*</p>*/}
+            <p className="ft-2 text-center text-neutral-100 !mb-0 sans">
+              Instalamos un sistema de captación de prospectos con dinero e intención real de compra, sin preguntones.
+            </p>
+            <CTA
+              cta="Descubre si tu negocio califica"
+              origin="hero"
+            />
+
+            {/*<p className="-ft-3 text-neutral-400 text-center max-w-[70ch] mx-auto">*/}
+            {/*  *El armado inicial es un pago único que te damos en la sesión. La garantía cubre la mensualidad: seguimos*/}
+            {/*  operando sin cobrártela hasta completar el mínimo, por hasta 2 meses. La pauta la sigues pagando tú*/}
+            {/*  directo a Meta. Aplica con la pauta mínima activa, con el estado de cada prospecto registrado y con los*/}
+            {/*  tiempos de atención acordados en tu contrato.{' '}*/}
+            {/*  <Link href={TERMS_URL} className="underline text-neutral-300">Términos completos</Link>*/}
+            {/*</p>*/}
           </div>
-          <div
-            className="w-full flex flex-col justify-center bottom-12 mt-auto mb-0 cursor-pointer absolute"
-          >
-            <span className="text-center text-gray-300">Para abajo</span>
-            <span className="material-icons text-white mx-auto animate-bounce">expand_more</span>
+
+          <div className="w-full grid grid-cols-1 md:grid-cols-3 mt-16 bg-black/60">
+            {CREDENCIALES.map((stat, i) => (
+              <div key={i} className="w-full p-8 border border-neutral-700">
+                <div className="ft-11 text-center font-black extended text-brand-1 mb-2">{stat.num}</div>
+                <div className="ft-1 text-center text-neutral-100 sans">{stat.label}</div>
+              </div>
+            ))}
           </div>
         </section>
       </div>
 
-      <section id="contact" className="reading-container">
-        <p className="-ft-2 text-brand-1">Primer paso</p>
-        <h2 className="text-neutral-100">
-          Agenda tu diagnóstico de marketing gratuito y descubre en donde se te está yendo la feria
-        </h2>
-        <p className="text-neutral-100">
-          {/*Para garantizar que nuestros clientes cuenten con una estrategia óptima,*/}
-          {/*solo seleccionamos los proyectos en los que podamos ayudar mejor.<br/><br/>*/}
-          {/*Pero ya llegaste hasta acá…<br/><br/>*/}
-          Regálanos unos datos y agenda una cita para analizar tu proyecto.</p>
-        <OptInForm lastClick={lastClick}/>
-      </section>
-
-      {/* PROBLEMA */}
-      <section id="problema">
-        <div className="reading-container mb-16">
-          <p className="-ft-2 text-brand-1 mb-5">El problema de fondo</p>
-          <h2 className="text-neutral-100">
-            ¿Y si te digo que tus campañas no son el <span className="text-brand-1">único problema</span>?
-          </h2>
-
-          <p className="text-neutral-100">
-            En los 8 años que llevamos chambeando en esto del marketing,
-            nos hemos topado que, casi siempre, las empresas pierden ventas
-            por una de 2:<br/><br/>
-            1. Es muuuuy probable que quien te hace tus campañas nunca le entendido a tu negocio.<br/><br/>
-            Y por eso llevas 3 meses pagando por unos posts bonitos que ni likes tienen y clientes... menos.<br/><br/>
-            Y 2. Es que 9 de 10 empresas no tienen un proceso de ventas funcional.<br/><br/>
-            Esto probablemente te esté pasando a ti y no lo sepas.<br/><br/>
-            Sad but true...<br/><br/>
-            Nosotros no le echamos más sal a esa herida.<br/><br/>
-            Diagnosticamos tu negocio desde el día uno y construimos el sistema para que empieces a vender.
-          </p>
-        </div>
-        <div className="w-full flex flex-col items-center">
-          <div className="w-full grid grid-cols-1 md:grid-cols-3">
-            {[
-              {num: '9', label: 'años ejecutando estrategias de crecimiento'},
-              {num: '+120', label: 'Negocios escalados con sistema'},
-              {num: '+1k', label: 'Dueños de negocio asesorados'},
-            ].map((stat, i) => (
-              <div key={i}
-                   className="w-full p-8 border border-neutral-700">
-                <div className="ft-11 text-center font-black text-brand-1 mb-2">
-                  {stat.num}
-                </div>
-                <div className="-ft-2 text-center text-neutral-100">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <CTA
-          cta="Te suena? Dale click!"
-          origin="problem"
-        />
-      </section>
-      {/*<section className="mt-16">*/}
-      {/*  <p className="ft-2 sans text-center py-8 px-12 bg-brand-1 rounded-2xl">*/}
-      {/*    <span className="ft-4 font-bold">ADVERTENCIA:</span><br/>*/}
-      {/*    Si la idea de invertir $20,000 al mes en crecer tu negocio todavía te parece un gran riesgo, probablemente te vamos a perjudicar más que ayudar.*/}
-      {/*  </p>*/}
-      {/*</section>
-      */}
-
-      {/* CASOS */}
-      <section id="casos">
-        <div className="reading-container mb-16">
-          <p className="text-brand-1">Casos de negocio</p>
-          <h2 className="text-neutral-100">
-            Resultados que ya tienen <span className="text-brand-1">nombre</span>
-          </h2>
-          <p className="text-neutral-100">
-            No somos de los que esconden números.<br/><br/>
-            Estos son algunos clientes que nos dejaron contar los resultados.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-8">
-          {CASOS.map((caso, i) => (
-            <div key={i} className="flex flex-col gap-8 bg-neutral-900 p-8 md:p-10">
-              <p className="-ft-2 text-brand-1">{caso.label}</p>
-              <h3 className="text-neutral-100">
-                {caso.titulo}
-              </h3>
-              <p className="text-neutral-100 flex-grow">
-                {caso.descripcion}
-              </p>
-              <div className="border-t border-neutral-700 pt-6 grid grid-cols-5 gap-6">
-                {caso.metricas.map((m, j) => (
-                  <div key={j} className="first:col-span-1 col-span-2">
-                    <p className="ft-4 text-brand-1 font-bold">
-                      {m.valor}
-                    </p>
-                    <p className="-ft-2 text-neutral-500" dangerouslySetInnerHTML={{__html: m.detalle}}/>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-        <CTA
-          cta="No quisieras ver tu marca aquí? Click!"
-          origin="study-cases"
-        />
-      </section>
-
-      {/* MODELO */}
-      <section id="modelo" className="container">
-        <div className="reading-container mb-16">
-          <p className="-ft-2 text-brand-1 mb-5">Cómo trabajamos</p>
-          <h2 className="text-white font-display font-black leading-tight mb-8">
-            Primero el <span className="text-brand-1">diagnóstico,</span> luego el sistema
-          </h2>
-          <p className="text-neutral-100">
-            Nos cansamos de los planes mensuales que terminas contratando porque te endulzaron el oído bien
-            perro.<br/><br/>
-            Y es que...<br/>
-            Hazte una pregunta:<br/>
-            tú construirías tu casa así sin planos, ni un render, ni nada?<br/><br/>
-            No creo...<br/><br/>
-            Por eso todos los clientes entran por el mismo lugar:<br/><br/>
-            una auditoría que pone todo sobre la mesa antes de gastar un peso en ejecución.<br/><br/>
-            Después de la Auditoría, tú decides cómo quieres trabajar.<br/><br/>
-            Así de simple.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-px bg-white/10">
-          {/* Auditoría */}
-          <div className="bg-neutral-900 p-16 border border-brand-4 flex flex-col gap-8">
-            <p className="-ft-1 uppercase text-brand-1">Done With You</p>
-            <h3 className="text-neutral-100">
-              Acompañamiento
-            </h3>
-            <p className="text-neutral-300">Para empresas que tienen equipo propio pero necesitan dirección y
-              supervisión continua. Tu equipo ejecuta, nosotros dirigimos.</p>
-            <ul className="space-y-3">
-              {[
-                '4 sesiones mensuales vía Zoom',
-                'Revisión de ads activos y KPIs de campañas',
-                'Revisión del proceso de ventas y embudo comercial',
-                'Recomendaciones concretas cada semana',
-              ].map((item, i) => (
-                <li key={i} className="text-neutral-100">
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Sistema */}
-          <div className="bg-neutral-900 p-16 border border-white/10 flex flex-col gap-8">
-            <p className="-ft-1 uppercase text-brand-1">Done For You</p>
-            <h3 className="font-display font-black text-white leading-tight mb-3">
-              Agencia
-            </h3>
-            <p className="text-neutral-300">El sistema completo ejecutado por nuestro equipo. Captación, nutrición y
-              cierre. Nosotros construimos y operamos el sistema.</p>
-            <ul className="space-y-3">
-              {[
-                'Sistema completo de captación y perfilamiento',
-                'Campañas generadoras de leads',
-                'Diseño y documentación del proceso de ventas',
-                'CRM, secuencias y coaching mensual',
-              ].map((item, i) => (
-                <li key={i} className="text-neutral-300">
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        <CTA
-          cta="Tiene más sentido, no? Click!"
-          origin="model"
-        />
-
-      </section>
-
-      {/* AUDITORÍA PROCESO */}
-      <section id="auditoria">
-        <div className="reading-container mb-16">
-          <p className="-ft-2 text-brand-1">El Proceso Notoriovs</p>
-          <h2 className="text-neutral-100">
-            Lo que nadie te ha dicho todavía sobre tu negocio
-          </h2>
-          <p className="text-neutral-100">
-            No arrancamos con una propuesta ni con una presentación bonita.<br/><br/>
-            Arrancamos preguntando lo que nadie te ha preguntado.<br/><br/>
-            Porque el problema casi nunca está donde crees que está.<br/><br/>
-            Y cada semana sin saberlo, te está costando.
-          </p>
-        </div>
-
-        <div className="mb-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-          {PROCESO.map((paso, i) => (
-            <div
-              key={i}
-              className={`flex flex-col gap-8 p-12 md:p-10 hover:bg-white/10 transition-colors border border-neutral-700`}
-            >
-              <p className="ft-8 font-bold text-brand-1/50">
-                {paso.num}
-              </p>
-              <div>
-                <h3 className="text-neutral-200 mb-4">
-                  {paso.titulo}
-                </h3>
-                <p className="text-neutral-200">
-                  {paso.descripcion}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <CTA
-          cta="Quieres conocer todo el proceso? Click!"
-          origin="process"
-        />
-      </section>
-
-      {/* PARA QUIÉN */}
+      {/* 1. DÉJAME ADIVINAR */}
       <section id="para-quien">
-        <div className="reading-container mb-16">
-          <p className="-ft-2 text-brand-1">Para quién es esto</p>
-          <h2 className="text-neutral-100">
-            A ver si hacemos <span className="text-brand-1">match</span>
+        <div className="reading-container">
+          <Eyebrow>Para quién es esto</Eyebrow>
+          <h2 className="text-neutral-100 !my-0">Déjame adivinar...</h2>
+
+          <p className="text-neutral-50">
+            Tu negocio funciona. Tienes buen producto, clientes contentos y alguien que sabe vender.
+            <br/><br/>
+            Casi todas tus ventas del año llegaron por un conocido o el cliente de siempre que te
+            volvió a llamar.
+            <br/><br/>
+            O sea: tu crecimiento depende de que alguien se acuerde de ti.
+            <br/><br/>
+            Hasta que un día decidiste contratar a una agencia y la decepción llegó...
+            <br/><br/>
+            Se la pasaron haciendo posts y reportes de likes cada fin de mes.<br/>
+            También te consiguieron un montón de {'"info"'} y {'“presio”'} que no te pagaron ni un peso.
+            <br/><br/>
+            Y al final, solo era {'"hay que esperar a que el algoritmo aprenda"'}.
+          </p>
+
+          <Quote quote={QUOTES.davidCampana}/>
+        </div>
+        <CTA origin="dejame-adivinar"/>
+      </section>
+
+      {/* 2. EL PROBLEMA DE FONDO */}
+      <section id="problema">
+        <div className="reading-container mb-12">
+          <Eyebrow>El problema de fondo</Eyebrow>
+          <h2 className="text-neutral-100 !my-0">
+            Los anuncios sí funcionan. Lo que falla es <span className="text-brand-1">lo que pasa
+            alrededor</span>
+          </h2>
+          {/*<p className="text-neutral-100">*/}
+          {/*  Más pauta sí trae más gente. Pero si quien la maneja no entiende tu negocio, no filtra y no mide, nomás te*/}
+          {/*  trae más de lo mismo: más preguntones y más prospectos que se pierden en el camino.*/}
+          {/*</p>*/}
+          <p className="text-neutral-100">
+            Casi siempre, una empresa como la tuya pierde ventas por tres razones. Ninguna se arregla con un post más
+            bonito.
+          </p>
+        </div>
+
+        <div className="w-full grid grid-cols-1 md:grid-cols-3">
+          {PROBLEMAS.map((p, i) => (
+            <div key={i} className="flex flex-col gap-6 p-8 md:p-10 border border-neutral-700">
+              <p className="ft-8 font-black extended text-brand-1/50 !mb-0">0{i + 1}</p>
+              <h3 className="text-neutral-100 !my-0">{p.titulo}</h3>
+              <p className="text-neutral-300 !mb-0">{p.texto}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="reading-container !border-t-0 !mt-0">
+          <p className="text-neutral-100">
+            <span className="font-bold sans ft-2 text-brand-1">Por eso trabajamos al revés:</span> <br/>
+            - Filtramos antes de que te escriban<br/>
+            - Te notificamos en cuanto llega alguien que sí califica<br/>
+            - Medimos cada paso hasta que cierres la venta
+          </p>
+          <Quote quote={QUOTES.davidCaliente}/>
+        </div>
+        <CTA origin="problema" />
+      </section>
+
+      {/* 2b. UNA NOTA DE FERNANDO */}
+      <section id="nota-fernando">
+        <div className="reading-container">
+          <Eyebrow>Una nota de Fernando</Eyebrow>
+          <div className="bg-neutral-900 border border-neutral-700 p-8 md:p-12 flex flex-col gap-6 text-neutral-100">
+            <p className="text-neutral-100">
+              Llevo 8 años frente a dueños de negocios que ya le pagaron a una o dos agencias. Casi todos me
+              dicen lo mismo: “me entregaron posts bonitos y nunca supe cuánto me costó un cliente”.
+            </p>
+            <p className="text-neutral-100">
+              Nosotros no vendemos likes ni seguidores. Somos operadores de publicidad: manejamos tus anuncios para que
+              te lleguen leads que sí compran, y te enseñamos en todo momento el costo y el retorno de tu inversión.
+            </p>
+            <Firma/>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. LA AGENCIA DE SIEMPRE CONTRA NOTORIOVS */}
+      <section id="diferencia">
+        <div className="reading-container mb-12">
+          <Eyebrow>La diferencia</Eyebrow>
+          <h2 className="text-neutral-100 !my-0">
+            Otras agencias vs los Notoriovs
+          </h2>
+        </div>
+
+        <div className="w-full border border-neutral-700">
+          <div className="hidden md:grid grid-cols-3 bg-neutral-900">
+            <div className="p-6"/>
+            <p className="p-6 -ft-1 uppercase text-neutral-400 !mb-0">La agencia de siempre</p>
+            <p className="p-6 -ft-1 uppercase text-brand-1 !mb-0">Notoriovs</p>
+          </div>
+          {COMPARATIVA.map((row, i) => (
+            <div key={i} className="grid grid-cols-2 md:grid-cols-3 border-t border-neutral-700">
+              <p className="col-span-2 md:col-span-1 px-6 pt-6 md:p-6 font-bold text-neutral-100 !mb-0 sans">{row.label}</p>
+              <div className="p-6">
+                <p className="md:hidden -ft-3 uppercase text-brand-2 !mb-2">Otros</p>
+                <p className="text-neutral-300 !mb-0 -ft-1 sans">{row.agencia}</p>
+              </div>
+              <div className="p-6 bg-brand-1/5">
+                <p className="md:hidden -ft-3 uppercase text-brand-1 !mb-2">Notoriovs</p>
+                <p className="text-neutral-100 !mb-0 -ft-1 sans">{row.notoriovs}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="reading-container !border-t-0 !mt-0">
+          <Quote quote={QUOTES.asesorAgencias}/>
+        </div>
+        <CTA origin="comparativa"/>
+      </section>
+
+      {/* 4. CASOS DE NEGOCIO */}
+      <section id="casos">
+        <div className="reading-container mb-12">
+          <Eyebrow>Casos de negocio</Eyebrow>
+          <h2 className="text-neutral-100 !my-0">
+            Comercial. <span className="text-brand-1">No likes.</span>
           </h2>
           <p className="text-neutral-100">
-            No nos importa qué vendes, no somos de esos que se especializan en un nicho y le hacen la misma campaña a tu
-            competencia.<br/><br/>
-            Aunque chambeamos mejor con empresas que:<br/>
-            — Cuenten con equipo comercial<br/>
-            — Tengan ganas de estructurar su proceso de ventas<br/>
-            — Vendan servicios B2B, Bienes raíces o tickets arriba de $10,000<br/><br/>
-            Si vendes playeras de $200 o cupcakes de $50, seguro eres bien chido… pero no sé que tanto te podamos
-            ayudar..<br/><br/>
-            Y si el problema que traes es que los leads no se convierten o que te llegan suficientes...<br/><br/>
-            Ya dale click al botón.</p>
-          <CTA
-            cta="Listo para chambear juntos? Click!"
-            origin="target"
-          />
-        </div>
-        <div
-          className="border-l-[3px] border-brand-4 bg-neutral-800 p-20"
-        >
-          <p className="text-neutral-400 mb-8">
-            {`"No sé qué están haciendo pero todas las citas que he tenido han sido con gente muy bien perfilada. ¡Síganle!"`}
+            Estos clientes nos dejaron contar su caso. Con nombre, con cifras y sin redondear hacia arriba.
           </p>
-          <p className="-ft-2 text-neutral-500 text-right">— Director General, CompraCasasUSA</p>
         </div>
+
+        <div className="grid md:grid-cols-3 gap-8">
+          {CASOS.map((caso, i) => (
+            <div key={i} className="flex flex-col gap-6 bg-neutral-900 p-8 md:p-10">
+              <p className="-ft-2 text-brand-1 !mb-0">{caso.label}</p>
+              <h3 className="ft-5 text-neutral-100 !my-0">{caso.titulo}</h3>
+              <p className="text-neutral-300 flex-grow !mb-0">{caso.descripcion}</p>
+              {/*<div className="border-t border-neutral-700 pt-6">*/}
+              {/*  <p className="ft-2 text-brand-1 font-bold !mb-2">{caso.principal}</p>*/}
+              {/*  <p className="-ft-2 text-neutral-500 italic !mb-0">{caso.secundaria}</p>*/}
+              {/*</div>*/}
+            </div>
+          ))}
+        </div>
+
+        <div className="reading-container !border-t-0 !mt-0">
+          <h3 className="text-neutral-100 !my-0">
+            Lo que dicen nuestros clientes (sin que se los pidiéramos dos veces)
+          </h3>
+        </div>
+        <div className="grid md:grid-cols-2 gap-8">
+          {TESTIMONIOS.map((t, i) => (
+            <Quote key={i} quote={t}/>
+          ))}
+        </div>
+
+        <CTA origin="study-cases"/>
       </section>
 
-      {/* FAQ */}
-      <section id="faq">
-        <div className="reading-container mb-16">
-          <p className="-ft-2 text-brand-1">Preguntas frecuentes</p>
-          <h2 className="text-neutral-100">
-            Lo que siempre preguntan
+      {/* 5. QUÉ PASA DESPUÉS DE AGENDAR */}
+      <section id="proceso">
+        <div className="reading-container mb-12">
+          <Eyebrow>El proceso</Eyebrow>
+          <h2 className="text-neutral-100 !my-0">
+            Sin enchular. Sin labia. <span className="text-brand-1">Solo números.</span>
           </h2>
         </div>
 
-        <Faqs questions={FAQ}/>
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          {PROCESO.map((paso, i) => (
+            <div key={i} className="flex flex-col gap-6 p-8 md:p-10 border border-neutral-700">
+              <p className="ft-8 font-black extended text-brand-1/50 !mb-0">{paso.num}</p>
+              <h3 className="text-neutral-100 sans !my-0">{paso.titulo}</h3>
+              <p className="text-neutral-300 !mb-0">{paso.descripcion}</p>
+            </div>
+          ))}
+        </div>
 
-        <CTA
-          cta="Todavía tienes dudas? Click!"
-          origin="faqs"
-        />
-
+        <CTA origin="process"/>
       </section>
+
+      {/* 6. TÚ CIERRAS. NOSOTROS HACEMOS LA TALACHA. */}
+      <section id="talacha">
+        <div className="reading-container mb-12">
+          <Eyebrow>Cero talacha</Eyebrow>
+          <h2 className="text-neutral-100 !my-0">
+            No vas a comprar otro curso de mkt digital. <span className="text-brand-1">Ni deberías.</span>
+          </h2>
+          <p className="text-neutral-100">
+            Tu tiempo vale más cerrando ventas que peleándote con la plataforma de anuncios a las 11 de la noche.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="bg-neutral-900 p-8 md:p-12 border border-brand-4 flex flex-col gap-6">
+            <p className="-ft-1 uppercase text-brand-1 !mb-0">Lo que hacemos nosotros</p>
+            <ul className="flex flex-col gap-4">
+              {NOSOTROS.map((item, i) => (
+                <div key={i} className="ft-0 text-neutral-100 flex gap-3">
+                  <span>✅</span>{item}
+                </div>
+              ))}
+            </ul>
+          </div>
+          <div className="bg-neutral-900 p-8 md:p-12 border border-neutral-700 flex flex-col gap-6">
+            <p className="-ft-1 uppercase text-neutral-200 !mb-0">Lo que te toca a ti</p>
+            <ul className="flex flex-col gap-4">
+              {TU.map((item, i) => (
+                <div key={i} className="ft-0 text-neutral-300 flex gap-3">
+                  <span>☑️</span>{item}
+                </div>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="reading-container !border-t-0 !mt-0">
+          <Quote quote={QUOTES.joseLuisApp}/>
+          {/*<p className="ft-3 text-neutral-100 font-bold sans">Cuatro cosas de tu lado. Todo lo demás es nuestro.</p>*/}
+        </div>
+        <CTA origin="talacha"/>
+      </section>
+
+      {/* 7. LA GARANTÍA */}
+      <section id="garantia">
+        <div className="reading-container">
+          <Eyebrow>Garantía</Eyebrow>
+          <h2 className="text-neutral-100 !my-0">
+            Qué otra agencia te <span className="text-brand-1">pone por escrito esto</span>?
+          </h2>
+          <div className="border-2 border-brand-1 p-8 md:p-12 flex flex-col gap-6 text-neutral-100">
+            <p className="ft-4 font-bold text-brand-1 !mb-0">Garantía de prospectos perfilados.</p>
+            <p className="!mb-0 text-neutral-100">
+              En la sesión de diagnóstico te decimos cuántos prospectos perfilados vas a recibir como mínimo en tus primeros
+              90 días.
+            </p>
+            <p className="!mb-0 text-neutral-100">
+              Si no llegamos, seguimos trabajando sin cobrarte una mensualidad hasta completarlos, por hasta 2 meses.
+            </p>
+          </div>
+
+          <Quote quote={QUOTES.asesorTranquilidad}/>
+
+        </div>
+        <CTA origin="garantia"/>
+      </section>
+
+      {/* 8. PREGUNTAS FRECUENTES */}
+      <section id="faq">
+        <div className="reading-container mb-4">
+          <Eyebrow>Preguntas frecuentes</Eyebrow>
+          <h2 className="text-neutral-100 !my-0">
+            Lo que siempre preguntan <span className="text-brand-1">(y lo que nadie te contesta derecho)</span>
+          </h2>
+        </div>
+        <Faqs questions={FAQ}/>
+      </section>
+
+      {/* 9. CTA FINAL */}
+      <section id="contact">
+        <div className="reading-container">
+          <h2 className="text-neutral-100 !my-0">
+            Descubre cómo vamos a conseguir <span className="text-brand-1">más ventas</span> para tu negocio.
+          </h2>
+          <p className="text-neutral-100">
+            Agenda una sesión de 30 minutos (con valor de $1,800), <nobr className="font-bold">100% gratis</nobr> y sin compromisos.
+          </p>
+          <p className="text-brand-1 font-bold">Solo para personas con hambre de crecer su negocio.</p>
+          <OptInForm lastClick={lastClick}/>
+        </div>
+      </section>
+
+      {/* 9b. POSDATA */}
+      <section id="posdata">
+        <div className="reading-container">
+          <div className="bg-neutral-900 border border-neutral-700 p-8 md:p-12 flex flex-col gap-6 text-neutral-100">
+            <p className="text-neutral-100">
+              <span className="font-bold text-brand-1">P.D.</span> Si llegaste hasta aquí y sigues con la duda, te
+              entiendo. Ya te estafaron antes y lo último que quieres es otra agencia que te prometa la luna.
+            </p>
+            <p className="text-neutral-100">
+              <span className="font-bold text-brand-1">P.P.D.</span> Lo peor que te puede pasar es salir de la sesión
+              sabiendo cuántos prospectos te puede traer tu pauta. Que, por cierto, es justo lo que tu agencia anterior
+              nunca te dijo.
+            </p>
+            <Firma/>
+          </div>
+        </div>
+        <CTA cta="Ya! Quiero mi sesión gratis" origin="posdata" microcopy={null}/>
+      </section>
+
+      {/* 10. LEGALES (dirección y contacto viven en el Footer global) */}
+      <div className="text-center pt-12">
+        <p className="-ft-3 text-neutral-500">
+          <Link href={info.privacyNotice} className="underline">Aviso de privacidad</Link>
+          {' · '}
+          <Link href={TERMS_URL} className="underline">Términos de la garantía</Link>
+        </p>
+      </div>
     </div>
   );
 }

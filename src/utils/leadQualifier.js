@@ -10,6 +10,7 @@ export default function LeadQualifier({ answers }) {
     '150k+':     200000,
   };
 
+  // Facturación MENSUAL (así se pregunta en el survey)
   const REVENUE_MIDPOINT = {
     '<50k':      30000,
     '50k-100k':  75000,
@@ -19,7 +20,7 @@ export default function LeadQualifier({ answers }) {
     '1.5m+':     2000000,
   };
 
-  // Compras por año, para estimar el valor anual del cliente
+  // Compras por año, para estimar el valor anual del cliente (solo informativo)
   const LTV_MULTIPLIER = {
     '1x':        1,
     '2x':        2,
@@ -28,65 +29,100 @@ export default function LeadQualifier({ answers }) {
     'recurring': 12,
   };
 
-  // ── Precios de servicio y margen esperado del prospecto ──
-  // Regla de negocio: la utilidad (~30%) que un solo cliente del prospecto genera
-  // debe alcanzar para pagar, al menos, UN MES del servicio correspondiente.
-  // Piso = precio_mensual / margen.
-  const MARGIN = 0.40;
-  const SERVICE_PRICE = {
-    encendido:  1800,
-    pulso:      8000,
-    enterprise: 24000,
+  // ── Regla de negocio ──
+  // El prospecto debe poder sostener el flujo mensual del programa (servicio + pauta)
+  // sin que rebase el MAX_SPEND_SHARE de su utilidad mensual.
+  //   capacidad = facturación mensual × MARGIN × MAX_SPEND_SHARE
+  const MARGIN          = 0.40;  // margen de utilidad estimado del prospecto
+  const MAX_SPEND_SHARE = 0.30;  // tope de la utilidad mensual destinada a servicio + pauta
+  const AD_SPEND        = 4000;  // pauta mensual mínima
+
+  // Programas. `minMonthlyFlow` = flujo mensual en el peor caso (servicio + pauta).
+  const PROGRAMS = {
+    pulso: {
+      name: 'Pulso',
+      months: 3,
+      minMonthlyFlow: 20000, // ~$16k servicio promedio (48k / 3) + $4k pauta
+      payments: {
+        cash:        { label: 'Contado',              total: 40000, firstPayment: 40000 },
+        installments:{ label: '3 pagos (24k/12k/12k)', total: 48000, firstPayment: 24000 },
+        msi:         { label: 'TDC hasta 12 MSI',      total: 48000, firstPayment: 4000 },
+      },
+    },
+    notoriovs90: {
+      name: 'Notoriovs 90',
+      months: 3,
+      minMonthlyFlow: 8000,  // $4k servicio (24k a 6 MSI) + $4k pauta
+      payments: {
+        cash:        { label: 'Contado',              total: 18000, firstPayment: 18000 },
+        installments:{ label: '3 pagos (12k/6k/6k)',   total: 24000, firstPayment: 12000 },
+        msi:         { label: 'TDC 6 MSI',             total: 24000, firstPayment: 4000 },
+      },
+    },
   };
 
-  // ── Umbrales derivados (no se editan a mano, salen de SERVICE_PRICE y MARGIN) ──
-  const LTV_FLOOR      = SERVICE_PRICE.encendido  / MARGIN;
-  const PULSO_LTV      = SERVICE_PRICE.pulso      / MARGIN;
-  const PULSO_TICKET   = PULSO_LTV;
-  const ENTERPRISE_LTV = SERVICE_PRICE.enterprise / MARGIN;
-
-  const PULSO_REVENUE  = 100000;  // facturación mínima para Pulso (piso de escala, no de margen)
+  // Ventas incrementales al mes que necesita para recuperar el flujo mínimo.
+  // Arriba de esto se marca como alerta (no descalifica).
+  const BREAK_EVEN_SALES_ALERT = 10;
 
   const fmt = (n) => '$' + Math.round(n).toLocaleString('es-MX') + ' MXN';
 
   function metrics(a) {
-    const ticket  = TICKET_MIDPOINT[a.averageTicket];
     const revenue = REVENUE_MIDPOINT[a.currentSales];
-    const mult    = LTV_MULTIPLIER[a.ltv];
-    if (ticket == null || revenue == null || mult == null) return null;
-    const annualLTV = ticket * mult;
-    return { ticket, revenue, mult, annualLTV, monthlyLTV: Math.round(annualLTV / 12) };
+    if (revenue == null) return null;
+
+    const ticket = TICKET_MIDPOINT[a.averageTicket] ?? null;
+    const mult   = LTV_MULTIPLIER[a.ltv] ?? null;
+
+    const monthlyProfit   = revenue * MARGIN;
+    const monthlyCapacity = monthlyProfit * MAX_SPEND_SHARE;
+    const annualLTV       = ticket != null && mult != null ? ticket * mult : null;
+    const breakEvenSales  = ticket != null
+      ? Math.ceil(PROGRAMS.notoriovs90.minMonthlyFlow / (ticket * MARGIN))
+      : null;
+
+    return {
+      revenue,
+      monthlyProfit,
+      monthlyCapacity: Math.round(monthlyCapacity),
+      ticket,
+      mult,
+      annualLTV,
+      breakEvenSales,
+    };
   }
 
-  function buildFlags(a) {
+  // Sugiere la forma de pago más conveniente que el flujo del prospecto aguanta
+  // en el primer mes (primer pago + pauta).
+  function suggestPayment(program, m) {
+    const order = ['cash', 'installments', 'msi'];
+    for (const key of order) {
+      const option = program.payments[key];
+      if (m.monthlyCapacity >= option.firstPayment + AD_SPEND) {
+        return { key, ...option };
+      }
+    }
+    return { key: 'msi', ...program.payments.msi };
+  }
+
+  function buildFlags(a, m) {
     const flags = [];
-    if (a.salesTeam === 'solo' || a.salesTeam === 'noProcess') {
+    if (a.salesTeam === 'solo') {
       flags.push('Capacidad de cierre limitada: validar en llamada quién atiende y cierra los leads.');
     }
     if (a.customerType === 'transactional') {
       flags.push('Modelo transaccional: confirmar que aplica captación filtrada y no más bien contenido o reseñas.');
+      if (a.ltv === '1x') {
+        flags.push('Transaccional sin recompra: el retorno depende 100% del volumen de ventas nuevas.');
+      }
     }
     if (a.customerType === 'mixed') {
       flags.push('Modelo mixto: confirmar de dónde viene la mayoría del ingreso.');
     }
+    if (m.breakEvenSales != null && m.breakEvenSales > BREAK_EVEN_SALES_ALERT) {
+      flags.push(`Necesita ~${m.breakEvenSales} ventas incrementales/mes para recuperar la inversión mínima: validar volumen y capacidad de atención.`);
+    }
     return flags;
-  }
-
-  function suggestTier(a, m) {
-    const hasTeam = a.salesTeam === '2-4' || a.salesTeam === '5+';
-
-    // Enterprise: jugadores grandes con equipo comercial y valor de cliente
-    // suficiente para justificar el precio de Enterprise.
-    const isEnterprise =
-      hasTeam && (m.ticket >= ENTERPRISE_LTV || m.annualLTV >= ENTERPRISE_LTV);
-    if (isEnterprise) return 'Enterprise';
-
-    // Pulso: el núcleo del modelo
-    const pulsoValue = m.ticket >= PULSO_TICKET || m.annualLTV >= PULSO_LTV;
-    if (pulsoValue && m.revenue >= PULSO_REVENUE) return 'Pulso';
-
-    // Encendido: califica pero es chico
-    return 'El Encendido';
   }
 
   function getQualificationResult(a) {
@@ -96,59 +132,39 @@ export default function LeadQualifier({ answers }) {
         status: 'needs_info',
         reason: 'missing_data',
         tier: null,
-        message: 'Faltan datos para calificar (ticket, facturación o recompra).',
+        payment: null,
+        message: 'Falta la facturación mensual para calificar.',
         metrics: null,
         flags: [],
       };
     }
 
-    // Compuerta económica: la utilidad estimada del cliente del prospecto debe
-    // alcanzar para pagar el servicio de entrada (El Encendido).
-    if (a.customerType === 'transactional') {
-      // Para transaccional, el LTV equivale a una sola transacción: se compara
-      // el ticket directo contra el piso, no el valor anual con recompra.
-      if (a.ltv === '1x') {
-        return {
-          status: 'disqualified',
-          reason: 'transactional_no_repeat',
-          tier: null,
-          message: `Modelo transaccional sin recompra (ticket ${fmt(m.ticket)}). Sin repetición de compra no califica, sin importar el ticket.`,
-          metrics: m,
-          flags: buildFlags(a),
-        };
-      }
-      if (m.ticket < LTV_FLOOR) {
-        return {
-          status: 'disqualified',
-          reason: 'transactional_weak_economics',
-          tier: null,
-          message: `Ticket insuficiente para un modelo transaccional (${fmt(m.ticket)}). La utilidad de una sola transacción debe alcanzar para pagar el servicio de entrada (piso ${fmt(LTV_FLOOR)}).`,
-          metrics: m,
-          flags: buildFlags(a),
-        };
-      }
-    } else {
-      if (m.annualLTV < LTV_FLOOR) {
-        return {
-          status: 'disqualified',
-          reason: 'low_lifetime_value',
-          tier: null,
-          message: `Valor anual por cliente insuficiente (${fmt(m.annualLTV)}). La utilidad de un cliente debe alcanzar para pagar el servicio de entrada (piso ${fmt(LTV_FLOOR)}).`,
-          metrics: m,
-          flags: buildFlags(a),
-        };
-      }
+    const flags = buildFlags(a, m);
+
+    const program = [PROGRAMS.pulso, PROGRAMS.notoriovs90]
+      .find((p) => m.monthlyCapacity >= p.minMonthlyFlow);
+
+    if (!program) {
+      return {
+        status: 'disqualified',
+        reason: 'insufficient_cash_flow',
+        tier: null,
+        payment: null,
+        message: `Flujo insuficiente. Con facturación de ${fmt(m.revenue)}/mes, el ${MAX_SPEND_SHARE * 100}% de su utilidad es ${fmt(m.monthlyCapacity)}; el mínimo es ${fmt(PROGRAMS.notoriovs90.minMonthlyFlow)}/mes (servicio + pauta).`,
+        metrics: m,
+        flags,
+      };
     }
 
-    // Calificado -> sugerir tier
-    const tier = suggestTier(a, m);
+    const payment = suggestPayment(program, m);
     return {
       status: 'qualified',
       reason: null,
-      tier,
-      message: `Prospecto calificado. Tier sugerido: ${tier}. Valor anual estimado ${fmt(m.annualLTV)}.`,
+      tier: program.name,
+      payment,
+      message: `Prospecto calificado. Programa sugerido: ${program.name} (${payment.label}). Capacidad mensual estimada ${fmt(m.monthlyCapacity)}.`,
       metrics: m,
-      flags: buildFlags(a),
+      flags,
     };
   }
 

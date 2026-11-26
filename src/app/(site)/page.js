@@ -349,7 +349,7 @@ export default function Home() {
             {/*  No, no nos volvimos locos.<br/>Y sí, va por escrito.*/}
             {/*</p>*/}
             <p className="ft-2 text-center text-neutral-100 !mb-0 sans">
-              Instalamos un sistema de captación de prospectos con dinero e intención real de compra, sin preguntones.
+              Olvídate de los preguntones. Implementamos un sistema de captación de clientes nuevos con dinero e intención real de compra.
             </p>
             <CTA
               cta="Descubre si tu negocio califica"
@@ -377,7 +377,7 @@ export default function Home() {
       </div>
 
       {/* 1. DÉJAME ADIVINAR */}
-      <section id="para-quien">
+      <section id="target">
         <div className="reading-container">
           <Eyebrow>Para quién es esto</Eyebrow>
           <h2 className="text-neutral-100 !my-0">Déjame adivinar...</h2>
@@ -400,11 +400,11 @@ export default function Home() {
 
           <Quote quote={QUOTES.davidCampana}/>
         </div>
-        <CTA origin="dejame-adivinar"/>
+        <CTA origin="target"/>
       </section>
 
       {/* 2. EL PROBLEMA DE FONDO */}
-      <section id="problema">
+      <section id="problem">
         <div className="reading-container mb-12">
           <Eyebrow>El problema de fondo</Eyebrow>
           <h2 className="text-neutral-100 !my-0">
@@ -440,11 +440,11 @@ export default function Home() {
           </p>
           <Quote quote={QUOTES.davidCaliente}/>
         </div>
-        <CTA origin="problema" />
+        <CTA origin="problem" />
       </section>
 
       {/* 2b. UNA NOTA DE FERNANDO */}
-      <section id="nota-fernando">
+      <section id="founder-claim">
         <div className="reading-container">
           <Eyebrow>Una nota de Fernando</Eyebrow>
           <div className="bg-neutral-900 border border-neutral-700 p-8 md:p-12 flex flex-col gap-6 text-neutral-100">
@@ -462,7 +462,7 @@ export default function Home() {
       </section>
 
       {/* 3. LA AGENCIA DE SIEMPRE CONTRA NOTORIOVS */}
-      <section id="diferencia">
+      <section id="comparative">
         <div className="reading-container mb-12">
           <Eyebrow>La diferencia</Eyebrow>
           <h2 className="text-neutral-100 !my-0">
@@ -494,11 +494,11 @@ export default function Home() {
         <div className="reading-container !border-t-0 !mt-0">
           <Quote quote={QUOTES.asesorAgencias}/>
         </div>
-        <CTA origin="comparativa"/>
+        <CTA origin="comparative"/>
       </section>
 
       {/* 4. CASOS DE NEGOCIO */}
-      <section id="casos">
+      <section id="study-cases">
         <div className="reading-container mb-12">
           <Eyebrow>Casos de negocio</Eyebrow>
           <h2 className="text-neutral-100 !my-0">
@@ -538,7 +538,7 @@ export default function Home() {
       </section>
 
       {/* 5. QUÉ PASA DESPUÉS DE AGENDAR */}
-      <section id="proceso">
+      <section id="process">
         <div className="reading-container mb-12">
           <Eyebrow>El proceso</Eyebrow>
           <h2 className="text-neutral-100 !my-0">
@@ -560,7 +560,7 @@ export default function Home() {
       </section>
 
       {/* 6. TÚ CIERRAS. NOSOTROS HACEMOS LA TALACHA. */}
-      <section id="talacha">
+      <section id="features">
         <div className="reading-container mb-12">
           <Eyebrow>Cero talacha</Eyebrow>
           <h2 className="text-neutral-100 !my-0">
@@ -598,11 +598,11 @@ export default function Home() {
           <Quote quote={QUOTES.joseLuisApp}/>
           {/*<p className="ft-3 text-neutral-100 font-bold sans">Cuatro cosas de tu lado. Todo lo demás es nuestro.</p>*/}
         </div>
-        <CTA origin="talacha"/>
+        <CTA origin="features"/>
       </section>
 
       {/* 7. LA GARANTÍA */}
-      <section id="garantia">
+      <section id="guarantee">
         <div className="reading-container">
           <Eyebrow>Garantía</Eyebrow>
           <h2 className="text-neutral-100 !my-0">
@@ -622,7 +622,7 @@ export default function Home() {
           <Quote quote={QUOTES.asesorTranquilidad}/>
 
         </div>
-        <CTA origin="garantia"/>
+        <CTA origin="guarantee"/>
       </section>
 
       {/* 8. PREGUNTAS FRECUENTES */}
